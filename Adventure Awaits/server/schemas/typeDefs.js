@@ -20,6 +20,10 @@ type Auth {
     user: User
   }
 
+type Query {
+    me: User
+}
+
 type Mutation {
     addUser(
         name: String!
