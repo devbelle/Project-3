@@ -3,6 +3,7 @@ import LoginPage from './pages/LoginPage';
 import Trips from './pages/Trips';
 import Restaurants from './pages/Restaurants';
 import Hotels from './pages//Hotels';
+import PackingPage from './pages/PackingPage';
 
 import PropTypes from 'prop-types';
 
@@ -15,6 +16,9 @@ function Home({ section }) {
     return <Restaurants/>;
   } else if (section === 'Hotels') {
 return <Hotels/>;
+}
+else if (section === 'Packing') {
+  return <PackingPage/>;
 }
 }
 
