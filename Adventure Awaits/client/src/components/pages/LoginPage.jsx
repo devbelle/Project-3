@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import Auth from '../utils/auth';
+// import Auth from '../utils/auth';
 
 
 const Box = styled.div`
@@ -24,11 +24,11 @@ const LoginPage = () => {
 
     const handleSignUp =  (event) => {
         event.preventDefault();
-        Auth.signup(name, email, password);
+        // Auth.signup(name, email, password);
     };
 const handleLogin = (event) => {    
     event.preventDefault();
-    Auth.login(name, password);
+    // Auth.login(name, password);
 };
 
 return (
