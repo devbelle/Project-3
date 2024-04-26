@@ -1,8 +1,3 @@
-// Destination
-// start date
-// end date
-// notes
-
 const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
