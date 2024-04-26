@@ -16,7 +16,7 @@ type Trip {
 }
 
 type Mutation {
-    addUser(
+    addUser
         name: String!
         email: String!
         password: String!
@@ -40,4 +40,4 @@ type Mutation {
 }
 `;
 
-module.exports - typeDefs;
+module.exports = typeDefs;
