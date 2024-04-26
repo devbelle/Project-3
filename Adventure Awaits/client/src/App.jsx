@@ -7,11 +7,8 @@ const currentPage = useLocation().pathname;
 console.log(currentPage);
 
   return (
-    <div className='portfolio'>
-      <Header/>
-      {/* <Portfolio section={section} /> */}
+    <div className='home'>
       <Page currentPage = {currentPage}/>
-      <Footer />
     </div>
   );
 }
