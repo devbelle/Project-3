@@ -10,13 +10,22 @@ type Trip {
     _id: ID
     title: String!
     destination: String!
-    startDate: Date
-    endDate: Date
+    startDate: String
+    endDate: String
     notes: String
 }
 
+type Auth {
+    token: ID!
+    user: User
+  }
+
+type Query {
+    me: User
+}
+
 type Mutation {
-    addUser
+    addUser(
         name: String!
         email: String!
         password: String!
@@ -26,18 +35,19 @@ type Mutation {
 
     addTrip(title: String!
         destination: String!
-        startDate: Date
-        endDate: Date
+        startDate: String
+        endDate: String
         notes: String): User
 
     updateTrip(tripId: ID!, title: String!
         destination: String!
-        startDate: Date
-        endDate: Date
+        startDate: String
+        endDate: String
         notes: String): User
-        
+
     removeTrip(tripId: ID!): User
 }
 `;
 
 module.exports = typeDefs;
+
