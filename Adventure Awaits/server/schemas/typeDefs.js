@@ -35,9 +35,9 @@ type Mutation {
         startDate: Date
         endDate: Date
         notes: String): User
-        
+
     removeTrip(tripId: ID!): User
 }
 `;
 
-module.exports - typeDefs;
+module.exports = typeDefs;
