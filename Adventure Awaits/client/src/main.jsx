@@ -3,10 +3,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App.jsx'
 import './index.css'
 import LoginPage from './pages/LoginPage.jsx'
-// import Hotels from './components/pages/Hotels.jsx'
-// import Restaurants from './components/pages/Restaurants.jsx'
-// import Trip from './components/pages/Trip.jsx'
-// import PackingPage from './components/pages/PackingPage.jsx'
+// import Hotels from './pages/HotelsPage.jsx'
+// import Restaurants from './pages/RestaurantsPage.jsx'
+// import TripsPage from './pages/TripsPage.jsx'
+// import PackingPage from './pages/PackingPage.jsx'
 
 const router = createBrowserRouter([
   { path: '/', 
@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     { index: true, element: <LoginPage /> },
     //  { path: 'hotels', element: <Hotels/> }, 
     //  { path: 'restaurants', element: <Restaurants/> },
-    //  { path: 'trip', element: <Trip/>},
+    //  { path: 'trips', element: <TripsPage/>},
     //  { path: 'packing', element: <PackingPage/>}
 
     ]
