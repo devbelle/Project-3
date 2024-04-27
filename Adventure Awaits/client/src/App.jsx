@@ -1,16 +1,40 @@
-import './index.css';
-import Page from './components/pages/index.jsx'
-import {useLocation} from 'react-router-dom'
+
+import { Outlet } from 'react-router-dom';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+
+
+const httpLink = createHttpLink({
+  uri: '/graphql',
+});
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('id_token');
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
+
 
 function App() {
-const currentPage = useLocation().pathname;
-console.log(currentPage);
-
   return (
-    <div className='home'>
-      <Page currentPage = {currentPage}/>
-    </div>
+    <ApolloProvider client={client}>
+        <Outlet />
+    </ApolloProvider>
   );
 }
 
-export default App
+export default App;
