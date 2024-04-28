@@ -1,13 +1,13 @@
-
-import  { useState } from 'react';
+import { useState } from "react";
 // import bcrypt from  'bcrypt';
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Box = styled.div`
   display: flex;
   justify-content: space-between;
   width: 90%;
   max-width: 430px;
+  height: 220px;
   padding: 10px;
   background-color: white;
   border-radius: 10px;
@@ -19,6 +19,7 @@ const Box = styled.div`
 
 const Section = styled.div`
   width: 50%;
+  height: 100%;
   background-color: #ffad73;
   border: 1px solid black;
 `;
@@ -63,55 +64,55 @@ const ImageBox = styled.div`
 `;
 
 const LoginPage = () => {
-  const [signupName, setSignupName] = useState('');
-  const [signupEmail, setSignupEmail] = useState('');
-  const [signupPassword, setSignupPassword] = useState('');
-  const [loginEmail, setLoginEmail] = useState('');
-  const [loginPassword, setLoginPassword] = useState('');
+  const [signupName, setSignupName] = useState("");
+  const [signupEmail, setSignupEmail] = useState("");
+  const [signupPassword, setSignupPassword] = useState("");
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
 
   const handleSignUp = async (event) => {
     event.preventDefault();
     try {
       // const hashedPassword = await bcrypt.hash(signupPassword, 10); // Hash password with bcrypt
-      const response = await fetch('/signup', {
-        method: 'POST',
+      const response = await fetch("/signup", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           name: signupName,
           email: signupEmail,
           // password: hashedPassword // Store hashed password
-        })
+        }),
       });
       const data = await response.json();
-      localStorage.setItem('jwtToken', data.token); // Store JWT token in local storage
+      localStorage.setItem("jwtToken", data.token); // Store JWT token in local storage
       // Redirect user or display success message
     } catch (error) {
       // Handle signup errors
-      console.error('Signup failed:', error);
+      console.error("Signup failed:", error);
     }
   };
 
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('/login', {
-        method: 'POST',
+      const response = await fetch("/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email: loginEmail,
-          password: loginPassword
-        })
+          password: loginPassword,
+        }),
       });
       const data = await response.json();
-      localStorage.setItem('jwtToken', data.token); // Store JWT token in local storage
+      localStorage.setItem("jwtToken", data.token); // Store JWT token in local storage
       // Redirect user or display success message
     } catch (error) {
       // Handle login errors
-      console.error('Login failed:', error);
+      console.error("Login failed:", error);
     }
   };
 
@@ -119,7 +120,9 @@ const LoginPage = () => {
     <Container>
       <Box>
         <Section>
-          <h2 style={{ color: '#333', textAlign: 'center', fontSize: '20px' }}>Create a New Account</h2>
+          <h2 style={{ color: "#333", textAlign: "center", fontSize: "20px" }}>
+            Create a New Account
+          </h2>
           <Form onSubmit={handleSignUp}>
             <Input
               type="text"
@@ -150,7 +153,9 @@ const LoginPage = () => {
         </Section>
         {/* Login Section */}
         <Section>
-          <h2 style={{ color: '#333', textAlign: 'center', fontSize: '20px' }}>Already Have an Account? Log In.</h2>
+          <h2 style={{ color: "#333", textAlign: "center", fontSize: "20px" }}>
+            Already Have an Account? Log In.
+          </h2>
           <Form onSubmit={handleLogin}>
             <Input
               type="email"
@@ -167,18 +172,20 @@ const LoginPage = () => {
               value={loginPassword}
               onChange={(e) => setLoginPassword(e.target.value)}
               placeholder="Password"
-
-              />
-                      <Button type="submit">Log in</Button>
-                     </Form>
-                   </Section>
-                 </Box>
-                <ImageBox>
-                <img src="/images/travel.jpg" alt="travel quote" style={{ width: '200%', height: '250%' }} />
-                 </ImageBox>
-                </Container>
-                );
-              };
-              
+            />
+            <Button type="submit">Log in</Button>
+          </Form>
+        </Section>
+      </Box>
+      <ImageBox>
+        <img
+          src="/images/travel.jpg"
+          alt="travel quote"
+          style={{ width: "200%", height: "250%" }}
+        />
+      </ImageBox>
+    </Container>
+  );
+};
 
 export default LoginPage;
