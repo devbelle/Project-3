@@ -1,3 +1,4 @@
+import DatePicker from "react-datepicker";
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
@@ -47,9 +48,14 @@ const Trip = () => {
     const [title, setTitle] = useState('');
     const [destination, setDestination] = useState('');
     const [notes, setNotes] = useState('');
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
 
-
-
+    const selectionRange = {
+        startDate: startDate,
+        endDate: endDate,
+        key: "selection"
+    };
 
 
 
@@ -88,6 +94,24 @@ const Trip = () => {
                     onChange={/*handle change submit*/}        
                 />
                 {/* Destination use state*/}   
+            </Section>
+            <Section>
+                <DatePicker
+                        selected = {startDate}
+                        onChange = {date => setStartDate(date)}
+                        selectsStart
+                        startDate = {startDate}
+                        endDate = {endDate}
+                        ranges = {[selectionRange]}
+                    />
+                <DatePicker
+                        selected = {endDate}
+                        onChange = {date => setEndDate(date)}
+                        selectsStart
+                        endDate = {endDate}
+                        minDate = {startDate}
+                        ranges = {[selectionRange]}
+                />
             </Section>
             <Section>
             <label className="" htmlFor="message">Notes...</label>
