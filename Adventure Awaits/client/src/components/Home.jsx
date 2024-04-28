@@ -1,8 +1,9 @@
 
-import LoginPage from './pages/LoginPage';
-import Trips from './pages/Trips';
-import Restaurants from './pages/Restaurants';
-import Hotels from './pages//Hotels';
+import LoginPage from '../pages/LoginPage';
+import TripsPage from './pages/Trips';
+import RestaurantsPage from '../pages/RestaurantsPage';
+import HotelsPage from '../pages/HotelsPage';
+import PackingPage from './pages/PackingPage';
 
 import PropTypes from 'prop-types';
 
@@ -10,11 +11,14 @@ function Home({ section }) {
   if (section === 'Login') {
     return <LoginPage />;
   } else if (section === 'Trips') {
-    return <Trips />;
+    return <TripsPage />;
   } else if (section === 'Restaurants') {
-    return <Restaurants/>;
+    return <RestaurantsPage/>;
   } else if (section === 'Hotels') {
-return <Hotels/>;
+return <HotelsPage/>;
+}
+else if (section === 'Packing') {
+  return <PackingPage/>;
 }
 }
 
