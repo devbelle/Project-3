@@ -1,40 +1,41 @@
 import { useState } from "react";
-// import bcrypt from  'bcrypt';
 import styled from "styled-components";
 
-const Box = styled.div`
+const PageContainer = styled.div`
   display: flex;
-  justify-content: space-between;
-  width: 90%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 0 80px;
+`;
+  const Box = styled.div`
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  width: 100%;
   max-width: 430px;
-  height: 220px;
-  padding: 10px;
   background-color: white;
   border-radius: 10px;
-  align-items: center;
-  position: absolute;
   border: 3px solid black;
-  margin-bottom: 250px;
+  padding: 50px;
+  margin-top: 10px;
+  margin-bottom: 50px;
 `;
 
 const Section = styled.div`
-  width: 50%;
-  height: 100%;
-  background-color: #ffad73;
-  border: 1px solid black;
-`;
-
-const Container = styled.div`
-  background-color: #add8e6;
-  width: 100%;
-  min-height: 100vh;
-  top: 0;
-  left: 0;
+height: 80%;
+  width: 80%;
   display: flex;
+text-align: center;
   justify-content: center;
-  align-items: center;
-  position: absolute;
-`;
+  background-color: #ffad73;
+  border: 2px solid black;
+  `;
 
 const Form = styled.form`
   display: flex;
@@ -54,13 +55,26 @@ const Input = styled.input`
   margin: 5px;
 `;
 const ImageBox = styled.div`
-  width: 100px;
-  height: 90px;
+height: 25%;
+width: 25%;
+margin: auto;
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin-top: auto;
-  margin-bottom: 90px;
+  margin: auto;
+  justify-content: center;
+`;
+const Header = styled.h1`
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  text-align: center;
+  background-color: lightblue;
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 100%;
+  padding: 20px;
+  margin: 0;
 `;
 
 const LoginPage = () => {
@@ -73,7 +87,6 @@ const LoginPage = () => {
   const handleSignUp = async (event) => {
     event.preventDefault();
     try {
-      // const hashedPassword = await bcrypt.hash(signupPassword, 10); // Hash password with bcrypt
       const response = await fetch("/signup", {
         method: "POST",
         headers: {
@@ -82,14 +95,11 @@ const LoginPage = () => {
         body: JSON.stringify({
           name: signupName,
           email: signupEmail,
-          // password: hashedPassword // Store hashed password
         }),
       });
       const data = await response.json();
-      localStorage.setItem("jwtToken", data.token); // Store JWT token in local storage
-      // Redirect user or display success message
+      localStorage.setItem("jwtToken", data.token);
     } catch (error) {
-      // Handle signup errors
       console.error("Signup failed:", error);
     }
   };
@@ -108,19 +118,18 @@ const LoginPage = () => {
         }),
       });
       const data = await response.json();
-      localStorage.setItem("jwtToken", data.token); // Store JWT token in local storage
-      // Redirect user or display success message
+      localStorage.setItem("jwtToken", data.token);
     } catch (error) {
-      // Handle login errors
       console.error("Login failed:", error);
     }
   };
 
   return (
-    <Container>
+    <PageContainer>
+      <Header>Adventure Awaits</Header>
       <Box>
         <Section>
-          <h2 style={{ color: "#333", textAlign: "center", fontSize: "20px" }}>
+          <h2 style={{ color: "#333", textAlign: "center", fontSize: "18px" }}>
             Create a New Account
           </h2>
           <Form onSubmit={handleSignUp}>
@@ -151,9 +160,8 @@ const LoginPage = () => {
             <Button type="submit">Sign up</Button>
           </Form>
         </Section>
-        {/* Login Section */}
         <Section>
-          <h2 style={{ color: "#333", textAlign: "center", fontSize: "20px" }}>
+          <h2 style={{ color: "#333", textAlign: "center", fontSize: "20px"}}>
             Already Have an Account? Log In.
           </h2>
           <Form onSubmit={handleLogin}>
@@ -181,10 +189,10 @@ const LoginPage = () => {
         <img
           src="/images/travel.jpg"
           alt="travel quote"
-          style={{ width: "200%", height: "250%" }}
+          style={{ width: "400%", height: "200%" }}
         />
       </ImageBox>
-    </Container>
+    </PageContainer>
   );
 };
 
