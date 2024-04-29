@@ -1,8 +1,9 @@
 import { useState, useContext } from "react";
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import AuthService from  ' ../utils/auth';
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
+import {LOGIN} from '../utils/mutations';
 
 const GlobalStyle = createGlobalStyle`
   body, html {
@@ -82,15 +83,6 @@ const Input = styled.input`
   padding: 5px;
   margin: 5px;
 `;
-// const ImageBox = styled.div`
-// height: 25%;
-// width: 25%;
-// margin: auto;
-//   display: flex;
-//   align-items: center;
-//   margin: auto;
-//   justify-content: center;
-// `;
 const Header = styled.h1`
   position: absolute;
   top: 0;
@@ -114,7 +106,7 @@ const [signupName, setSignupName] = useState('');
 const [signupEmail, setSignupEmail] = useState('');
 const [signupPassword, setSignupPassword] = useState('');
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const { setIsLoggedIn } = useContext(AuthService); // Access setIsLoggedIn from AuthContext
 
   const handleSignUp = async (event) => {
@@ -157,7 +149,7 @@ const [signupPassword, setSignupPassword] = useState('');
 
       // If login is successful, set isLoggedIn to true and navigate to the trips page
       setIsLoggedIn(true);
-      history.push('/trips');
+      navigate('/trips');
     } catch (error) {
       console.error("Login failed:", error);
     }
@@ -226,13 +218,6 @@ const [signupPassword, setSignupPassword] = useState('');
           </Form>
         </Section>
       </Box>
-      {/* <ImageBox>
-        <img
-          src="/images/travel.jpg"
-          alt="travel quote"
-          style={{ width: "400%", height: "200%" }}
-        />
-      </ImageBox> */}
     </PageContainer>
     </>
   );
