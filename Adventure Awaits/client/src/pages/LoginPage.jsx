@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useHistory } from 'react-router-dom';
+import AuthService from  ' ../utils/auth';
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 
@@ -104,15 +106,20 @@ const Header = styled.h1`
   margin-bottom: 15px;
 `;
 
-const LoginPage = () => {
-  const [signupName, setSignupName] = useState("");
-  const [signupEmail, setSignupEmail] = useState("");
-  const [signupPassword, setSignupPassword] = useState("");
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
+function LoginPage() {
+  // Define state variables for login and signup form inputs
+const [loginEmail, setLoginEmail] = useState('');
+const [loginPassword, setLoginPassword] = useState('');
+const [signupName, setSignupName] = useState('');
+const [signupEmail, setSignupEmail] = useState('');
+const [signupPassword, setSignupPassword] = useState('');
+
+  const history = useHistory();
+  const { setIsLoggedIn } = useContext(AuthService); // Access setIsLoggedIn from AuthContext
 
   const handleSignUp = async (event) => {
     event.preventDefault();
+
     try {
       const response = await fetch("/signup", {
         method: "POST",
@@ -122,6 +129,7 @@ const LoginPage = () => {
         body: JSON.stringify({
           name: signupName,
           email: signupEmail,
+         password: signupPassword, 
         }),
       });
       const data = await response.json();
@@ -146,6 +154,10 @@ const LoginPage = () => {
       });
       const data = await response.json();
       localStorage.setItem("jwtToken", data.token);
+
+      // If login is successful, set isLoggedIn to true and navigate to the trips page
+      setIsLoggedIn(true);
+      history.push('/trips');
     } catch (error) {
       console.error("Login failed:", error);
     }
@@ -224,6 +236,6 @@ const LoginPage = () => {
     </PageContainer>
     </>
   );
-};
+}
 
 export default LoginPage;
