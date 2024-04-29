@@ -5,7 +5,7 @@ import PropTypes from  'prop-types'
 const Link = styled(RouterLink)`
   color: #fff;
   text-decoration: none;
-  margin: 0 10px; // Add some space between the links
+  margin: 0 10px; 
 `;
 
 function Header({ isLoggedIn, title, color }) {
@@ -33,6 +33,6 @@ function Header({ isLoggedIn, title, color }) {
     title: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
   };
-  
+
   export default Header;
 
