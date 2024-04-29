@@ -45,18 +45,57 @@ const Input = styled.input`
 `;
 
 const Trip = () => {
-    const [title, setTitle] = useState('');
-    const [destination, setDestination] = useState('');
-    const [notes, setNotes] = useState('');
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+    // const [title, setTitle] = useState('');
+    // const [destination, setDestination] = useState('');
+    // const [notes, setNotes] = useState('');
+    const [formState, setFormState] = useState({name: '', location: '', message: '' });
+    //const [formSent, setFormSent] = useState(false);
+    const {name, location, message} = formState;
+    //changing date picker
+    const [date, setDate] = useState(new Date());
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
 
-    const selectionRange = {
-        startDate: startDate,
-        endDate: endDate,
-        key: "selection"
-    };
+    //will need a mutation for adding trips
+    const [addTrip, { error }] = useMutation(ADD_TRIP);
 
+
+    //selection range formula
+    // const handleDateChange = (range) => {
+    //     const [startDate, endDate] = range;
+    //     setStartDate(startDate);
+    //     setEndDate(endDate);
+    // }
+
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setFormState({ ...formState, [name]: value });
+      };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        console.log(formState)
+
+        try {
+            const { data } = await addTrip({
+              variables: { ...formState },
+            });
+
+            //possible function needed to match Ids with API
+
+        } catch (err) {
+            console.error(err);
+        }
+
+
+        setFormState({
+            name: '',
+            location: '',
+            message: '',
+          });
+        };
 
 
 
@@ -69,66 +108,62 @@ const Trip = () => {
                 <h2>Add Trips</h2>
             </Section>
             <div>Loading...</div>
-            <Form>
+            <Form onSubmit={handleSubmit}>
             <Section>
                 <label htmlFor="name">Trip Name</label>
                 {/* Title use state*/}
                 <Input
                     type="text"
                     className="form-control"
-                    name="location"
-                    placeholder="Location"
-                    value={/*location state*/}
-                    onChange={/*handle change submit*/}        
+                    name="name"
+                    placeholder="Trip Name"
+                    value={formState.name}
+                    onChange={handleInputChange}        
                 />
                 {/* Destination use state*/}   
             </Section>
             <Section>
-                <label htmlFor="name">Destination</label>
+                <label htmlFor="location">Destination</label>
                 <Input
                     type="text"
                     className="form-control"
                     name="location"
-                    placeholder="Location"
-                    value={/* location state */}
-                    onChange={/*handle change submit*/}        
+                    placeholder="Destination"
+                    value={formState.location}
+                    onChange={handleInputChange}        
                 />
                 {/* Destination use state*/}   
             </Section>
             <Section>
                 <DatePicker
-                        selected = {startDate}
-                        onChange = {date => setStartDate(date)}
                         selectsStart
+                        selected = {startDate}
+                        onChange = {(date) => setStartDate(date)}
                         startDate = {startDate}
-                        endDate = {endDate}
-                        ranges = {[selectionRange]}
                     />
                 <DatePicker
-                        selected = {endDate}
-                        onChange = {date => setEndDate(date)}
                         selectsStart
+                        selected = {endDate}
+                        onChange = {(date) => setEndDate(date)}
                         endDate = {endDate}
+                        startDate={startDate}
                         minDate = {startDate}
-                        ranges = {[selectionRange]}
                 />
             </Section>
             <Section>
             <label className="" htmlFor="message">Notes...</label>
                 <textarea
                     className=""
-                    name=""
-                    placeholder=""
-                    value={/* State */}
-                    onChange={/*handlechange*/}
+                    name="message"
+                    placeholder="message"
+                    value={formState.message}
+                    onChange={handleInputChange}
                 ></textarea>
                 {/* Note use state*/}   
             </Section>
             <div>
-                 <Button
-                    className=""
-                    onClick={/*submit button*/}>Add trip
-                </Button>
+                {/* May need to add a data type to the button*/}
+                 <Button type='submit'>Add trip</Button>
             </div>
             </Form>
         </Box>
@@ -137,4 +172,5 @@ const Trip = () => {
     )
 
 
+    
 }
