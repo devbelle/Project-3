@@ -7,17 +7,13 @@ import Hotels from './pages/HotelsPage.jsx'
 import Restaurants from './pages/RestaurantsPage.jsx'
 import TripsPage from './pages/TripsPage.jsx'
 import PackingPage from './pages/PackingPage.jsx'
-<<<<<<< HEAD
 import EditTripPage from './pages/EditTripPage.jsx'
-=======
->>>>>>> main
 
 const router = createBrowserRouter([
   { path: '/', 
   element: <App />, 
   children: [
     { index: true, element: <LoginPage /> },
-<<<<<<< HEAD
      { path: 'hotels', element: <Hotels/> }, 
      { path: 'restaurants', element: <Restaurants/> },
      { path: 'trips', element: <TripsPage/>},
@@ -25,13 +21,6 @@ const router = createBrowserRouter([
      { path: 'EditTripPage', element: <EditTripPage/>}
 
     ]
-=======
-    { path: 'hotels', element: <Hotels/> }, 
-    { path: 'restaurants', element: <Restaurants/> },
-    { path: 'trips', element: <TripsPage/>},
-    { path: 'packing', element: <PackingPage/>}
-  ]
->>>>>>> main
   }
 ])
 
