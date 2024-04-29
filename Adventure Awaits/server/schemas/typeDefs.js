@@ -37,15 +37,15 @@ type Mutation {
         destination: String!
         startDate: String
         endDate: String
-        notes: String): User
+        notes: String): Trip
 
     updateTrip(tripId: ID!, title: String!
         destination: String!
         startDate: String
         endDate: String
-        notes: String): User
+        notes: String): Trip
 
-    removeTrip(tripId: ID!): User
+    removeTrip(tripId: ID!): Trip
 }
 `;
 
