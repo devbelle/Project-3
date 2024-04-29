@@ -8,9 +8,10 @@ const Link = styled(RouterLink)`
   margin: 0 10px; // Add some space between the links
 `;
 
-function Header({ isLoggedIn }) {
+function Header({ isLoggedIn, title, color }) {
     return (
-      <header>
+      <header style = {{backgroundColor: color}}> 
+        <h1>{title}</h1>
         <nav>
           {isLoggedIn ? (
             <>
@@ -29,6 +30,8 @@ function Header({ isLoggedIn }) {
 
   Header.propTypes = {
     isLoggedIn: PropTypes.bool.isRequired,
+    title: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired,
   };
   
   export default Header;

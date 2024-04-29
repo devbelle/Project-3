@@ -4,6 +4,7 @@ import TripsPage from './pages/Trips';
 import RestaurantsPage from '../pages/RestaurantsPage';
 import HotelsPage from '../pages/HotelsPage';
 import PackingPage from './pages/PackingPage';
+import EditTripPage from './pages/EditTripPage';
 
 import PropTypes from 'prop-types';
 
@@ -20,6 +21,10 @@ return <HotelsPage/>;
 else if (section === 'Packing') {
   return <PackingPage/>;
 }
+else {
+  return <EditTripPage/>;
+}
+
 }
 
 Home.propTypes = {
