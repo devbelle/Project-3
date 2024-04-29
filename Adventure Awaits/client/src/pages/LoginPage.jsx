@@ -1,68 +1,94 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { createGlobalStyle } from "styled-components";
 
+const GlobalStyle = createGlobalStyle`
+  body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+`;
 const PageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
   justify-content: center;
+  display: flex;
   align-items: center;
   height: 100vh;
-  padding: 0 80px;
-`;
-  const Box = styled.div`
-  position: absolute;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center; 
   width: 100%;
-  max-width: 430px;
-  background-color: white;
-  border-radius: 10px;
-  border: 3px solid black;
-  padding: 50px;
-  margin-top: 10px;
-  margin-bottom: 50px;
+  position: fixed;
+  top: 0;
+  left: 0;
+background-image: url("/images/nature.jpg");
+background-size: cover;
+background-position: center;
 `;
+const Box = styled.div`
+display: flex;
+justify-content: space-between;
+width: 80%;
+padding: 20px;
+background-color: lightgray;
+border-radius: 8px;
+align-items: center;
+border: 2px solid black;
+margin: 0 auto;
+margin-top: 60px;
+height: auto;
+
+@media (min-width: 768px) {
+  width: 600px;
+  height: 400px;
+}
+`;
+
 
 const Section = styled.div`
-height: 80%;
-  width: 80%;
-  display: flex;
 text-align: center;
-  justify-content: center;
-  background-color: #ffad73;
-  border: 2px solid black;
-  `;
+padding: 10px;
+width: 40%;
+height: auto;
+margin-top: 5px;
+margin-left: 2px;
+margin-right: 2px;
+justify-content: center;
+background-color: orange;
+border-radius: 8px;
+border: 2px solid black;
+`;
 
 const Form = styled.form`
+flex-direction: column;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 55%;
 `;
 const Button = styled.button`
-  width: 100px;
+width: 100px;
   display: block;
   border: 1px solid black;
-  padding: 5px;
-  margin-top: 10px;
+  padding: 2px;
+  margin-top: 2px;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
 `;
 const Input = styled.input`
   padding: 5px;
   margin: 5px;
 `;
-const ImageBox = styled.div`
-height: 25%;
-width: 25%;
-margin: auto;
-  display: flex;
-  align-items: center;
-  margin: auto;
-  justify-content: center;
-`;
+// const ImageBox = styled.div`
+// height: 25%;
+// width: 25%;
+// margin: auto;
+//   display: flex;
+//   align-items: center;
+//   margin: auto;
+//   justify-content: center;
+// `;
 const Header = styled.h1`
   position: absolute;
   top: 0;
@@ -73,8 +99,9 @@ const Header = styled.h1`
   border: 1px solid black;
   border-radius: 10px;
   width: 100%;
-  padding: 20px;
-  margin: 0;
+  padding: 10px;
+  margin-top: 0;
+  margin-bottom: 15px;
 `;
 
 const LoginPage = () => {
@@ -125,11 +152,13 @@ const LoginPage = () => {
   };
 
   return (
+    <>
+      <GlobalStyle />
     <PageContainer>
       <Header>Adventure Awaits</Header>
       <Box>
         <Section>
-          <h2 style={{ color: "#333", textAlign: "center", fontSize: "18px" }}>
+        <h2 style={{ color: "#333", textAlign: "center", fontSize: "18px", marginTop: "10px" }}>
             Create a New Account
           </h2>
           <Form onSubmit={handleSignUp}>
@@ -161,7 +190,7 @@ const LoginPage = () => {
           </Form>
         </Section>
         <Section>
-          <h2 style={{ color: "#333", textAlign: "center", fontSize: "20px"}}>
+        <h2 style={{ color: "#333", textAlign: "center", fontSize: "18px", marginTop: "10px" }}>
             Already Have an Account? Log In.
           </h2>
           <Form onSubmit={handleLogin}>
@@ -185,14 +214,15 @@ const LoginPage = () => {
           </Form>
         </Section>
       </Box>
-      <ImageBox>
+      {/* <ImageBox>
         <img
           src="/images/travel.jpg"
           alt="travel quote"
           style={{ width: "400%", height: "200%" }}
         />
-      </ImageBox>
+      </ImageBox> */}
     </PageContainer>
+    </>
   );
 };
 
