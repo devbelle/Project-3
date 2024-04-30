@@ -1,9 +1,11 @@
 import { useState, useContext } from "react";
-import { useNavigate } from 'react-router-dom';
-import AuthService from  '../utils/auth';
+import { useNavigate } from "react-router-dom";
+import AuthService from "../utils/auth";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
-// import {LOGIN} from '../utils/mutations';
+import { LOGIN } from "../utils/mutations";
+import { useMutation } from "@apollo/client";
+import { ADD_USER } from "../utils/mutations";
 
 const GlobalStyle = createGlobalStyle`
   body, html {
@@ -21,46 +23,45 @@ const PageContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-background-image: url("/images/nature.jpg");
-background-size: cover;
-background-position: center;
+  background-image: url("/images/nature.jpg");
+  background-size: cover;
+  background-position: center;
 `;
 const Box = styled.div`
-display: flex;
-justify-content: space-between;
-width: 80%;
-padding: 20px;
-background-color: lightgray;
-border-radius: 8px;
-align-items: center;
-border: 2px solid black;
-margin: 0 auto;
-margin-top: 60px;
-height: auto;
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  padding: 20px;
+  background-color: lightgray;
+  border-radius: 8px;
+  align-items: center;
+  border: 2px solid black;
+  margin: 0 auto;
+  margin-top: 60px;
+  height: auto;
 
-@media (min-width: 768px) {
-  width: 600px;
-  height: 400px;
-}
+  @media (min-width: 768px) {
+    width: 600px;
+    height: 400px;
+  }
 `;
 
-
 const Section = styled.div`
-text-align: center;
-padding: 10px;
-width: 40%;
-height: auto;
-margin-top: 5px;
-margin-left: 2px;
-margin-right: 2px;
-justify-content: center;
-background-color: orange;
-border-radius: 8px;
-border: 2px solid black;
+  text-align: center;
+  padding: 10px;
+  width: 40%;
+  height: auto;
+  margin-top: 5px;
+  margin-left: 2px;
+  margin-right: 2px;
+  justify-content: center;
+  background-color: orange;
+  border-radius: 8px;
+  border: 2px solid black;
 `;
 
 const Form = styled.form`
-flex-direction: column;
+  flex-direction: column;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,7 +70,7 @@ flex-direction: column;
   height: 55%;
 `;
 const Button = styled.button`
-width: 100px;
+  width: 100px;
   display: block;
   border: 1px solid black;
   padding: 2px;
@@ -100,33 +101,27 @@ const Header = styled.h1`
 
 function LoginPage() {
   // Define state variables for login and signup form inputs
-const [loginEmail, setLoginEmail] = useState('');
-const [loginPassword, setLoginPassword] = useState('');
-const [signupName, setSignupName] = useState('');
-const [signupEmail, setSignupEmail] = useState('');
-const [signupPassword, setSignupPassword] = useState('');
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [signupName, setSignupName] = useState("");
+  const [signupEmail, setSignupEmail] = useState("");
+  const [signupPassword, setSignupPassword] = useState("");
 
   const navigate = useNavigate();
   const authContext = useContext(AuthService);
   const setIsLoggedIn = authContext ? authContext.setIsLoggedIn : () => {};
-  
+  const [addUser, { data, loading, error }] = useMutation(ADD_USER);
+  const [login] = useMutation(LOGIN);
+
   const handleSignUp = async (event) => {
     event.preventDefault();
-
     try {
-      const response = await fetch("/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: signupName,
-          email: signupEmail,
-         password: signupPassword, 
-        }),
+      const { data } = await addUser({
+        variables: { name: signupName, email: signupEmail,  password: signupPassword},
       });
-      const data = await response.json();
-      localStorage.setItem("jwtToken", data.token);
+      localStorage.setItem("jwtToken", data.addUser.token);
+      setIsLoggedIn(true);
+      navigate("/trips"); // If signup is successful, set isLoggedIn to true and navigate to the trips page
     } catch (error) {
       console.error("Signup failed:", error);
     }
@@ -135,22 +130,12 @@ const [signupPassword, setSignupPassword] = useState('');
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: loginEmail,
-          password: loginPassword,
-        }),
+      const { data } = await login({
+        variables: { email: loginEmail, password: loginPassword },
       });
-      const data = await response.json();
-      localStorage.setItem("jwtToken", data.token);
-
-      // If login is successful, set isLoggedIn to true and navigate to the trips page
+      localStorage.setItem("jwtToken", data.login.token);
       setIsLoggedIn(true);
-      navigate('/trips');
+      navigate("/trips"); // If login is successful, set isLoggedIn to true and navigate to the trips page
     } catch (error) {
       console.error("Login failed:", error);
     }
@@ -159,67 +144,81 @@ const [signupPassword, setSignupPassword] = useState('');
   return (
     <>
       <GlobalStyle />
-    <PageContainer>
-      <Header>Adventure Awaits</Header>
-      <Box>
-        <Section>
-        <h2 style={{ color: "#333", textAlign: "center", fontSize: "18px", marginTop: "10px" }}>
-            Create a New Account
-          </h2>
-          <Form onSubmit={handleSignUp}>
-            <Input
-              type="text"
-              id="signupName"
-              name="signupName"
-              value={signupName}
-              onChange={(e) => setSignupName(e.target.value)}
-              placeholder="Name"
-            />
-            <Input
-              type="email"
-              id="signupEmail"
-              name="signupEmail"
-              value={signupEmail}
-              onChange={(e) => setSignupEmail(e.target.value)}
-              placeholder="Email"
-            />
-            <Input
-              type="password"
-              id="signupPassword"
-              name="signupPassword"
-              value={signupPassword}
-              onChange={(e) => setSignupPassword(e.target.value)}
-              placeholder="Password"
-            />
-            <Button type="submit">Sign up</Button>
-          </Form>
-        </Section>
-        <Section>
-        <h2 style={{ color: "#333", textAlign: "center", fontSize: "18px", marginTop: "10px" }}>
-            Already Have an Account? Log In.
-          </h2>
-          <Form onSubmit={handleLogin}>
-            <Input
-              type="email"
-              id="loginEmail"
-              name="loginEmail"
-              value={loginEmail}
-              onChange={(e) => setLoginEmail(e.target.value)}
-              placeholder="Email"
-            />
-            <Input
-              type="password"
-              id="loginPassword"
-              name="loginPassword"
-              value={loginPassword}
-              onChange={(e) => setLoginPassword(e.target.value)}
-              placeholder="Password"
-            />
-            <Button type="submit">Log in</Button>
-          </Form>
-        </Section>
-      </Box>
-    </PageContainer>
+      <PageContainer>
+        <Header>Adventure Awaits</Header>
+        <Box>
+          <Section>
+            <h2
+              style={{
+                color: "#333",
+                textAlign: "center",
+                fontSize: "18px",
+                marginTop: "10px",
+              }}
+            >
+              Create a New Account
+            </h2>
+            <Form onSubmit={handleSignUp}>
+              <Input
+                type="text"
+                id="signupName"
+                name="signupName"
+                value={signupName}
+                onChange={(e) => setSignupName(e.target.value)}
+                placeholder="Name"
+              />
+              <Input
+                type="email"
+                id="signupEmail"
+                name="signupEmail"
+                value={signupEmail}
+                onChange={(e) => setSignupEmail(e.target.value)}
+                placeholder="Email"
+              />
+              <Input
+                type="password"
+                id="signupPassword"
+                name="signupPassword"
+                value={signupPassword}
+                onChange={(e) => setSignupPassword(e.target.value)}
+                placeholder="Password"
+              />
+              <Button type="submit">Sign up</Button>
+            </Form>
+          </Section>
+          <Section>
+            <h2
+              style={{
+                color: "#333",
+                textAlign: "center",
+                fontSize: "18px",
+                marginTop: "10px",
+              }}
+            >
+              Already Have an Account? Log In.
+            </h2>
+            <Form onSubmit={handleLogin}>
+              <Input
+                type="email"
+                id="loginEmail"
+                name="loginEmail"
+                value={loginEmail}
+                onChange={(e) => setLoginEmail(e.target.value)}
+                placeholder="Email"
+              />
+              <Input
+                type="password"
+                id="loginPassword"
+                name="loginPassword"
+                value={loginPassword}
+                onChange={(e) => setLoginPassword(e.target.value)}
+                placeholder="Password"
+              />
+              <Button type="submit">Log in</Button>
+            </Form>
+          </Section>
+        </Box>
+      </PageContainer>
     </>
   );
 }
