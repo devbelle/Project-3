@@ -1,4 +1,5 @@
 
+import {useState, createContext} from 'react';
 import { Outlet } from 'react-router-dom';
 import {
   ApolloClient,
@@ -8,6 +9,7 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
+export const AuthService = createContext();
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -28,11 +30,14 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
     <ApolloProvider client={client}>
+      <AuthService.Provider value={{ isLoggedIn, setIsLoggedIn }}>
         <Outlet />
+      </AuthService.Provider>
     </ApolloProvider>
   );
 }

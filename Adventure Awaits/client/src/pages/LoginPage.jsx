@@ -1,9 +1,9 @@
 import { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
-import AuthService from  ' ../utils/auth';
+import AuthService from  '../utils/auth';
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
-import {LOGIN} from '../utils/mutations';
+// import {LOGIN} from '../utils/mutations';
 
 const GlobalStyle = createGlobalStyle`
   body, html {
@@ -107,8 +107,9 @@ const [signupEmail, setSignupEmail] = useState('');
 const [signupPassword, setSignupPassword] = useState('');
 
   const navigate = useNavigate();
-  const { setIsLoggedIn } = useContext(AuthService); // Access setIsLoggedIn from AuthContext
-
+  const authContext = useContext(AuthService);
+  const setIsLoggedIn = authContext ? authContext.setIsLoggedIn : () => {};
+  
   const handleSignUp = async (event) => {
     event.preventDefault();
 
