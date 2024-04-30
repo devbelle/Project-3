@@ -131,7 +131,7 @@ function LoginPage() {
     event.preventDefault();
     try {
       const { data } = await login({
-        variables: { email: loginEmail, password: loginPassword },
+        variables: { name: loginEmail, password: loginPassword },
       });
       localStorage.setItem("jwtToken", data.login.token);
       setIsLoggedIn(true);
