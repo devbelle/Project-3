@@ -15,14 +15,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <ApolloProvider client={client}>
     <Router>
       <Routes>
-        <Route path="/" element={<App />}>
-          <Route path="login" element={<LoginPage />} />
-          <Route path="trips" element={<TripsPage />} />
-          <Route path="hotels" element={<HotelsPage />} />
-          <Route path="restaurants" element={<RestaurantsPage />} />
-          <Route path="packing" element={<PackingPage />} />
-          <Route path="editTrips" element={<EditTripPage />} /> 
-        </Route>
+        <Route path="/" element={<App />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/trips" element={<TripsPage />} />
+        <Route path="/hotels" element={<HotelsPage />} />
+        <Route path="/restaurants" element={<RestaurantsPage />} />
+        <Route path="/packing" element={<PackingPage />} />
+        <Route path="/editTrips" element={<EditTripPage />} /> 
       </Routes>
     </Router>
   </ApolloProvider>
