@@ -107,7 +107,7 @@ function LoginPage() {
   const [signupEmail, setSignupEmail] = useState("");
   const [signupPassword, setSignupPassword] = useState("");
 
-  const navigate = useNavigate();
+  const navigate = useNavigate();  //defines where to navigate upon logging in or signup
   const authContext = useContext(AuthService);
   const setIsLoggedIn = authContext ? authContext.setIsLoggedIn : () => {};
   const [addUser, { data, loading, error }] = useMutation(ADD_USER);

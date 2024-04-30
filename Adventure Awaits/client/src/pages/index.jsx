@@ -10,18 +10,16 @@ import RestaurantsPage from './RestaurantsPage';
 import PackingPage from './PackingPage';
 import EditTripPage from './EditTripPage';
 
-
 ReactDOM.createRoot(document.getElementById('root')).render(
   <ApolloProvider client={client}>
     <Router>
       <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/trips" element={<TripsPage />} />
-        <Route path="/hotels" element={<HotelsPage />} />
-        <Route path="/restaurants" element={<RestaurantsPage />} />
-        <Route path="/packing" element={<PackingPage />} />
-        <Route path="/editTrips" element={<EditTripPage />} /> 
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/app" element={<TripsPage />} />
+        <Route path="/app/hotels" element={<HotelsPage />} />
+        <Route path="/app/restaurants" element={<RestaurantsPage />} />
+        <Route path="/app/packing" element={<PackingPage />} />
+        <Route path="/app/editTrips" element={<EditTripPage />} /> 
       </Routes>
     </Router>
   </ApolloProvider>
