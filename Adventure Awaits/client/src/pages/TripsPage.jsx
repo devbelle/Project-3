@@ -8,12 +8,10 @@ import { ADD_TRIP } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 
 
-const Box = styled.div`
-
+const TripsBox = styled.div`
 justify-content: space-between;
 width: 90%;
 max-width: 430px;
-
 padding: 10px;
 background-color: white;
 border-radius: 10px;
@@ -109,7 +107,7 @@ const TripsPage = () => {
 
 
     return (
-        <Box>
+        <TripsBox>
             <Section>
                 <h2>Add Trips</h2>
             </Section>
@@ -176,7 +174,7 @@ const TripsPage = () => {
                  <Button type='submit'>Add trip</Button>
             </div>
             </Form>
-        </Box>
+        </TripsBox>
 
 
     )
