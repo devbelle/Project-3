@@ -1,8 +1,6 @@
 // import styled from 'styled-components';
 import { useState, useEffect } from 'react';
-
-
-
+import HeaderPages from '../components/HeaderPages';
 
 
 const SearchRestaurants = () => {
@@ -42,8 +40,10 @@ const SearchRestaurants = () => {
 //       return (
 //         <>
 //           <div className="text-light bg-dark p-5">
+<HeaderPages title="Resteraunts" color="#ADD8E6" font="Arial" fontSize="22px" marginTop= '10px' imgSrc="/images/globe.jpg" />
+
 //             <Container>
-//               <h1>Search for Books!</h1>
+//               <h1> Search for Restaurants</h1>
 //               <Form onSubmit={handleFormSubmit}>
 //                 <Row>
 //                   <Col xs={12} md={8}>
