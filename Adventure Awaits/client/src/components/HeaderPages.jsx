@@ -1,8 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import PropTypes from "prop-types";
 
 function HeaderPages({ title, color, font, fontSize, imgSrc }) {
-  return (
+ const navigate =useNavigate();
+ function handleLogout() {
+    //clear user data from local storage
+    localStorage.clear();
+    //redirect to login page
+    navigate('/');
+ }
+    return (
     <header
       style={{
         backgroundImage: `url(${imgSrc})`,
@@ -98,6 +105,21 @@ function HeaderPages({ title, color, font, fontSize, imgSrc }) {
           to="/editTrip"
         >
           Edit Trip
+        </Link>
+        <span>|</span>
+
+        <Link
+            style={{
+                padding: "0 6px",
+                fontWeight: "bold",
+                fontSize: "1em",
+                color: "#FFF8F0",
+                textShadow: "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black",
+            }}
+            to="/"
+            onClick={handleLogout}
+        >
+            Logout
         </Link>
       </nav>
     </header>
