@@ -41,7 +41,7 @@ type Mutation {
         password: String!
     ): Auth
 
-    login(name: String!, password: String!): Auth
+    login(email: String!, password: String!): Auth
 
     addTrip(title: String!
         destination: String!

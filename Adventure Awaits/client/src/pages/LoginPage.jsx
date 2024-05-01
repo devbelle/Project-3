@@ -131,7 +131,7 @@ function LoginPage() {
     event.preventDefault();
     try {
       const { data } = await login({
-        variables: { name: loginEmail, password: loginPassword },
+        variables: { email: loginEmail, password: loginPassword },
       });
       localStorage.setItem("id_token", data.login.token);
       setIsLoggedIn(true);

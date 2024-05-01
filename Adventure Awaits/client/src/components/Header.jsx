@@ -16,7 +16,7 @@ function Header({ isLoggedIn, title, color }) {
           <>
             <Link to="/trips">Trips</Link>
             <Link to="/hotels">Hotels</Link>
-            <Link to="/restaurants">Restaurants</Link>
+            {/* <Link to="/restaurants">Restaurants</Link> */}
             <Link to="/packing">Packing</Link>
             <Link to="/editTrip">Edit Trip</Link>
           </>
