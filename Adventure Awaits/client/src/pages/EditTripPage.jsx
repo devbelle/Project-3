@@ -45,7 +45,7 @@ const Input = styled.input`
 
 //Suspect to change once we start plugging in the server side. creating a direct copy of trip page to add trips
 
-const Edit = () => {
+const EditTripPage = () => {
 
 
     
@@ -58,49 +58,46 @@ const Edit = () => {
             <div>Loading...</div>
             <Form>
             <Section>
-                <label htmlFor="name">{Trip Name Id}</label>
+                <label htmlFor="name"></label>
                 {/* Title use state*/}
                 <Input
                     type="text"
                     className="form-control"
                     name="location"
                     placeholder="Location"
-                    value={/*location state*/}
-                    onChange={/*handle change submit*/}        
+                          
                 />
                 {/* Destination use state*/}   
             </Section>
             <Section>
-                <label htmlFor="name">{Destination Id}</label>
+                <label htmlFor="name"></label>
                 <Input
                     type="text"
                     className="form-control"
                     name="location"
-                    placeholder="Location"
-                    value={/* location Id*/}
-                    onChange={/*handle change submit*/}        
+                    placeholder="Location"     
                 />
                 {/* Destination use state*/}   
             </Section>
             <Section>
-            <label className="" htmlFor="message">{Notes Id}</label>
+            <label className="" htmlFor="message"></label>
                 <textarea
                     className=""
                     name=""
                     placeholder=""
-                    value={/* State Id*/}
-                    onChange={/*handlechange*/}
-                ></textarea>
+                    ></textarea>
                 {/* Note use state*/}   
             </Section>
             <div>
                  <Button
                     className=""
-                    data-id={ /*id} */}
-                    onClick={/*submit button*/}>Edit trip
+                    //data-id=
+                    onClick > Edit trip
                 </Button>
             </div>
             </Form>
         </Box>
     )
 }
+
+export default EditTripPage;

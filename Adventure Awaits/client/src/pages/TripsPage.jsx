@@ -1,18 +1,20 @@
+import HeaderPages from '../components/HeaderPages';
 import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Auth from '../utils/auth';
+import { ADD_TRIP } from "../utils/mutations";
+import { useMutation } from "@apollo/client";
 import { useQuery } from "@apollo/client";
 import { GET_RESTAURANTS } from "../utils/queries";
 
 
-const Box = styled.div`
-display: flex;
+const TripsBox = styled.div`
 justify-content: space-between;
 width: 90%;
 max-width: 430px;
-height: 220px;
 padding: 10px;
 background-color: white;
 border-radius: 10px;
@@ -23,11 +25,11 @@ margin-bottom: 250px;
 `
 
 const Section = styled.div`
-width: 50%;
-height: 100%;
-background-color: #ffad73;
-border: 1px solid black;
-`
+  width: 50%;
+  height: 100%;
+  background-color: #ffad73;
+  border: 1px solid black;
+`;
 const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -46,113 +48,145 @@ const Input = styled.input`
   margin: 5px;
 `;
 
-const Trip = () => {
-    const [title, setTitle] = useState('');
-    const [destination, setDestination] = useState('');
-    const [notes, setNotes] = useState('');
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+const TripsPage = () => {
+  // const [title, setTitle] = useState('');
+  // const [destination, setDestination] = useState('');
+  // const [notes, setNotes] = useState('');
+  const [formState, setFormState] = useState({
+    title: "",
+    destination: "",
+    message: "",
+  });
+  //const [formSent, setFormSent] = useState(false);
+  // const {title, location, message} = formState;
+  //changing date picker
+  const [date, setDate] = useState(new Date());
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
 
-    const [getRestaurants, {error}] = useQuery(GET_RESTAURANTS) 
+  //will need a mutation for adding trips
+  const [addTrip] = useMutation(ADD_TRIP);
 
-    const selectionRange = {
-        startDate: startDate,
-        endDate: endDate,
-        key: "selection"
-    };
+  //selection range formula
+  // const handleDateChange = (range) => {
+  //     const [startDate, endDate] = range;
+  //     setStartDate(startDate);
+  //     setEndDate(endDate);
+  // }
 
-const handleFormSubmit = async () => {
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+
+    //const updatedName = name === 'name' ? 'title' : title;
+
+    setFormState({ ...formState, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    console.log(formState);
+
     try {
-        const {data} = await getRestaurants({
-            variables: {city: 'Barcelona'}
-        })
-        console.log(data.getRestaurants)
-    } catch (error) {
-        console.log(error)
+      const { data } = await addTrip({
+        variables: { ...formState },
+      });
+
+      //possible function needed to match Ids with API
+    } catch (err) {
+      console.error(err);
     }
-}
-useEffect(() => {
-    handleFormSubmit()
-}, [])
+
+
+
+
+        setFormState({
+            title: '',
+            destination: '',
+            message: '',
+          });
+        };
+
+
 
 
 
 
     return (
-        <Box>
+        <TripsBox>
             <Section>
                 <h2>Add Trips</h2>
             </Section>
             <div>Loading...</div>
-            <Form>
+            <Form onSubmit={handleSubmit}>
             <Section>
                 <label htmlFor="name">Trip Name</label>
-                {/* Title use state*/}
+                
                 <Input
                     type="text"
                     className="form-control"
-                    name="location"
-                    placeholder="Location"
-                    // value={}
-                    // onChange={}        
+                    name="title"
+                    placeholder="Trip Name"
+                    value={formState.title}
+                    onChange={handleInputChange}        
                 />
-                {/* Destination use state*/}   
+               
             </Section>
             <Section>
-                <label htmlFor="name">Destination</label>
+                <label htmlFor="location">Destination</label>
                 <Input
                     type="text"
                     className="form-control"
-                    name="location"
-                    placeholder="Location"
-                    // value={}
-                    // onChange={}        
+                    name="destination"
+                    placeholder="Destination"
+                    value={formState.destination}
+                    onChange={handleInputChange}        
                 />
-                {/* Destination use state*/}   
+                
             </Section>
             <Section>
+                <label htmlFor="start-date">Start Date</label>
                 <DatePicker
+                        selectsStart
                         selected = {startDate}
-                        onChange = {date => setStartDate(date)}
-                        selectsStart
+                        onChange = {(date) => setStartDate(date)}
                         startDate = {startDate}
-                        endDate = {endDate}
-                        ranges = {[selectionRange]}
                     />
+                    </Section>
+                    <Section>
+                    <label htmlFor="start-date">End Date</label>
                 <DatePicker
-                        selected = {endDate}
-                        onChange = {date => setEndDate(date)}
                         selectsStart
+                        selected = {endDate}
+                        onChange = {(date) => setEndDate(date)}
                         endDate = {endDate}
+                        startDate={startDate}
                         minDate = {startDate}
-                        ranges = {[selectionRange]}
                 />
             </Section>
             <Section>
             <label className="" htmlFor="message">Notes...</label>
                 <textarea
                     className=""
-                    name=""
-                    placeholder=""
-                    // value={}
-                    // onChange={}
+                    name="message"
+                    placeholder="message"
+                    value={formState.message}
+                    onChange={handleInputChange}
                 ></textarea>
-                {/* Note use state*/}   
+                 
             </Section>
             <div>
-                 <Button
-                    className=""
-                    // onClick={}
-                    >Add trip
-                </Button>
+               
+                 <Button type='submit'>Add trip</Button>
             </div>
             </Form>
-        </Box>
+        </TripsBox>
 
 
     )
 
 
+    
 }
 
-export default Trip
+export default TripsPage;

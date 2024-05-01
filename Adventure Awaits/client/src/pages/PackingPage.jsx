@@ -40,7 +40,7 @@ const Button = styled.button`
 
 
 //from Devin's React Portfolio
-const Trip = () => {
+const PackingPage = () => {
     const [message, setMessage] = useState('');
     
 
@@ -58,15 +58,15 @@ const Trip = () => {
             <Section>
                 <h2>What should you bring?</h2>
             </Section>
-            <Form id="contact-form" onSubmit={/* submit button */}>
+            <Form id="contact-form" onSubmit >
         
                 <Section className="field">
                     <label className="label" htmlFor="message">Packing...</label>
-                    <textarea className="textarea" name="message" id="text" rows="5" defaultValue={/* message function for user entry of packing*/} onBlur={/* handlefrom function*/} />
+                    <textarea className="textarea" name="message" id="text" rows="5"   />
                 </Section>
-                    {/* error message function*/ && (
+                    {/* error message function*/  (
                 <Section>
-                    <p className="is-danger">{/* Error message function*/}</p>
+                    <p className="is-danger"></p>
                 </Section>
                 )}
                     <Button className="button is-medium is-primary is-fullwidth" data-testid="button" type="submit">Submit</Button>
@@ -77,3 +77,5 @@ const Trip = () => {
 
 
 }
+
+export default PackingPage;

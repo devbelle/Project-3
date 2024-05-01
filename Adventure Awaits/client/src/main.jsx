@@ -14,13 +14,13 @@ const router = createBrowserRouter([
   element: <App />, 
   children: [
     { index: true, element: <LoginPage /> },
-     { path: 'hotels', element: <Hotels/> }, 
-     { path: 'restaurants', element: <Restaurants/> },
-     { path: 'trips', element: <TripsPage/>},
-     { path: 'packing', element: <PackingPage/>},
-     { path: 'EditTripPage', element: <EditTripPage/>}
+    { path: 'trips', element: <TripsPage /> },
+    { path: 'packing', element: <PackingPage /> },
+    { path: 'editTrip', element: <EditTripPage /> },
+    { path: 'hotels', element: <Hotels /> },
+    { path: 'restaurants', element: <Restaurants /> },
 
-    ]
+  ]
   }
 ])
 

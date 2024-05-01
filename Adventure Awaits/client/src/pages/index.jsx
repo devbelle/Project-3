@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/client';
 import client from './config/client';
-import App from './App';
+import ProtectedRoute from './ProtectedRoute';
 import LoginPage from './LoginPage';
 import TripsPage from './TripsPage';
 import HotelsPage from './HotelsPage';
@@ -14,14 +14,12 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <ApolloProvider client={client}>
     <Router>
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/" element={<App />}>
-          <Route path="trips" element={<TripsPage />} />
-          <Route path="hotels" element={<HotelsPage />} />
-          <Route path="restaurants" element={<RestaurantsPage />} />
-          <Route path="packing" element={<PackingPage />} />
-          <Route path="editTrips" element={<EditTripPage />} /> 
-        </Route>
+        <Route path="/" element={<LoginPage />} />
+        <ProtectedRoute path="/trips" element={<TripsPage />} />
+        <ProtectedRoute path="/hotels" element={<HotelsPage />} />
+        <ProtectedRoute path="/restaurants" element={<RestaurantsPage />} />
+        <ProtectedRoute path="/packing" element={<PackingPage />} />
+        <ProtectedRoute path="/editTrips" element={<EditTripPage />} /> 
       </Routes>
     </Router>
   </ApolloProvider>
