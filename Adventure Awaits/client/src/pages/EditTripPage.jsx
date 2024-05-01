@@ -1,7 +1,11 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import Auth from '../utils/auth';
+//import axios from 'axios';
+import { useMutation, useQuery } from "@apollo/client";
+import { UPDATE_TRIP } from '../utils/mutations';
+import { QUERY_TRIP } from '../utils/queries';
 
 
 const Box = styled.div`
@@ -46,14 +50,39 @@ const Input = styled.input`
 //Suspect to change once we start plugging in the server side. creating a direct copy of trip page to add trips
 
 const EditTripPage = () => {
+    const {tripId} = useParams()
 
+    const [formState, setFormState] = useState({title: '', destination: '', message: '' });
 
+    const { data } = useQuery(QUERY_TRIP, {variables: {tripId}});
+    const [editTrip, { error }] = useMutation(UPDATE_TRIP);
+
+    //query for data
+
+    const trip = data?.trip ?? {}
+    console.log(trip);
+
+    const handleFormSubmit = async (event) => {
+        try {
+          const { data } = editTrip({
+            variables: {
+              tripId: tripId,
+              tripName: formState.title,
+              message: formState.message,
+              destination: formState.destination,
+              startDate: formState.startDate,
+              endDate: formState.endDate,
+            },
+          });
+        } catch (err) {
+          console.log(err);
+        }
     
     
     return (
         <Box>
             <Section>
-                <h2>Add Trips</h2>
+                <h2>Edit Trips</h2>
             </Section>
             <div>Loading...</div>
             <Form>
@@ -65,7 +94,7 @@ const EditTripPage = () => {
                     className="form-control"
                     name="location"
                     placeholder="Location"
-                          
+                    defaultValue={trip.title}  
                 />
                 {/* Destination use state*/}   
             </Section>
@@ -92,12 +121,14 @@ const EditTripPage = () => {
                  <Button
                     className=""
                     //data-id=
-                    onClick > Edit trip
+                    onClick={handleFormSubmit} > Update trip
                 </Button>
             </div>
             </Form>
         </Box>
     )
+    }
+
 }
 
 export default EditTripPage;

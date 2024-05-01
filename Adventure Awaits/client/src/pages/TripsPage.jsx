@@ -85,22 +85,23 @@ const TripsPage = () => {
 
         try {
             const { data } = await addTrip({
-              variables: { ...formState },
+              variables: { ...formState, startDate, endDate },
             });
 
+            setFormState({
+                title: '',
+                destination: '',
+                message: '',
+              });
+            
             //possible function needed to match Ids with API
 
         } catch (err) {
             console.error(err);
         }
 
+    }
 
-        setFormState({
-            title: '',
-            destination: '',
-            message: '',
-          });
-        };
 
 
 

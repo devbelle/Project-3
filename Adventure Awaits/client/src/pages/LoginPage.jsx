@@ -119,7 +119,7 @@ function LoginPage() {
       const { data } = await addUser({
         variables: { name: signupName, email: signupEmail,  password: signupPassword},
       });
-      localStorage.setItem("jwtToken", data.addUser.token);
+      localStorage.setItem("id_token", data.addUser.token);
       setIsLoggedIn(true);
       navigate("/trips"); // If signup is successful, set isLoggedIn to true and navigate to the trips page
     } catch (error) {
@@ -133,7 +133,7 @@ function LoginPage() {
       const { data } = await login({
         variables: { name: loginEmail, password: loginPassword },
       });
-      localStorage.setItem("jwtToken", data.login.token);
+      localStorage.setItem("id_token", data.login.token);
       setIsLoggedIn(true);
       navigate("/trips"); // If login is successful, set isLoggedIn to true and navigate to the trips page
     } catch (error) {

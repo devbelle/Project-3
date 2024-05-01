@@ -21,7 +21,8 @@ type Auth {
   }
 
 type Query {
-    me: User
+    me: User 
+    trip(id: ID!):Trip 
 }
 
 type Mutation {
@@ -37,7 +38,7 @@ type Mutation {
         destination: String!
         startDate: String
         endDate: String
-        notes: String): Trip
+        notes: String): User
 
     updateTrip(tripId: ID!, title: String!
         destination: String!

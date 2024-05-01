@@ -9,6 +9,14 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
+    //added user for edit trips page
+    trip: async (parent, args, context) => {
+      if (context.user) {
+        const user = await User.findOne({ _id: context.user._id, trips: {_id: args.id }}, 'trips' ).populate("trips");
+        return user?.trips[0];
+      }
+      throw AuthenticationError;
+    }
   },
 
   Mutation: {
@@ -49,16 +57,16 @@ const resolvers = {
           notes,
         });
 
-        await User.findOneAndUpdate(
+        return User.findOneAndUpdate(
           { _id: context.user._id },
           {
             $addToSet: { trips: trip._id },
-          }
-        ),
+          },
           {
             new: true,
             runValidators: true,
-          };
+          }
+        ).populate('trips')
       }
       throw AuthenticationError;
     },

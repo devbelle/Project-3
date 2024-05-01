@@ -8,12 +8,26 @@ query QUERY_ME {
       email
       trips {
         _id
-        name
+        title
         destination
         startDate
         endDate
         notes
       }
+    }
+  }
+  `
+
+  export const QUERY_TRIP = gql `
+query QUERY_TRIP ($tripId: ID!) {
+    trip(id: $tripId) {
+      _id
+      title
+      destination
+      startDate
+      endDate
+      notes
+      
     }
   }
   `
