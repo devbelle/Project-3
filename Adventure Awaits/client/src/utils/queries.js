@@ -8,7 +8,7 @@ query QUERY_ME {
       email
       trips {
         _id
-        title
+        name
         destination
         startDate
         endDate
