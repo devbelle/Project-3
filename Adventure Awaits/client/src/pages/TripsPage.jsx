@@ -47,36 +47,20 @@ const Input = styled.input`
 `;
 
 const TripsPage = () => {
-  // const [title, setTitle] = useState('');
-  // const [destination, setDestination] = useState('');
-  // const [notes, setNotes] = useState('');
   const [formState, setFormState] = useState({
     title: "",
     destination: "",
     message: "",
   });
-  //const [formSent, setFormSent] = useState(false);
-  // const {title, location, message} = formState;
-  //changing date picker
+
   const [date, setDate] = useState(new Date());
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
 
-  //will need a mutation for adding trips
   const [addTrip] = useMutation(ADD_TRIP);
-
-  //selection range formula
-  // const handleDateChange = (range) => {
-  //     const [startDate, endDate] = range;
-  //     setStartDate(startDate);
-  //     setEndDate(endDate);
-  // }
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-
-    //const updatedName = name === 'name' ? 'title' : title;
-
     setFormState({ ...formState, [name]: value });
   };
 
@@ -94,26 +78,26 @@ const TripsPage = () => {
     } catch (err) {
       console.error(err);
     }
+  };
 
 
-  return (
-    <Box>
-<HeaderPages title="My Trips" color="#ADD8E6" font="Arial" fontSize="22px" marginTop= '10px' imgSrc="/images/globe.jpg" />
- <Section>
-        <h2>Add Trips</h2>
-      </Section>
-      <div>Loading...</div>
-      <Form onSubmit={handleSubmit}>
-        <Section>
-          <label htmlFor="name">Trip Name</label>
+//   return (
+//     <Box>
+//  <Section>
+//         <h2>Add Trips</h2>
+//       </Section>
+//       <div>Loading...</div>
+//       <Form onSubmit={handleSubmit}>
+//         <Section>
+//           <label htmlFor="name">Trip Name</label>
 
 
-        setFormState({
-            title: '',
-            destination: '',
-            message: '',
-          });
-        };
+//         setFormState({
+//             title: '',
+//             destination: '',
+//             message: '',
+//           });
+//         };
 
 
 
@@ -122,6 +106,7 @@ const TripsPage = () => {
 
     return (
         <TripsBox>
+        <HeaderPages title="My Trips" color="#ADD8E6" font="Arial" fontSize="22px" marginTop= '10px' imgSrc="/images/globe.jpg" />
             <Section>
                 <h2>Add Trips</h2>
             </Section>
@@ -195,6 +180,6 @@ const TripsPage = () => {
 
 
     
-}
+};
 
 export default TripsPage;
