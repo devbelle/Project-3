@@ -17,3 +17,15 @@ query QUERY_ME {
     }
   }
   `
+
+export const GET_RESTAURANTS = gql`
+query getRestaurants($city: String) {
+  getRestaurants(city: $city) {
+    name
+    averageRating
+    priceTag
+    currentOpenStatusText
+    squareImgUrl
+  }
+}
+`
