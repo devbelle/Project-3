@@ -1,5 +1,6 @@
 const { User, Trip } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
+require("dotenv").config();
 
 
 const resolvers = {
@@ -9,6 +10,40 @@ const resolvers = {
         return User.findOne({ _id: context.user._id }).populate("trips");
       }
       throw AuthenticationError;
+    },
+    getRestaurants: async (parent, { city }, context) => {
+      try {
+        const url = `https://tripadvisor16.p.rapidapi.com/api/v1/restaurant/searchLocation?query=${city}`;
+        const options = {
+          method: "GET",
+          headers: {
+            "X-RapidAPI-Key": process.env.APIKEY,
+            "X-RapidAPI-Host": process.env.APIHOST,
+          },
+        };
+
+        const cityId = await fetch(url, options);
+        const cityIdData = await cityId.json();
+
+        const locationId = cityIdData.data[0].locationId;
+        const requestUrl = `https://tripadvisor16.p.rapidapi.com/api/v1/restaurant/searchRestaurants?locationId=${locationId}`;
+        const requestOptions = {
+          method: "GET",
+          headers: {
+            "X-RapidAPI-Key": process.env.APIKEY,
+            "X-RapidAPI-Host": process.env.APIHOST,
+          },
+        };
+        const response = await fetch(requestUrl, requestOptions);
+        const data = await response.json();
+
+        const restaurant = data.data.data;
+        console.log(restaurant);
+        return restaurant;
+      } catch (error) {
+        console.log(error);
+        throw AuthenticationError;
+      }
     },
   },
 

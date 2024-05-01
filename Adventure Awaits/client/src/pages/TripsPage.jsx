@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Auth from '../utils/auth';
 import { ADD_TRIP } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
