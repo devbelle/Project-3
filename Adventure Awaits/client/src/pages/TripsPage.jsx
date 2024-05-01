@@ -1,26 +1,26 @@
 import HeaderPages from '../components/HeaderPages';
 import DatePicker from "react-datepicker";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import Auth from "../utils/auth";
+import "react-datepicker/dist/react-datepicker.css";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import Auth from '../utils/auth';
 import { ADD_TRIP } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 
-const Box = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 90%;
-  max-width: 430px;
-  height: 220px;
-  padding: 10px;
-  background-color: white;
-  border-radius: 10px;
-  align-items: center;
-  position: absolute;
-  border: 3px solid black;
-  margin-bottom: 250px;
-`;
+
+const TripsBox = styled.div`
+justify-content: space-between;
+width: 90%;
+max-width: 430px;
+padding: 10px;
+background-color: white;
+border-radius: 10px;
+align-items: center;
+position: absolute;
+border: 3px solid black;
+margin-bottom: 250px;
+`
 
 const Section = styled.div`
   width: 50%;
@@ -95,12 +95,6 @@ const TripsPage = () => {
       console.error(err);
     }
 
-    setFormState({
-      title: "",
-      destination: "",
-      message: "",
-    });
-  };
 
   return (
     <Box>
@@ -113,60 +107,94 @@ const TripsPage = () => {
         <Section>
           <label htmlFor="name">Trip Name</label>
 
-          <Input
-            type="text"
-            className="form-control"
-            name="title"
-            placeholder="Trip Name"
-            value={formState.title}
-            onChange={handleInputChange}
-          />
-        </Section>
-        <Section>
-          <label htmlFor="location">Destination</label>
-          <Input
-            type="text"
-            className="form-control"
-            name="destination"
-            placeholder="Destination"
-            value={formState.destination}
-            onChange={handleInputChange}
-          />
-        </Section>
-        <Section>
-          <DatePicker
-            selectsStart
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-            startDate={startDate}
-          />
-          <DatePicker
-            selectsStart
-            selected={endDate}
-            onChange={(date) => setEndDate(date)}
-            endDate={endDate}
-            startDate={startDate}
-            minDate={startDate}
-          />
-        </Section>
-        <Section>
-          <label className="" htmlFor="message">
-            Notes...
-          </label>
-          <textarea
-            className=""
-            name="message"
-            placeholder="message"
-            value={formState.message}
-            onChange={handleInputChange}
-          ></textarea>
-        </Section>
-        <div>
-          <Button type="submit">Add trip</Button>
-        </div>
-      </Form>
-    </Box>
-  );
-};
+
+        setFormState({
+            title: '',
+            destination: '',
+            message: '',
+          });
+        };
+
+
+
+
+
+
+    return (
+        <TripsBox>
+            <Section>
+                <h2>Add Trips</h2>
+            </Section>
+            <div>Loading...</div>
+            <Form onSubmit={handleSubmit}>
+            <Section>
+                <label htmlFor="name">Trip Name</label>
+                
+                <Input
+                    type="text"
+                    className="form-control"
+                    name="title"
+                    placeholder="Trip Name"
+                    value={formState.title}
+                    onChange={handleInputChange}        
+                />
+               
+            </Section>
+            <Section>
+                <label htmlFor="location">Destination</label>
+                <Input
+                    type="text"
+                    className="form-control"
+                    name="destination"
+                    placeholder="Destination"
+                    value={formState.destination}
+                    onChange={handleInputChange}        
+                />
+                
+            </Section>
+            <Section>
+                <label htmlFor="start-date">Start Date</label>
+                <DatePicker
+                        selectsStart
+                        selected = {startDate}
+                        onChange = {(date) => setStartDate(date)}
+                        startDate = {startDate}
+                    />
+                    </Section>
+                    <Section>
+                    <label htmlFor="start-date">End Date</label>
+                <DatePicker
+                        selectsStart
+                        selected = {endDate}
+                        onChange = {(date) => setEndDate(date)}
+                        endDate = {endDate}
+                        startDate={startDate}
+                        minDate = {startDate}
+                />
+            </Section>
+            <Section>
+            <label className="" htmlFor="message">Notes...</label>
+                <textarea
+                    className=""
+                    name="message"
+                    placeholder="message"
+                    value={formState.message}
+                    onChange={handleInputChange}
+                ></textarea>
+                 
+            </Section>
+            <div>
+               
+                 <Button type='submit'>Add trip</Button>
+            </div>
+            </Form>
+        </TripsBox>
+
+
+    )
+
+
+    
+}
 
 export default TripsPage;
