@@ -10,19 +10,18 @@ import RestaurantsPage from './RestaurantsPage';
 import PackingPage from './PackingPage';
 import EditTripPage from './EditTripPage';
 
-//possibly messing with changes
 
-// ReactDOM.createRoot(document.getElementById('root')).render(
-//   <ApolloProvider client={client}>
-//     <Router>
-//       <Routes>
-//         <Route path="/" element={<LoginPage />} />
-//         <ProtectedRoute path="/trips" element={<TripsPage />} />
-//         <ProtectedRoute path="/hotels" element={<HotelsPage />} />
-//         <ProtectedRoute path="/restaurants" element={<RestaurantsPage />} />
-//         <ProtectedRoute path="/packing" element={<PackingPage />} />
-//         <ProtectedRoute path="/editTrips" element={<EditTripPage />} /> 
-//       </Routes>
-//     </Router>
-//   </ApolloProvider>
-// );
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <ApolloProvider client={client}>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <ProtectedRoute path="/trips" element={<TripsPage />} />
+        <ProtectedRoute path="/hotels" element={<HotelsPage />} />
+        <ProtectedRoute path="/restaurants" element={<RestaurantsPage />} />
+        <ProtectedRoute path="/packing" element={<PackingPage />} />
+        <ProtectedRoute path="/trips/:tripId" element={<EditTripPage />} /> 
+      </Routes>
+    </Router>
+  </ApolloProvider>
+);
