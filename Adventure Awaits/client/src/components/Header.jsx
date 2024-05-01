@@ -7,7 +7,6 @@ const Link = styled(RouterLink)`
   text-decoration: none;
   margin: 0 10px;
 `;
-
 function Header({ isLoggedIn, title, color }) {
   return (
     <header style={{ backgroundColor: color }}>
@@ -15,14 +14,14 @@ function Header({ isLoggedIn, title, color }) {
       <nav>
         {isLoggedIn ? (
           <>
-            <Link to="/TripsPage">Trips</Link>
-            <Link to="/HotelsPage">Hotels</Link>
-            <Link to="/RestaurantsPage">Restaurants</Link>
-            <Link to="/PackingPage">Packing</Link>
-            <Link to="/EditTripPage">Edit Trip</Link>
+            <Link to="/trips">Trips</Link>
+            <Link to="/hotels">Hotels</Link>
+            <Link to="/restaurants">Restaurants</Link>
+            <Link to="/packing">Packing</Link>
+            <Link to="/editTrip">Edit Trip</Link>
           </>
         ) : (
-          <Link to="/LoginPage">Login</Link>
+          <Link to="/login">Login</Link>
         )}
       </nav>
     </header>
