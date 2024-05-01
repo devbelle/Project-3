@@ -20,9 +20,18 @@ type Auth {
     user: User
   }
 
+type Restaurant {
+    name: String
+    averageRating: Float
+    priceTag: String
+    currentOpenStatusText: String
+    squareImgUrl: String
+}
+
 type Query {
     me: User 
     trip(id: ID!):Trip 
+    getRestaurants(city: String): [Restaurant]
 }
 
 type Mutation {

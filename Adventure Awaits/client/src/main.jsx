@@ -10,18 +10,15 @@ import PackingPage from "./pages/PackingPage.jsx";
 import EditTripPage from "./pages/EditTripPage.jsx";
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    children: [
-      { index: true, element: <LoginPage /> },
-      {
-        path: "trips/",
-        
-        element: <TripsPage />,
-      },
-      { path: "trips/:tripId", element: <EditTripPage /> },
-      { path: "packing", element: <PackingPage /> },
+  { path: '/', 
+  element: <App />, 
+  children: [
+    { index: true, element: <LoginPage /> },
+    { path: 'trips', element: <TripsPage /> },
+    { path: 'packing', element: <PackingPage /> },
+    { path: "trips/:tripId", element: <EditTripPage /> },
+    { path: 'hotels', element: <Hotels /> },
+    { path: 'restaurants', element: <Restaurants /> },
 
       { path: "hotels", element: <Hotels /> },
       { path: "restaraunts", element: <Restaurants /> },

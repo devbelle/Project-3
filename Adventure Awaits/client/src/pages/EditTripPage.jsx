@@ -6,6 +6,8 @@ import Auth from '../utils/auth';
 import { useMutation, useQuery } from "@apollo/client";
 import { UPDATE_TRIP } from '../utils/mutations';
 import { QUERY_TRIP } from '../utils/queries';
+import HeaderPages from '../components/HeaderPages';
+
 
 
 const Box = styled.div`
@@ -81,6 +83,8 @@ const EditTripPage = () => {
     
     return (
         <Box>
+            <HeaderPages title="My Trip Edits" color="#ADD8E6" font="Arial" fontSize="22px" marginTop= '10px' imgSrc="/images/globe.jpg" />
+
             <Section>
                 <h2>Edit Trips</h2>
             </Section>

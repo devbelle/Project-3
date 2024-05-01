@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import Auth from '../utils/auth';
+import HeaderPages from '../components/HeaderPages';
+
 
 const Box = styled.div`
 display: flex;
@@ -55,6 +57,7 @@ const PackingPage = () => {
 
     return (
         <Box>
+         <HeaderPages title="My Packing Page" color="#ADD8E6" font="Arial" fontSize="22px" marginTop= '10px' imgSrc="/images/globe.jpg" />
             <Section>
                 <h2>What should you bring?</h2>
             </Section>
