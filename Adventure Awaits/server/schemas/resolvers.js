@@ -2,7 +2,6 @@ const { User, Trip } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
 require("dotenv").config();
 
-
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
@@ -49,8 +48,11 @@ const resolvers = {
 
   Mutation: {
     addUser: async (parent, { name, email, password }) => {
+      // This should create a user
       const user = await User.create({ name, email, password });
+      // This creates a token
       const token = signToken(user);
+      // This returns both the token and the user
       return { token, user };
     },
     login: async (parent, { email, password }) => {
@@ -58,14 +60,12 @@ const resolvers = {
 
       if (!user) {
         throw AuthenticationError;
-
       }
 
       const correctPw = await user.isCorrectPassword(password);
-
+ 
       if (!correctPw) {
         throw AuthenticationError;
-
       }
 
       const token = signToken(user);
