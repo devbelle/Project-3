@@ -1,8 +1,10 @@
 import DatePicker from "react-datepicker";
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Auth from '../utils/auth';
+import { useQuery } from "@apollo/client";
+import { GET_RESTAURANTS } from "../utils/queries";
 
 
 const Box = styled.div`
@@ -51,14 +53,27 @@ const Trip = () => {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
 
+    const [getRestaurants, {error}] = useQuery(GET_RESTAURANTS) 
+
     const selectionRange = {
         startDate: startDate,
         endDate: endDate,
         key: "selection"
     };
 
-
-
+const handleFormSubmit = async () => {
+    try {
+        const {data} = await getRestaurants({
+            variables: {city: 'Barcelona'}
+        })
+        console.log(data.getRestaurants)
+    } catch (error) {
+        console.log(error)
+    }
+}
+useEffect(() => {
+    handleFormSubmit()
+}, [])
 
 
 
@@ -78,8 +93,8 @@ const Trip = () => {
                     className="form-control"
                     name="location"
                     placeholder="Location"
-                    value={/*location state*/}
-                    onChange={/*handle change submit*/}        
+                    // value={}
+                    // onChange={}        
                 />
                 {/* Destination use state*/}   
             </Section>
@@ -90,8 +105,8 @@ const Trip = () => {
                     className="form-control"
                     name="location"
                     placeholder="Location"
-                    value={/* location state */}
-                    onChange={/*handle change submit*/}        
+                    // value={}
+                    // onChange={}        
                 />
                 {/* Destination use state*/}   
             </Section>
@@ -119,15 +134,16 @@ const Trip = () => {
                     className=""
                     name=""
                     placeholder=""
-                    value={/* State */}
-                    onChange={/*handlechange*/}
+                    // value={}
+                    // onChange={}
                 ></textarea>
                 {/* Note use state*/}   
             </Section>
             <div>
                  <Button
                     className=""
-                    onClick={/*submit button*/}>Add trip
+                    // onClick={}
+                    >Add trip
                 </Button>
             </div>
             </Form>
@@ -138,3 +154,5 @@ const Trip = () => {
 
 
 }
+
+export default Trip

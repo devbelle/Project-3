@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
-import AuthService from  ' ../utils/auth';
+import Auth from  '../utils/auth';
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import {LOGIN} from '../utils/mutations';
