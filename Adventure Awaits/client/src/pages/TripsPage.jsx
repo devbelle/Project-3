@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import Auth from '../utils/auth';
+import { ADD_TRIP } from "../utils/mutations";
+import { useMutation } from "@apollo/client";
 
 
 const Box = styled.div`
@@ -44,20 +46,20 @@ const Input = styled.input`
   margin: 5px;
 `;
 
-const Trip = () => {
+const TripsPage = () => {
     // const [title, setTitle] = useState('');
     // const [destination, setDestination] = useState('');
     // const [notes, setNotes] = useState('');
-    const [formState, setFormState] = useState({name: '', location: '', message: '' });
+    const [formState, setFormState] = useState({title: '', destination: '', message: '' });
     //const [formSent, setFormSent] = useState(false);
-    const {name, location, message} = formState;
+    // const {title, location, message} = formState;
     //changing date picker
     const [date, setDate] = useState(new Date());
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
 
     //will need a mutation for adding trips
-    const [addTrip, { error }] = useMutation(ADD_TRIP);
+    const [addTrip] = useMutation(ADD_TRIP);
 
 
     //selection range formula
@@ -70,6 +72,9 @@ const Trip = () => {
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
+
+        //const updatedName = name === 'name' ? 'title' : title;
+
         setFormState({ ...formState, [name]: value });
       };
 
@@ -91,8 +96,8 @@ const Trip = () => {
 
 
         setFormState({
-            name: '',
-            location: '',
+            title: '',
+            destination: '',
             message: '',
           });
         };
@@ -111,28 +116,28 @@ const Trip = () => {
             <Form onSubmit={handleSubmit}>
             <Section>
                 <label htmlFor="name">Trip Name</label>
-                {/* Title use state*/}
+                
                 <Input
                     type="text"
                     className="form-control"
-                    name="name"
+                    name="title"
                     placeholder="Trip Name"
-                    value={formState.name}
+                    value={formState.title}
                     onChange={handleInputChange}        
                 />
-                {/* Destination use state*/}   
+               
             </Section>
             <Section>
                 <label htmlFor="location">Destination</label>
                 <Input
                     type="text"
                     className="form-control"
-                    name="location"
+                    name="destination"
                     placeholder="Destination"
-                    value={formState.location}
+                    value={formState.destination}
                     onChange={handleInputChange}        
                 />
-                {/* Destination use state*/}   
+                
             </Section>
             <Section>
                 <DatePicker
@@ -159,10 +164,10 @@ const Trip = () => {
                     value={formState.message}
                     onChange={handleInputChange}
                 ></textarea>
-                {/* Note use state*/}   
+                 
             </Section>
             <div>
-                {/* May need to add a data type to the button*/}
+               
                  <Button type='submit'>Add trip</Button>
             </div>
             </Form>
@@ -174,3 +179,5 @@ const Trip = () => {
 
     
 }
+
+export default TripsPage;
