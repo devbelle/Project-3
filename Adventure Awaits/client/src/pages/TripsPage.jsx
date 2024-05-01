@@ -59,37 +59,6 @@ const TripsPage = () => {
 
   const [addTrip] = useMutation(ADD_TRIP);
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormState({ ...formState, [name]: value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    console.log(formState);
-
-    try {
-      const { data } = await addTrip({
-        variables: { ...formState },
-      });
-
-      //possible function needed to match Ids with API
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-
-//   return (
-//     <Box>
-//  <Section>
-//         <h2>Add Trips</h2>
-//       </Section>
-//       <div>Loading...</div>
-//       <Form onSubmit={handleSubmit}>
-//         <Section>
-//           <label htmlFor="name">Trip Name</label>
 
 
     const handleInputChange = (event) => {
