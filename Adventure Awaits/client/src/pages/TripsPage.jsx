@@ -1,3 +1,4 @@
+import HeaderPages from '../components/HeaderPages';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styled from 'styled-components';
@@ -22,11 +23,11 @@ margin-bottom: 250px;
 `
 
 const Section = styled.div`
-width: 50%;
-height: 100%;
-background-color: #ffad73;
-border: 1px solid black;
-`
+  width: 50%;
+  height: 100%;
+  background-color: #ffad73;
+  border: 1px solid black;
+`;
 const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -46,52 +47,55 @@ const Input = styled.input`
 `;
 
 const TripsPage = () => {
-    // const [title, setTitle] = useState('');
-    // const [destination, setDestination] = useState('');
-    // const [notes, setNotes] = useState('');
-    const [formState, setFormState] = useState({title: '', destination: '', message: '' });
-    //const [formSent, setFormSent] = useState(false);
-    // const {title, location, message} = formState;
-    //changing date picker
-    const [date, setDate] = useState(new Date());
-    const [startDate, setStartDate] = useState();
-    const [endDate, setEndDate] = useState();
+  // const [title, setTitle] = useState('');
+  // const [destination, setDestination] = useState('');
+  // const [notes, setNotes] = useState('');
+  const [formState, setFormState] = useState({
+    title: "",
+    destination: "",
+    message: "",
+  });
+  //const [formSent, setFormSent] = useState(false);
+  // const {title, location, message} = formState;
+  //changing date picker
+  const [date, setDate] = useState(new Date());
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
 
-    //will need a mutation for adding trips
-    const [addTrip] = useMutation(ADD_TRIP);
+  //will need a mutation for adding trips
+  const [addTrip] = useMutation(ADD_TRIP);
+
+  //selection range formula
+  // const handleDateChange = (range) => {
+  //     const [startDate, endDate] = range;
+  //     setStartDate(startDate);
+  //     setEndDate(endDate);
+  // }
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+
+    //const updatedName = name === 'name' ? 'title' : title;
+
+    setFormState({ ...formState, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    console.log(formState);
+
+    try {
+      const { data } = await addTrip({
+        variables: { ...formState },
+      });
+
+      //possible function needed to match Ids with API
+    } catch (err) {
+      console.error(err);
+    }
 
 
-    //selection range formula
-    // const handleDateChange = (range) => {
-    //     const [startDate, endDate] = range;
-    //     setStartDate(startDate);
-    //     setEndDate(endDate);
-    // }
-
-
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-
-        //const updatedName = name === 'name' ? 'title' : title;
-
-        setFormState({ ...formState, [name]: value });
-      };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        console.log(formState)
-
-        try {
-            const { data } = await addTrip({
-              variables: { ...formState },
-            });
-
-            //possible function needed to match Ids with API
-
-        } catch (err) {
-            console.error(err);
-        }
 
 
         setFormState({
