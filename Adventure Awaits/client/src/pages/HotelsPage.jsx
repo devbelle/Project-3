@@ -1,4 +1,5 @@
  import styled from 'styled-components';
+ import HeaderPages from '../components/HeaderPages';
 
 
 const HotelPage = () => {
@@ -37,9 +38,10 @@ const HotelPage = () => {
       // };
 //       return (
 //         <>
-//           <div className="text-light bg-dark p-5">
-//             <Container>
-//               <h1>Search for Books!</h1>
+//           <div className="text-light bg-dark p-5"> 
+<HeaderPages title="Hotels" color="#ADD8E6" font="Arial" fontSize="22px" marginTop= '10px' imgSrc="/images/globe.jpg" />
+            // <Container>
+            //   <h1>Hotels</h1>
 //               <Form onSubmit={handleFormSubmit}>
 //                 <Row>
 //                   <Col xs={12} md={8}>
@@ -96,7 +98,7 @@ const HotelPage = () => {
 //                 );
 //               })}
 //             </Row> */}
-//           </Container>
+        //   </Container>
 //         </>
 //       );
 //     };
