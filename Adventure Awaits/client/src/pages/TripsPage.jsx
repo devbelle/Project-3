@@ -1,4 +1,5 @@
 import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
@@ -8,11 +9,11 @@ import { useMutation } from "@apollo/client";
 
 
 const Box = styled.div`
-display: flex;
+
 justify-content: space-between;
 width: 90%;
 max-width: 430px;
-height: 220px;
+
 padding: 10px;
 background-color: white;
 border-radius: 10px;
@@ -140,12 +141,16 @@ const TripsPage = () => {
                 
             </Section>
             <Section>
+                <label htmlFor="start-date">Start Date</label>
                 <DatePicker
                         selectsStart
                         selected = {startDate}
                         onChange = {(date) => setStartDate(date)}
                         startDate = {startDate}
                     />
+                    </Section>
+                    <Section>
+                    <label htmlFor="start-date">End Date</label>
                 <DatePicker
                         selectsStart
                         selected = {endDate}
