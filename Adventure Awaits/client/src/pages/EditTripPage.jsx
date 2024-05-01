@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import Auth from '../utils/auth';
+import HeaderPages from '../components/HeaderPages';
+
 
 
 const Box = styled.div`
@@ -52,6 +54,8 @@ const EditTripPage = () => {
     
     return (
         <Box>
+            <HeaderPages title="My Trip Edits" color="#ADD8E6" font="Arial" fontSize="22px" marginTop= '10px' imgSrc="/images/globe.jpg" />
+
             <Section>
                 <h2>Add Trips</h2>
             </Section>
