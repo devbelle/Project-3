@@ -7,8 +7,6 @@ import { useEffect, useState } from 'react';
 import Auth from '../utils/auth';
 import { ADD_TRIP } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
-import { useQuery } from "@apollo/client";
-import { GET_RESTAURANTS } from "../utils/queries";
 
 
 const TripsBox = styled.div`
