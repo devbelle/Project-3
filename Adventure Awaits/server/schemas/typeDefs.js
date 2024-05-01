@@ -29,7 +29,8 @@ type Restaurant {
 }
 
 type Query {
-    me: User
+    me: User 
+    trip(id: ID!):Trip 
     getRestaurants(city: String): [Restaurant]
 }
 
@@ -46,7 +47,7 @@ type Mutation {
         destination: String!
         startDate: String
         endDate: String
-        notes: String): Trip
+        notes: String): User
 
     updateTrip(tripId: ID!, title: String!
         destination: String!

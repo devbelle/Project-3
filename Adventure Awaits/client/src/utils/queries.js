@@ -8,7 +8,7 @@ query QUERY_ME {
       email
       trips {
         _id
-        name
+        title
         destination
         startDate
         endDate
@@ -18,6 +18,19 @@ query QUERY_ME {
   }
   `
 
+  export const QUERY_TRIP = gql `
+query QUERY_TRIP ($tripId: ID!) {
+    trip(id: $tripId) {
+      _id
+      title
+      destination
+      startDate
+      endDate
+      notes
+      
+    }
+  }
+  `
 export const GET_RESTAURANTS = gql`
 query getRestaurants($city: String) {
   getRestaurants(city: $city) {
