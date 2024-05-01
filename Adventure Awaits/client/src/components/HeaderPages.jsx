@@ -110,7 +110,6 @@ HeaderPages.propTypes = {
   font: PropTypes.string.isRequired,
   fontSize: PropTypes.string.isRequired,
   imgSrc: PropTypes.string.isRequired,
-  padding: PropTypes.string.isRequired,
 };
 
 export default HeaderPages;
