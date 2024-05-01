@@ -43,12 +43,38 @@ const Button = styled.button`
 
 //from Devin's React Portfolio
 const PackingPage = () => {
-    const [message, setMessage] = useState('');
+    const [formState, setFormState] = useState({message: ""});
     
+    const handleInputChange = (event) => {
+        const { message, value } = event.target;
 
+        //const updatedName = name === 'name' ? 'title' : title;
 
+        setFormState({ ...formState, [message]: value });
 
+        };
 
+        const handleSubmit = async (e) => {
+            e.preventDefault();
+    
+            console.log(formState)
+    
+            try {
+                const { data } = await addTrip({
+                  variables: { ...formState, message },
+                });
+    
+                setFormState({
+                    message: '',
+                  });
+                
+                //possible function needed to match Ids with API
+    
+            } catch (err) {
+                console.error(err);
+            }
+
+        }
 
 
 
@@ -61,11 +87,11 @@ const PackingPage = () => {
             <Section>
                 <h2>What should you bring?</h2>
             </Section>
-            <Form id="contact-form" onSubmit >
+            <Form id="contact-form" onSubmit={handleSubmit} >
         
                 <Section className="field">
                     <label className="label" htmlFor="message">Packing...</label>
-                    <textarea className="textarea" name="message" id="text" rows="5"   />
+                    <textarea className="textarea" name="message" id="text" rows="5" onChange={handleInputChange}   />
                 </Section>
                     {/* error message function*/  (
                 <Section>
