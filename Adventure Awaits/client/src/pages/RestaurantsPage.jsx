@@ -1,6 +1,19 @@
 // import HeaderPages from '../components/HeaderPages';
 
+// import { useQuery } from "@apollo/client";
+// import { GET_RESTAURANTS } from "../utils/queries";
 
+// restaurant stuff
+// const handleFormSubmit = async () => {
+//   try {
+//       const {data} = await getRestaurants({
+//           variables: {city: 'Barcelona'}
+//       })
+//       console.log(data.getRestaurants)
+//   } catch (error) {
+//       console.log(error)
+//   }
+// }
 export default function RestaurantsPage() {
 
 //TODO: build this page when ready.  
