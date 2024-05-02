@@ -90,7 +90,9 @@ const Header = styled.h1`
   left: 50%;
   transform: translate(-50%, 0);
   text-align: center;
-  background-color: lightblue;
+  background-image: url("/images/sun.jpg");
+  background-size: cover;
+  // background-color: lightblue;
   border: 1px solid black;
   border-radius: 10px;
   width: 100%;
