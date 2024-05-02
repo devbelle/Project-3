@@ -42,3 +42,12 @@ query getRestaurants($city: String) {
   }
 }
 `
+
+export const GET_HOTELS = gql`
+query getHotels($city: String, $startDate: String, $endDate: String) {
+  getHotels(city: $city, startDate: $startDate, endDate: $endDate) {
+    title
+    priceForDisplay
+    provider
+  }
+}`
