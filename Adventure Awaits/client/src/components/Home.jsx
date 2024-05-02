@@ -16,16 +16,14 @@ function Home({ section }) {
   // } else if (section === 'Restaurants') {
   //   return <RestaurantsPage/>;
   } else if (section === 'Hotels') {
-return <HotelsPage/>;
-}
-else if (section === 'Packing') {
-  return <PackingPage/>;
-}
-else {
-  return <EditTripPage/>;
+    return <HotelsPage/>;
+  } else if (section === 'Packing') {
+    return <PackingPage/>;
+  } else if (section === 'EditTrip') {
+    return <EditTripPage/>;
+  }
 }
 
-}
 
 Home.propTypes = {
   section: PropTypes.string.isRequired,
