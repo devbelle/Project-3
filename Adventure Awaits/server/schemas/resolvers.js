@@ -80,10 +80,8 @@ const resolvers = {
           },
         };
         const response = await fetch(requestUrl, requestOptions);
-        const data = await response.json();
-        // console.log(data);
-        const hotel = data.data.data;
-        // console.log(hotel);
+        const data = await response.json();    
+        const hotel = data.data.data;   
         return hotel;
       } catch (error) {
         console.log(error);
