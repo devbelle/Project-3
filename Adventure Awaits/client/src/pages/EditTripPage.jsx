@@ -61,8 +61,9 @@ const EditTripPage = () => {
 
     //query for data
 
-    const trip = data?.trip ?? {}
+    const trip = data?.trip || []
     console.log(trip);
+    
 
     const handleFormSubmit = async (event) => {
         try {
@@ -88,8 +89,8 @@ const EditTripPage = () => {
             <Section>
                 <h2>Edit Trips</h2>
             </Section>
-            <div>Loading...</div>
             <Form>
+            {trip}
             <Section>
                 <label htmlFor="name"></label>
                 {/* Title use state*/}
