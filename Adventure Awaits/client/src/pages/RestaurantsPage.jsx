@@ -4,24 +4,87 @@ import { useState } from "react";
 import { useLazyQuery } from "@apollo/client";
 import { GET_RESTAURANTS } from "../utils/queries";
 
+<<<<<<< HEAD
+const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 40vh; 
+  width: 100%;
+  margin-top: -120px;
+  @media (max-width: 768px) {
+    width: 70%; // Decrease width on smaller screens
+  }
+`;
+
+const ParentDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  width: 100vw;
+=======
 const Section = styled.div`
   width: 50%;
   height: 100%;
   background-color: #ffad73;
   border: 1px solid black;
+>>>>>>> origin
 `;
 const Form = styled.form`
+<<<<<<< HEAD
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 300px; 
+  height: 260px;
+  border: 2px solid black;
+  margin-top: 10px;
+  border-radius: 10px;
+  background-image: url('images/burger.png');
+  background-repeat: no-repeat;
+  background-size: cover%;
+  filter: brightness(90%); 
+`;
+
+=======
     display: flex
     flex-direction: column;
     align-items: center;
     justify-content: center;
   `;
+>>>>>>> origin
 const Button = styled.button`
   width: 100px;
   display: block;
+<<<<<<< HEAD
+  border: 2px solid black;
+  padding: 8px;
+  margin-top: 8px;
+  margin-bottom: 5px;
+  width: 45%; 
+  text-align: center;
+  transition: all 0.3s ease; // Add transition
+  &:hover {
+    transform: scale(1.02); // Increase size on hover
+  }
+  background-color: #ADD8E6;
+  @media (max-width: 768px) {
+    width: 50%; // Increase width on smaller screens
+    height: 60px; // Increase height on smaller screens
+  }
+
+  @media (max-width: 735px) {
+    width: 40%; // Increase width on even smaller screens
+    height: 40px; // Increase height on even smaller screens
+  }
+=======
   border: 1px solid black;
   padding: 5px;
   margin-top: 10px;
+>>>>>>> origin
 `;
 const Input = styled.input`
   padding: 5px;
@@ -38,7 +101,11 @@ const RestaurantsPage = () => {
   );
   console.log(restaurantCitySearch);
 
+<<<<<<< HEAD
+
+=======
   // restaurant stuff
+>>>>>>> origin
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -59,9 +126,13 @@ const RestaurantsPage = () => {
         marginTop="15px"
         imgSrc="/images/globe.jpg"
       />
+      <ParentDiv>
       <Section>
         
       </Section>
+<<<<<<< HEAD
+      </ParentDiv>
+=======
       <Form onSubmit={handleFormSubmit}>
         <Section className="field">
           <label className="label" htmlFor="city">
@@ -89,6 +160,7 @@ const RestaurantsPage = () => {
       {restaurants.length > 0
         ? restaurants.map((restaurant) => <div> {restaurant.name}</div>)
         : null}
+>>>>>>> origin
     </>
   );
 };
