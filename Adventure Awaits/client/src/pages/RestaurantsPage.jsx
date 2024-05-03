@@ -1,38 +1,16 @@
 import HeaderPages from '../components/HeaderPages';
+import styled from "styled-components";
+import {useState} from 'react';
 
-// import { useQuery } from "@apollo/client";
-// import { GET_RESTAURANTS } from "../utils/queries";
-
-<<<<<<< HEAD
 const RestaurantPage = () => {
-=======
-// restaurant stuff
-// const handleFormSubmit = async () => {
-//   try {
-//       const {data} = await getRestaurants({
-//           variables: {city: 'Barcelona'}
-//       })
-//       console.log(data.getRestaurants)
-//   } catch (error) {
-//       console.log(error)
-//   }
-// }
-export default function RestaurantsPage() {
+const [searchInput, setSearchInput] =useState('');
 
-//TODO: build this page when ready.  
-    return <div></div>;
-}
->>>>>>> main
-
-
-
-
-
-
-
-
+const handleSearch =() => {
+    //call API with the search input
+};
 
     return (
+        <>
         <HeaderPages 
           title="Restaurants" 
           color="#ADD8E6" 
@@ -41,6 +19,13 @@ export default function RestaurantsPage() {
           marginTop='10px' 
           imgSrc="/images/globe.jpg" 
         />
+        <input
+        type="text"
+        value={searchInput}
+        onChange={e => setSearchInput(e.target.value)} 
+        />
+        <button onClick={handleSearchInput}>Search</button>
+      </>
       );
     };
 
