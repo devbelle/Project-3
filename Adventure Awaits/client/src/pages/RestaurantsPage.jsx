@@ -50,16 +50,33 @@ const RestaurantsPage = () => {
   const restaurants = data?.getRestaurants || [];
 
   return (
-    <div>
+    <>
       <HeaderPages
         title="Restaurants Page"
         color="#ADD8E6"
         font="Arial"
-        fontSize="22px"
-        marginTop="10px"
+        fontSize="18"
+        marginTop="15px"
         imgSrc="/images/globe.jpg"
       />
-
+      <Section>
+        <Form id="contact-form" onSubmit={handleFormSubmit}>
+          <div className="field">
+            <Label className="label" htmlFor="city">
+              Search for a City
+            </Label>
+            <Input
+              id="city"
+              type="text"
+              className="form-control"
+              name="restaurant"
+              placeholder="Search for a City..."
+              value={restaurantCitySearch}
+              onChange={(e) => setRestaurantCitySearch(e.target.value)}
+            />
+          </div>
+        </Form>
+      </Section>
       <Form onSubmit={handleFormSubmit}>
         <Section className="field">
           <label className="label" htmlFor="city">
@@ -87,7 +104,7 @@ const RestaurantsPage = () => {
       {restaurants.length > 0
         ? restaurants.map((restaurant) => <div> {restaurant.name}</div>)
         : null}
-    </div>
+    </>
   );
 };
 export default RestaurantsPage;
