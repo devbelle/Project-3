@@ -18,7 +18,7 @@ const router = createBrowserRouter([
     { path: 'packing', element: <PackingPage /> },
     { path: "trips/:tripId", element: <EditTripPage /> },
     { path: 'hotels', element: <Hotels /> },
-    // { path: 'restaurants', element: <Restaurants /> },
+    { path: 'restaurants', element: <Restaurants /> },
 
       { path: "hotels", element: <Hotels /> },
       { path: "restaraunts", element: <Restaurants /> },

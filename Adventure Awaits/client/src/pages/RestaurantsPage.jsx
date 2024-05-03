@@ -1,14 +1,27 @@
-// import HeaderPages from '../components/HeaderPages';
+import HeaderPages from '../components/HeaderPages';
 
 
-export default function RestaurantsPage() {
-
-//TODO: build this page when ready.  
-    return <div></div>;
-}
+const RestaurantPage = () => {
 
 
-//added Header and nav
 
 
-/* <HeaderPages title="My Packing Page" color="#ADD8E6" font="Arial" fontSize="22px" marginTop= '10px' imgSrc="/images/globe.jpg" /> */
+
+
+
+
+
+    return (
+        <HeaderPages 
+          title="Restaurants" 
+          color="#ADD8E6" 
+          font="Arial" 
+          fontSize="22px" 
+          marginTop='10px' 
+          imgSrc="/images/globe.jpg" 
+        />
+      );
+    };
+
+
+    export default RestaurantPage;
