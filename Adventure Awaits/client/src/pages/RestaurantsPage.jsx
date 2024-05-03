@@ -158,7 +158,7 @@ const RestaurantsPage = () => {
       </Form>
 
       {restaurants.length > 0
-        ? restaurants.map((restaurant) => <div> {restaurant.name}</div>)
+        ? restaurants.map((restaurant) => <div key={restaurant.locationId}> {restaurant.name}</div>)
         : null}
 >>>>>>> origin
     </>
