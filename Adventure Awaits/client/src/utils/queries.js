@@ -39,6 +39,7 @@ query getRestaurants($city: String) {
     priceTag
     currentOpenStatusText
     squareImgUrl
+    locationId
   }
 }
 `
@@ -49,5 +50,6 @@ query getHotels($city: String, $startDate: String, $endDate: String) {
     title
     priceForDisplay
     provider
+    id
   }
 }`
