@@ -3,16 +3,26 @@ import styled from "styled-components";
 import {useState} from 'react';
 import { useQuery } from "@apollo/client";
 import { GET_RESTAURANTS } from "../utils/queries";
-// import { getRestaurants } from "../utils/queries"; 
 
 const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  height: 100vh; 
+  justify-content: center;
+  min-height: 40vh; 
+  width: 100%;
+  margin-top: -120px;
+  @media (max-width: 768px) {
+    width: 70%; // Decrease width on smaller screens
+  }
+`;
+
+const ParentDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
   width: 100vw;
-  padding-top: 20vh;
 `;
 
 const Form = styled.form`
@@ -20,8 +30,8 @@ const Form = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 30%; 
-  height: 30%;
+  width: 300px; 
+  height: 260px;
   border: 2px solid black;
   margin-top: 10px;
   border-radius: 10px;
@@ -29,11 +39,6 @@ const Form = styled.form`
   background-repeat: no-repeat;
   background-size: cover%;
   filter: brightness(90%); 
-  @media (max-width: 768px) {
-    width: 60%; // Increase width on smaller screens
-    height: 30%; // Increase height on smaller screens
-  }
-  
 `;
 
 const Button = styled.button`
@@ -49,8 +54,14 @@ const Button = styled.button`
     transform: scale(1.02); // Increase size on hover
   }
   background-color: #ADD8E6;
-  @media (min-width: 768px) { // When the viewport is 768px or larger
-    width: 20%; // Set the width to 30% for desktop
+  @media (max-width: 768px) {
+    width: 50%; // Increase width on smaller screens
+    height: 60px; // Increase height on smaller screens
+  }
+
+  @media (max-width: 735px) {
+    width: 40%; // Increase width on even smaller screens
+    height: 40px; // Increase height on even smaller screens
   }
 `;
 
@@ -83,18 +94,6 @@ padding-bottom: 2px;
     const [restaurantCitySearch, setRestaurantCitySearch] = useState('');
     const { loading, error, data } = useQuery(GET_RESTAURANTS);
 
-  // restaurant stuff
-  // const handleFormSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const { data } = await getRestaurants({
-  //       variables: { city: "Barcelona" },
-  //     });
-  //     console.log(data.getRestaurants);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -116,6 +115,7 @@ padding-bottom: 2px;
         marginTop="15px"
         imgSrc="/images/globe.jpg"
       />
+      <ParentDiv>
       <Section>
         <Form id="contact-form" onSubmit={handleFormSubmit}>
           <div className="field">
@@ -142,6 +142,7 @@ padding-bottom: 2px;
           </Button>
         </Form>
       </Section>
+      </ParentDiv>
     </>
   );
 };
