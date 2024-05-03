@@ -22,8 +22,13 @@ const ParentDiv = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 80vh;
+<<<<<<< HEAD
   width: 100vw;
 `;
+=======
+  width: 100vw;`
+
+>>>>>>> origin
 const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -103,7 +108,38 @@ const RestaurantsPage = () => {
       <Section>
         
       </Section>
+<<<<<<< HEAD
       </ParentDiv>
+=======
+     
+      </ParentDiv>
+      <Form onSubmit={handleFormSubmit}>
+        <Section className="field">
+          <label className="label" htmlFor="city">
+            Search for a City
+          </label>
+          <Input
+            type="text"
+            className="form-control"
+            name="restaurant"
+            placeholder="Search for a City..."
+            value={restaurantCitySearch}
+            onChange={(e) => setRestaurantCitySearch(e.target.value)}
+          />
+        </Section>
+
+        <Button
+          className="button is-medium is-primary is-fullwidth"
+          data-testid="button"
+          type="submit"
+        />
+          Search
+      </Form>
+
+      {restaurants.length > 0
+        ? restaurants.map((restaurant) => <div key={restaurant.locationId}> {restaurant.name}</div>)
+        : null}
+>>>>>>> origin
     </>
   );
 };

@@ -26,12 +26,14 @@ type Restaurant {
     priceTag: String
     currentOpenStatusText: String
     squareImgUrl: String
+    locationId: Int
 }
 
 type Hotel {
     title: String
     priceForDisplay: String
     provider: String
+    id: Int
 }
 
 type Query {
