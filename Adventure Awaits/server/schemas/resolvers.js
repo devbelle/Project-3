@@ -10,11 +10,14 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
-    
+
     //added user for edit trips page
     trip: async (parent, args, context) => {
       if (context.user) {
-        const user = await User.findOne({ _id: context.user._id, trips: {_id: args.id }}, 'trips' ).populate("trips");
+        const user = await User.findOne(
+          { _id: context.user._id, trips: { _id: args.id } },
+          "trips"
+        ).populate("trips");
         return user?.trips[0];
       }
       throw AuthenticationError;
@@ -33,7 +36,6 @@ const resolvers = {
 
         const cityId = await fetch(url, options);
         const cityIdData = await cityId.json();
-
         const locationId = cityIdData.data[0].locationId;
         const requestUrl = `https://tripadvisor16.p.rapidapi.com/api/v1/restaurant/searchRestaurants?locationId=${locationId}`;
         const requestOptions = {
@@ -45,10 +47,44 @@ const resolvers = {
         };
         const response = await fetch(requestUrl, requestOptions);
         const data = await response.json();
-
         const restaurant = data.data.data;
-        console.log(restaurant);
+
         return restaurant;
+      } catch (error) {
+        console.log(error);
+        throw AuthenticationError;
+      }
+    },
+
+    // get hotels logic
+    getHotels: async (parent, { city, startDate, endDate }, context) => {
+      try {
+        const url = `https://tripadvisor16.p.rapidapi.com/api/v1/hotels/searchLocation?query=${city}`;
+        const options = {
+          method: "GET",
+          headers: {
+            "X-RapidAPI-Key": process.env.APIKEY,
+            "X-RapidAPI-Host": process.env.APIHOST,
+          },
+        };
+        const cityId = await fetch(url, options);
+        const cityIdData = await cityId.json();
+        const geoId = cityIdData.data[0].geoId;
+        console.log(geoId);
+        const requestUrl = `https://tripadvisor16.p.rapidapi.com/api/v1/hotels/searchHotels?geoId=${geoId}&checkIn=${startDate}&checkOut=${endDate}&pageNumber=1&currencyCode=USD`;
+        const requestOptions = {
+          method: "GET",
+          headers: {
+            "X-RapidAPI-Key": process.env.APIKEY,
+            "X-RapidAPI-Host": process.env.APIHOST,
+          },
+        };
+        const response = await fetch(requestUrl, requestOptions);
+        const data = await response.json();
+        // console.log(data);
+        const hotel = data.data.data;
+        // console.log(hotel);
+        return hotel;
       } catch (error) {
         console.log(error);
         throw AuthenticationError;
@@ -73,7 +109,7 @@ const resolvers = {
       }
 
       const correctPw = await user.isCorrectPassword(password);
- 
+
       if (!correctPw) {
         throw AuthenticationError;
       }
@@ -107,7 +143,7 @@ const resolvers = {
             new: true,
             runValidators: true,
           }
-        ).populate('trips')
+        ).populate("trips");
       }
       throw AuthenticationError;
     },

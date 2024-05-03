@@ -28,10 +28,17 @@ type Restaurant {
     squareImgUrl: String
 }
 
+type Hotel {
+    title: String
+    priceForDisplay: String
+    provider: String
+}
+
 type Query {
     me: User 
     trip(id: ID!):Trip 
     getRestaurants(city: String): [Restaurant]
+    getHotels(city: String, startDate: String, endDate: String): [Hotel]
 }
 
 type Mutation {
