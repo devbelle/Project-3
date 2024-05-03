@@ -16,12 +16,15 @@ function Home({ section }) {
   } else if (section === 'Restaurants') {
     return <RestaurantsPage/>;
   } else if (section === 'Hotels') {
-    return <HotelsPage/>;
-  } else if (section === 'Packing') {
-    return <PackingPage/>;
-  } else if (section === 'EditTrip') {
-    return <EditTripPage/>;
-  }
+return <HotelsPage/>;
+}
+else if (section === 'Packing') {
+  return <PackingPage/>;
+}
+else if(section === 'trips/:tripId'){
+  return <EditTripPage/>;
+}
+
 }
 
 

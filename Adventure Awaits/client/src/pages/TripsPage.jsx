@@ -6,7 +6,9 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Auth from '../utils/auth';
 import { ADD_TRIP } from "../utils/mutations";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
+import EditTripPage from './EditTripPage';
+import { QUERY_ME } from '../utils/queries';
 
 
 const TripsBox = styled.div`
@@ -17,7 +19,6 @@ padding: 10px;
 background-color: white;
 border-radius: 10px;
 align-items: center;
-position: absolute;
 border: 3px solid black;
 margin-bottom: 250px;
 `
@@ -59,6 +60,11 @@ const TripsPage = () => {
 
   const [addTrip] = useMutation(ADD_TRIP);
 
+  const { data, loading } = useQuery(QUERY_ME);
+  //posibly needed for a trips list
+  const trips = data?.me.trips || [];
+  console.log(trips);
+  console.log(data);
 
 
     const handleInputChange = (event) => {
@@ -82,6 +88,8 @@ const TripsPage = () => {
             setFormState({
                 title: '',
                 destination: '',
+                startDate,
+                endDate,
                 message: '',
               });
             
@@ -100,12 +108,12 @@ const TripsPage = () => {
 
 
     return (
+      <>
         <TripsBox>
         <HeaderPages title="My Trips" color="#ADD8E6" font="Arial" fontSize="22px" marginTop= '10px' imgSrc="/images/globe.jpg" />
             <Section>
                 <h2>Add Trips</h2>
             </Section>
-            <div>Loading...</div>
             <Form onSubmit={handleSubmit}>
             <Section>
                 <label htmlFor="name">Trip Name</label>
@@ -170,11 +178,41 @@ const TripsPage = () => {
             </Form>
         </TripsBox>
 
+        
+        <h2>My Trips</h2>
+        {loading ? (
+          <div>Loading...</div>
+        ) : (
+          <ul>
+            {trips.map((trip) => (
+            <div key={trip._id}>
+              <li>
+                <h3>{trip.title}</h3>
+                <p>Destination: {trip.destination}</p>
+                <p>Start Date: {trip.startDate}</p>
+                <p>End Date: {trip.endDate}</p>
+                <p>Notes: {trip.message}</p>
+              </li>
+              
+              <Link
+              key={trip._id + 'link'}
+              to={`/trip/${trip._id}`}></Link>
+              </div>
+            ))}
+            
+          </ul>
+          
+          
+        )}
+        
+      </>
+      
+    
 
-    )
+       
 
 
     
-};
+)};
 
 export default TripsPage;
