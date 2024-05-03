@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import HeaderPages from "../components/HeaderPages";
 
-const Box = styled.div`
+const PackingBox = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -18,19 +18,19 @@ const Box = styled.div`
   margin-bottom: 250px;
 `;
 
-const Section = styled.div`
+const PackingSection = styled.div`
   //   width: 75%;
   height: 50%;
   background-color: #ffad73;
   border: 1px solid black;
 `;
-const Form = styled.form`
+const PackingForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 `;
-const Button = styled.button`
+const PackingButton = styled.button`
   width: 100px;
   display: block;
   border: 1px solid black;
@@ -56,7 +56,7 @@ const PackingPage = () => {
 //   };
 
   return (
-    <Box>
+    <PackingBox>
       <HeaderPages
         title="My Packing Page"
         color="#ADD8E6"
@@ -65,24 +65,24 @@ const PackingPage = () => {
         marginTop="10px"
         imgSrc="/images/globe.jpg"
       />
-      <Section>
+      <PackingSection>
         <h2>What should you bring?</h2>
         <h3>Packing List:</h3>
-      </Section>
-      <Form>
+      </PackingSection>
+      <PackingForm>
 
-        <Section>
+        <PackingSection>
           <ul>
             {packingEl.map((packingEl, index) => (
               <li key={index}>{packingEl}</li>
             ))}
           </ul>
        
-        </Section>
+        </PackingSection>
         
-        <Section>
+        <PackingSection> 
        
-        </Section>
+        </PackingSection>
 
         <input
           type="text"
@@ -98,17 +98,17 @@ const PackingPage = () => {
           </li>
         ))}
       </ul> */}
-        <Button
+        <PackingButton
           className="button is-medium is-primary is-fullwidth"
           type="submit"
           onClick={addPackingEl}
         >
           Add Item
-        </Button>
+        </PackingButton>
       
-      </Form>
+      </PackingForm>
       
-    </Box>
+    </PackingBox>
   );
 };
 
