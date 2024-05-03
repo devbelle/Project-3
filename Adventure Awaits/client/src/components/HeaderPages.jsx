@@ -102,7 +102,7 @@ function HeaderPages({ title, color, font, fontSize, imgSrc }) {
             color: "#FFF8F0",
             textShadow: "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black",
           }}
-          to="/editTrip"
+          to="/trips/:tripId"
         >
           Edit Trip
         </Link>
