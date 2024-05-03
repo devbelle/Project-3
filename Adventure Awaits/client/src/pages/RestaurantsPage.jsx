@@ -5,30 +5,79 @@ import { useQuery } from "@apollo/client";
 import { GET_RESTAURANTS } from "../utils/queries";
 // import { getRestaurants } from "../utils/queries"; 
 
+const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh; 
+  width: 100vw;
+  padding-top: 20vh;
+`;
 
-  const Section = styled.div`
-    width: 50%;
-    height: 100%;
-    background-color: #ffad73;
-    border: 1px solid black;
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 30%; 
+  height: 30%;
+  border: 2px solid black;
+  margin-top: 10px;
+  border-radius: 10px;
+  background-image: url('images/burger.png');
+  background-repeat: no-repeat;
+  background-size: cover%;
+  filter: brightness(90%); 
+  @media (max-width: 768px) {
+    width: 60%; // Increase width on smaller screens
+    height: 30%; // Increase height on smaller screens
+  }
+  
+`;
+
+const Button = styled.button`
+  display: block;
+  border: 2px solid black;
+  padding: 8px;
+  margin-top: 8px;
+  margin-bottom: 5px;
+  width: 45%; 
+  text-align: center;
+  transition: all 0.3s ease; // Add transition
+  &:hover {
+    transform: scale(1.02); // Increase size on hover
+  }
+  background-color: #ADD8E6;
+  @media (min-width: 768px) { // When the viewport is 768px or larger
+    width: 20%; // Set the width to 30% for desktop
+  }
+`;
+
+const Input = styled.input`
+  padding: 5px;
+  width: 100%; 
+  margin-top: 2px;
+  text-align: center;
+  transition: all 0.3s ease; // Add transition
+  &:hover {
+    transform: scale(1.02); // Increase size on hover
+  }
+`;
+
+const Label = styled.label`
+display: block;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+margin-bottom: 10px;
+font-size: 28px;
+color: white;
+margin-top: -50px;
+padding-bottom: 2px;
   `;
-  const Form = styled.form`
-    display: flex
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  `;
-  const Button = styled.button`
-    width: 100px;
-    display: block;
-    border: 1px solid black;
-    padding: 5px;
-    margin-top: 10px;
-  `;
-  const Input = styled.input`
-    padding: 5px;
-    margin: 5px;
-  `;
+
+
 
   const RestaurantsPage = () => {
     const [restaurantCitySearch, setRestaurantCitySearch] = useState('');
@@ -58,41 +107,43 @@ import { GET_RESTAURANTS } from "../utils/queries";
   };
 
   return (
-    <div>
+    <>
       <HeaderPages
         title="Restaurants Page"
         color="#ADD8E6"
         font="Arial"
-        fontSize="22px"
-        marginTop="10px"
+        fontSize='18'
+        marginTop="15px"
         imgSrc="/images/globe.jpg"
       />
+      <Section>
+        <Form id="contact-form" onSubmit={handleFormSubmit}>
+          <div className="field">
+            <Label className="label" htmlFor="city">
+              Search for a City
+            </Label>
+            <Input
+              id="city"
+              type="text"
+              className="form-control"
+              name="restaurant"
+              placeholder="Search for a City..."
+              value={restaurantCitySearch}
+              onChange={e => setRestaurantCitySearch(e.target.value)}
+            />
+          </div>
 
-      <Form id="contact-form" onSubmit={handleFormSubmit}>
-        <Section className="field">
-          <label className="label" htmlFor="city">
-            Search for a City
-          </label>
-          <Input
-            type="text"
-            className="form-control"
-            name="restaurant"
-            placeholder="Search for a City..."
-            value={restaurantCitySearch}
-            onChange={e => setRestaurantCitySearch(e.target.value)}
-          />
-        </Section>
-
-        <Button
-          className="button is-medium is-primary is-fullwidth"
-          data-testid="button"
-          type="submit"
-        >
-          Search
-        </Button>
-      </Form>
-    </div>
+          <Button
+            className="button is-medium is-primary is-fullwidth"
+            data-testid="button"
+            type="submit"
+          >
+            Search
+          </Button>
+        </Form>
+      </Section>
+    </>
   );
 };
-export default RestaurantsPage;
 
+export default RestaurantsPage;
