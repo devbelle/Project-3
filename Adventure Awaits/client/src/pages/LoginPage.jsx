@@ -92,7 +92,6 @@ const Header = styled.h1`
   text-align: center;
   background-image: url("/images/sun.jpg");
   background-size: cover;
-  // background-color: lightblue;
   border: 1px solid black;
   border-radius: 10px;
   width: 100%;
