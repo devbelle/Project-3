@@ -1,109 +1,95 @@
- import styled from 'styled-components';
- import HeaderPages from '../components/HeaderPages';
+import HeaderPages from "../components/HeaderPages";
+import styled from "styled-components";
+import { useState } from "react";
+import { useLazyQuery } from "@apollo/client";
+import { GET_HOTELS } from "../utils/queries";
 
+const Section = styled.div`
+  width: 50%;
+  height: 100%;
+  background-color: #ffad73;
+  border: 1px solid black;
+`;
+const Form = styled.form`
+    display: flex
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  `;
+const Button = styled.button`
+  width: 100px;
+  display: block;
+  border: 1px solid black;
+  padding: 5px;
+  margin-top: 10px;
+`;
+const Input = styled.input`
+  padding: 5px;
+  margin: 5px;
+`;
 
-const HotelPage = () => {
+const HotelsPage = () => {
+  const [hotelCitySearch, setHotelCitySearch] = useState("");
+  const [getHotels, { loading, error, data, called }] = useLazyQuery(
+    GET_HOTELS,
+    {
+      variables: { city: hotelCitySearch, startDate: "2025-06-12", endDate: "2025-06-18" },
+    }
+  );
+  console.log(hotelCitySearch);
 
-//     const [searchedHotels, setSearchedHotels] = useState([]);
+  // hotel stuff
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
 
-    // const handleFormSubmit = async (event) => {
-    //     event.preventDefault();
-    
-    //     if (!searchInput) {
-    //       return false;
-    //     }
-    
-        // try {
-        //   const response = await  api searchRestaurants(searchInput);
-    
-        //   if (!response.ok) {
-        //     throw new Error('something went wrong!');
-        //   }
-    
-        //   const { data } = await response.json();
-    
-        //   const hotelData = items.map((hotel) => ({
-            // restaurantId: restaurant.id,
-            // currencyCode: book.volumeInfo.authors || ['No author to display'],
-            // title: book.volumeInfo.title,
-            // description: book.volumeInfo.description,
-            // image: book.volumeInfo.imageLinks?.thumbnail || '',
-      //     }));
-    
-      //     setSearchedHotels(hotelData);
-      //     setSearchInput('');
-      //   } catch (err) {
-      //     console.error(err);
-      //   }
-      // };
-//       return (
-//         <>
-//           <div className="text-light bg-dark p-5"> 
-<HeaderPages title="Hotels" color="#ADD8E6" font="Arial" fontSize="22px" marginTop= '10px' imgSrc="/images/globe.jpg" />
-            // <Container>
-            //   <h1>Hotels</h1>
-//               <Form onSubmit={handleFormSubmit}>
-//                 <Row>
-//                   <Col xs={12} md={8}>
-//                     <Form.Control
-//                       name='searchInput'
-//                       value={searchInput}
-//                       onChange={(e) => setSearchInput(e.target.value)}
-//                       type='text'
-//                       size='lg'
-//                       placeholder='Search for a restaurant'
-//                     />
-//                   </Col>
-//                   <Col xs={12} md={4}>
-//                     <Button type='submit' variant='success' size='lg'>
-//                       Submit Search
-//                     </Button>
-//                   </Col>
-//                 </Row>
-//               </Form>
-//             </Container>
-//           </div>
-    
-//           <Container>
-//             <h2 className='pt-5'>
-//               {searchedHotels.length
-//                 ? `Viewing ${searchedHotels.length} results:`
-//                 : 'Search for a book to begin'}
-//             </h2>
-//             {/* {/* <Row>
-//               {searchedBooks.map((book) => {
-//                 return (
-//                   <Col md="4" key={book.bookId}>
-//                     <Card border='dark'>
-//                       {book.image ? (
-//                         <Card.Img src={book.image} alt={`The cover for ${book.title}`} variant='top' />
-//                       ) : null}
-//                       <Card.Body>
-//                         <Card.Title>{book.title}</Card.Title>
-//                         <p className='small'>Authors: {book.authors}</p>
-//                         <Card.Text>{book.description}</Card.Text>
-//                         {Auth.loggedIn() && (
-//                           <Button
-//                             disabled={savedBookIds?.some((savedBookId) => savedBookId === book.bookId)}
-//                             className='btn-block btn-info'
-//                             onClick={() => handleSaveBook(book.bookId)}>
-//                             {savedBookIds?.some((savedBookId) => savedBookId === book.bookId)
-//                               ? 'This book has already been saved!'
-//                               : 'Save this Book!'}
-//                           </Button>
-//                         )}
-//                       </Card.Body>
-//                     </Card>
-//                   </Col> */}
-//                 );
-//               })}
-//             </Row> */}
-        //   </Container>
-//         </>
-//       );
-//     };
+    await getHotels();
+  };
+  if (loading && called) return <div>Loading...</div>;
+  if (error) return `Error! ${error.message}`;
 
-}
+  const hotels = data?.getHotels || [];
 
+  return (
+    <>
+      <HeaderPages
+        title="Hotels Page"
+        color="#ADD8E6"
+        font="Arial"
+        fontSize="18"
+        marginTop="15px"
+        imgSrc="/images/globe.jpg"
+      />
+      <Section>
+        
+      </Section>
+      <Form onSubmit={handleFormSubmit}>
+        <Section className="field">
+          <label className="label" htmlFor="city">
+            Search for a City
+          </label>
+          <Input
+            type="text"
+            className="form-control"
+            name="hotel"
+            placeholder="Search for a City..."
+            value={hotelCitySearch}
+            onChange={(e) => setHotelCitySearch(e.target.value)}
+          />
+        </Section>
 
-export default HotelPage;
+        <Button
+          className="button is-medium is-primary is-fullwidth"
+          data-testid="button"
+          type="submit"
+        >
+          Search
+        </Button>
+      </Form>
+
+      {hotels.length > 0
+        ? hotels.map((hotel) => <div> {hotel.title}</div>)
+        : null}
+    </>
+  );
+};
+export default HotelsPage;
