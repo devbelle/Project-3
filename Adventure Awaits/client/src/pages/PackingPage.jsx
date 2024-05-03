@@ -1,15 +1,14 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { useState } from "react";
-import Auth from "../utils/auth";
 import HeaderPages from "../components/HeaderPages";
 
-const Box = styled.div`
+const PackingBox = styled.div`
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
   width: 90%;
   max-width: 430px;
-  height: 220px;
+  height: 90%px;
   padding: 10px;
   background-color: white;
   border-radius: 10px;
@@ -19,19 +18,19 @@ const Box = styled.div`
   margin-bottom: 250px;
 `;
 
-const Section = styled.div`
-  width: 50%;
-  height: 100%;
+const PackingSection = styled.div`
+  //   width: 75%;
+  height: 50%;
   background-color: #ffad73;
   border: 1px solid black;
 `;
-const Form = styled.form`
+const PackingForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 `;
-const Button = styled.button`
+const PackingButton = styled.button`
   width: 100px;
   display: block;
   border: 1px solid black;
@@ -41,81 +40,75 @@ const Button = styled.button`
 
 //from Devin's React Portfolio
 const PackingPage = () => {
-  const [formState, setFormState] = useState({ message: "" });
-
-  const handleInputChange = (event) => {
-    const { message, value } = event.target;
-
-    //const updatedName = name === 'name' ? 'title' : title;
-
-    setFormState({ ...formState, [message]: value });
-  };
-
-  const handleSubmit = async (e) => {
+  const [packingEl, setPackingEl] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  const addPackingEl = (e) => {
     e.preventDefault();
-
-    console.log(formState);
-
-    try {
-      const { data } = await addTrip({
-        variables: { ...formState, message },
-      });
-
-      setFormState({
-        message: "",
-      });
-
-      //possible function needed to match Ids with API
-    } catch (err) {
-      console.error(err);
+    if (inputValue.trim() !== "") {
+      setPackingEl([...packingEl, inputValue]);
+      setInputValue("");
     }
   };
 
+//   const deletePackingEl = (index) => {
+//     const updatedPackingEl = packingEl.filter((packingEl, i) => i !== index);
+//     setPackingEl(updatedPackingEl);
+//   };
+
   return (
-    <Box>
+    <PackingBox>
       <HeaderPages
-        title="My&nbsp;Packing&nbsp;Page"
+        title="My Packing Page"
         color="#ADD8E6"
         font="Arial"
-        fontSize="18px"
+        fontSize="22px"
         marginTop="10px"
         imgSrc="/images/globe.jpg"
-        style={{
-          textAlign: "center",
-          width: "100%",
-          whiteSpace: "nowrap",
-        }}
       />
-      <Section>
+      <PackingSection>
         <h2>What should you bring?</h2>
-      </Section>
-      <Form id="contact-form" onSubmit={handleSubmit}>
-        <Section className="field">
-          <label className="label" htmlFor="message">
-            Packing...
-          </label>
-          <textarea
-            className="textarea"
-            name="message"
-            id="text"
-            rows="5"
-            onChange={handleInputChange}
-          />
-        </Section>
-        {
-          /* error message function*/ <Section>
-            <p className="is-danger"></p>
-          </Section>
-        }
-        <Button
+        <h3>Packing List:</h3>
+      </PackingSection>
+      <PackingForm>
+
+        <PackingSection>
+          <ul>
+            {packingEl.map((packingEl, index) => (
+              <li key={index}>{packingEl}</li>
+            ))}
+          </ul>
+       
+        </PackingSection>
+        
+        <PackingSection> 
+       
+        </PackingSection>
+
+        <input
+          type="text"
+          value={inputValue}
+          placeholder="Add item to pack..."
+          onChange={(e) => setInputValue(e.target.value)}
+        />
+          {/* <ul>
+        {packingEl.map((packingEl, index) => (
+          <li key={index}>
+            {packingEl}
+            <button onClick={() => deletePackingEl(index)}>Delete</button>
+          </li>
+        ))}
+      </ul> */}
+        <PackingButton
           className="button is-medium is-primary is-fullwidth"
-          data-testid="button"
           type="submit"
+          onClick={addPackingEl}
         >
-          Submit
-        </Button>
-      </Form>
-    </Box>
+          Add Item
+        </PackingButton>
+      
+      </PackingForm>
+      
+    </PackingBox>
   );
 };
 
