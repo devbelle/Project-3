@@ -35,8 +35,11 @@ const resolvers = {
         };
 
         const cityId = await fetch(url, options);
+
         const cityIdData = await cityId.json();
+
         const locationId = cityIdData.data[0].locationId;
+        console.log(locationId);
         const requestUrl = `https://tripadvisor16.p.rapidapi.com/api/v1/restaurant/searchRestaurants?locationId=${locationId}`;
         const requestOptions = {
           method: "GET",
@@ -47,12 +50,13 @@ const resolvers = {
         };
         const response = await fetch(requestUrl, requestOptions);
         const data = await response.json();
+
         const restaurant = data.data.data;
 
         return restaurant;
       } catch (error) {
         console.log(error);
-        throw AuthenticationError;
+        throw error;
       }
     },
 
@@ -80,12 +84,12 @@ const resolvers = {
           },
         };
         const response = await fetch(requestUrl, requestOptions);
-        const data = await response.json();    
-        const hotel = data.data.data;   
+        const data = await response.json();
+        const hotel = data.data.data;
         return hotel;
       } catch (error) {
         console.log(error);
-        throw AuthenticationError;
+        throw error;
       }
     },
   },
