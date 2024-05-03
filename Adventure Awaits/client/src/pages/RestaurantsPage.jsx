@@ -60,22 +60,7 @@ const RestaurantsPage = () => {
         imgSrc="/images/globe.jpg"
       />
       <Section>
-        <Form id="contact-form" onSubmit={handleFormSubmit}>
-          <div className="field">
-            <Label className="label" htmlFor="city">
-              Search for a City
-            </Label>
-            <Input
-              id="city"
-              type="text"
-              className="form-control"
-              name="restaurant"
-              placeholder="Search for a City..."
-              value={restaurantCitySearch}
-              onChange={(e) => setRestaurantCitySearch(e.target.value)}
-            />
-          </div>
-        </Form>
+        
       </Section>
       <Form onSubmit={handleFormSubmit}>
         <Section className="field">
