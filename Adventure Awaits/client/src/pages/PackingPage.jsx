@@ -1,31 +1,29 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import Auth from '../utils/auth';
-import HeaderPages from '../components/HeaderPages';
-
+import styled from "styled-components";
+import { useState } from "react";
+import HeaderPages from "../components/HeaderPages";
 
 const Box = styled.div`
-display: flex;
-justify-content: space-between;
-width: 90%;
-max-width: 430px;
-height: 220px;
-padding: 10px;
-background-color: white;
-border-radius: 10px;
-align-items: center;
-position: absolute;
-border: 3px solid black;
-margin-bottom: 250px;
-`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 90%;
+  max-width: 430px;
+  height: 90%px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+  align-items: center;
+  position: absolute;
+  border: 3px solid black;
+  margin-bottom: 250px;
+`;
 
 const Section = styled.div`
-width: 50%;
-height: 100%;
-background-color: #ffad73;
-border: 1px solid black;
-`
+  //   width: 75%;
+  height: 50%;
+  background-color: #ffad73;
+  border: 1px solid black;
+`;
 const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -40,71 +38,78 @@ const Button = styled.button`
   margin-top: 10px;
 `;
 
-
 //from Devin's React Portfolio
 const PackingPage = () => {
-    const [formState, setFormState] = useState({message: ""});
-    
-    const handleInputChange = (event) => {
-        const { message, value } = event.target;
+  const [packingEl, setPackingEl] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  const addPackingEl = (e) => {
+    e.preventDefault();
+    if (inputValue.trim() !== "") {
+      setPackingEl([...packingEl, inputValue]);
+      setInputValue("");
+    }
+  };
 
-        //const updatedName = name === 'name' ? 'title' : title;
+//   const deletePackingEl = (index) => {
+//     const updatedPackingEl = packingEl.filter((packingEl, i) => i !== index);
+//     setPackingEl(updatedPackingEl);
+//   };
 
-        setFormState({ ...formState, [message]: value });
+  return (
+    <Box>
+      <HeaderPages
+        title="My Packing Page"
+        color="#ADD8E6"
+        font="Arial"
+        fontSize="22px"
+        marginTop="10px"
+        imgSrc="/images/globe.jpg"
+      />
+      <Section>
+        <h2>What should you bring?</h2>
+        <h3>Packing List:</h3>
+      </Section>
+      <Form>
 
-        };
-
-        const handleSubmit = async (e) => {
-            e.preventDefault();
-    
-            console.log(formState)
-    
-            try {
-                const { data } = await addTrip({
-                  variables: { ...formState, message },
-                });
-    
-                setFormState({
-                    message: '',
-                  });
-                
-                //possible function needed to match Ids with API
-    
-            } catch (err) {
-                console.error(err);
-            }
-
-        }
-
-
-
-
-
-
-    return (
-        <Box>
-         <HeaderPages title="My Packing Page" color="#ADD8E6" font="Arial" fontSize="22px" marginTop= '10px' imgSrc="/images/globe.jpg" />
-            <Section>
-                <h2>What should you bring?</h2>
-            </Section>
-            <Form id="contact-form" onSubmit={handleSubmit} >
+        <Section>
+          <ul>
+            {packingEl.map((packingEl, index) => (
+              <li key={index}>{packingEl}</li>
+            ))}
+          </ul>
+       
+        </Section>
         
-                <Section className="field">
-                    <label className="label" htmlFor="message">Packing...</label>
-                    <textarea className="textarea" name="message" id="text" rows="5" onChange={handleInputChange}   />
-                </Section>
-                    {/* error message function*/  (
-                <Section>
-                    <p className="is-danger"></p>
-                </Section>
-                )}
-                    <Button className="button is-medium is-primary is-fullwidth" data-testid="button" type="submit">Submit</Button>
-            </Form>
-        </Box>
+        <Section>
+       
+        </Section>
 
-    )
-
-
-}
+        <input
+          type="text"
+          value={inputValue}
+          placeholder="Add item to pack..."
+          onChange={(e) => setInputValue(e.target.value)}
+        />
+          {/* <ul>
+        {packingEl.map((packingEl, index) => (
+          <li key={index}>
+            {packingEl}
+            <button onClick={() => deletePackingEl(index)}>Delete</button>
+          </li>
+        ))}
+      </ul> */}
+        <Button
+          className="button is-medium is-primary is-fullwidth"
+          type="submit"
+          onClick={addPackingEl}
+        >
+          Add Item
+        </Button>
+      
+      </Form>
+      
+    </Box>
+  );
+};
 
 export default PackingPage;
