@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useLazyQuery } from "@apollo/client";
 import { GET_RESTAURANTS } from "../utils/queries";
 
-<<<<<<< HEAD
 const Section = styled.section`
   display: flex;
   flex-direction: column;
@@ -24,16 +23,8 @@ const ParentDiv = styled.div`
   align-items: center;
   min-height: 80vh;
   width: 100vw;
-=======
-const Section = styled.div`
-  width: 50%;
-  height: 100%;
-  background-color: #ffad73;
-  border: 1px solid black;
->>>>>>> origin
 `;
 const Form = styled.form`
-<<<<<<< HEAD
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,17 +40,9 @@ const Form = styled.form`
   filter: brightness(90%); 
 `;
 
-=======
-    display: flex
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  `;
->>>>>>> origin
 const Button = styled.button`
   width: 100px;
   display: block;
-<<<<<<< HEAD
   border: 2px solid black;
   padding: 8px;
   margin-top: 8px;
@@ -80,11 +63,6 @@ const Button = styled.button`
     width: 40%; // Increase width on even smaller screens
     height: 40px; // Increase height on even smaller screens
   }
-=======
-  border: 1px solid black;
-  padding: 5px;
-  margin-top: 10px;
->>>>>>> origin
 `;
 const Input = styled.input`
   padding: 5px;
@@ -101,11 +79,6 @@ const RestaurantsPage = () => {
   );
   console.log(restaurantCitySearch);
 
-<<<<<<< HEAD
-
-=======
-  // restaurant stuff
->>>>>>> origin
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -130,37 +103,7 @@ const RestaurantsPage = () => {
       <Section>
         
       </Section>
-<<<<<<< HEAD
       </ParentDiv>
-=======
-      <Form onSubmit={handleFormSubmit}>
-        <Section className="field">
-          <label className="label" htmlFor="city">
-            Search for a City
-          </label>
-          <Input
-            type="text"
-            className="form-control"
-            name="restaurant"
-            placeholder="Search for a City..."
-            value={restaurantCitySearch}
-            onChange={(e) => setRestaurantCitySearch(e.target.value)}
-          />
-        </Section>
-
-        <Button
-          className="button is-medium is-primary is-fullwidth"
-          data-testid="button"
-          type="submit"
-        >
-          Search
-        </Button>
-      </Form>
-
-      {restaurants.length > 0
-        ? restaurants.map((restaurant) => <div> {restaurant.name}</div>)
-        : null}
->>>>>>> origin
     </>
   );
 };
