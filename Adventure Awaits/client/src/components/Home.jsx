@@ -21,7 +21,7 @@ return <HotelsPage/>;
 else if (section === 'Packing') {
   return <PackingPage/>;
 }
-else if(section === 'trips/:tripId'){
+else if(section === 'trip/:tripId'){
   return <EditTripPage/>;
 }
 
