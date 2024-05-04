@@ -90,21 +90,7 @@ function HeaderPages({ title, color, font, fontSize, imgSrc }) {
           }}
           to="/packing"
         >
-          Packing
-        </Link>
-        <span>|</span>
-
-        <Link
-          style={{
-            padding: "0 6px",
-            fontWeight: "bold",
-            fontSize: "1em",
-            color: "#FFF8F0",
-            textShadow: "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black",
-          }}
-          to="/trips/:tripId"
-        >
-          Edit Trip
+          Packing List
         </Link>
         <span>|</span>
 
