@@ -159,9 +159,8 @@ const HotelsPage = () => {
       <Row xs={1} md={5} className="g-4">
       {hotels.length > 0
         ? hotels.slice(0, 10).map((hotel) => (
-          <CardGroup> 
+          <CardGroup key={hotel.id}> 
           <Card
-            key={hotel.id}
             style={{ width: "18rem" }}
             border="dark"
             bg='info-subtle'
