@@ -8,38 +8,45 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  height: 100vh; 
+  justify-content: center;
+  height: 70vh;
+  min-height: 40vh;
+  width: 100%;
+  @media (max-width: 768px) {
+    height: 80vh; // Increase height on smaller screens
+    min-height: 90vh; // Increase minimum height on smaller screens
+    width: 100%; // Increase width on smaller screens
+  }
+`;
+
+const ParentDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 40vh;
   width: 100vw;
-  padding-top: 20vh;
+  @media (max-width: 768px) {
+    min-height: 60vh; // Increase minimum height on smaller screens
+  }
 `;
 
 const Form = styled.form`
+margin-top: -80px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 30%;
-  height: 30%;
+  min-height: 50%; 
+  width: 25%;
   border: 2px solid black;
   border-radius: 10px;
-  background-image: url('/images/burger.jpg');
+  background-image: url('/images/burger.png');
   background-size: cover;
-
   @media (max-width: 768px) {
     width: 60%; // Increase width on smaller screens
-    height: 50%; // Increase height on smaller screens
+    min-height: 40%; // Increase height on smaller screens
   }
 `;
-const ParentDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  width: 100vw;
-`;
-
 const Button = styled.button`
   display: block;
   border: 2px solid black;
@@ -53,8 +60,12 @@ const Button = styled.button`
     transform: scale(1.02); // Increase size on hover
   }
   background-color: #ADD8E6;
-  @media (min-width: 768px) { // When the viewport is 768px or larger
-    width: 20%; // Set the width to 30% for desktop
+  @media (max-width: 768px) {
+    width: 60%; // Increase width on smaller screens
+  }
+
+  @media (max-width: 480px) {
+    width: 80%; // Further increase width on very small screens
   }
 `;
 
@@ -66,6 +77,9 @@ const Input = styled.input`
   transition: all 0.3s ease; // Add transition
   &:hover {
     transform: scale(1.02); // Increase size on hover
+  }
+  @media (max-width: 480px) {
+    width: 90; // Further increase width on very small screens
   }
 `;
 
