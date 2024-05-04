@@ -23,6 +23,7 @@ const Section = styled.section`
 
 const ParentDiv = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 40vh;
@@ -33,16 +34,16 @@ const ParentDiv = styled.div`
 `;
 
 const Form = styled.form`
-margin-top: -80px;
+  margin-top: -80px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 50%; 
+  min-height: 50%;
   width: 25%;
   border: 2px solid black;
   border-radius: 10px;
-  background-image: url('/images/burger.png');
+  background-image: url("/images/burger.png");
   background-size: cover;
   @media (max-width: 768px) {
     width: 60%; // Increase width on smaller screens
@@ -55,13 +56,13 @@ const Button = styled.button`
   padding: 8px;
   margin-top: 8px;
   margin-bottom: 5px;
-  width: 45%; 
+  width: 45%;
   text-align: center;
   transition: all 0.3s ease; // Add transition
   &:hover {
     transform: scale(1.02); // Increase size on hover
   }
-  background-color: #ADD8E6;
+  background-color: #add8e6;
   @media (max-width: 768px) {
     width: 40%; // Increase width on smaller screens
   }
@@ -73,7 +74,7 @@ const Button = styled.button`
 
 const Input = styled.input`
   padding: 5px;
-  width: 90%; 
+  width: 90%;
   margin-top: 2px;
   text-align: center;
   transition: all 0.3s ease; // Add transition
@@ -86,16 +87,16 @@ const Input = styled.input`
 `;
 
 const Label = styled.label`
-display: block;
+  display: block;
   width: 100%;
   text-align: center;
   font-weight: bold;
-margin-bottom: 10px;
-font-size: 28px;
-color: white;
-margin-top: -50px;
-padding-bottom: 2px;
-  `;
+  margin-bottom: 10px;
+  font-size: 28px;
+  color: white;
+  margin-top: -50px;
+  padding-bottom: 2px;
+`;
 
 const RestaurantsPage = () => {
   const [restaurantCitySearch, setRestaurantCitySearch] = useState("");
@@ -118,7 +119,7 @@ const RestaurantsPage = () => {
   const restaurants = data?.getRestaurants || [];
 
   return (
-    <>
+    <ParentDiv>
       <HeaderPages
         title="Restaurants Page"
         color="#ADD8E6"
@@ -127,33 +128,35 @@ const RestaurantsPage = () => {
         marginTop="15px"
         imgSrc="/images/globe.jpg"
       />
-      <ParentDiv>
-        <Section></Section>
-      </ParentDiv>
-      <Form onSubmit={handleFormSubmit}>
-        <Section className="field">
-          <label className="label" htmlFor="city">
-            Search for a City
-          </label>
-          <Input
-            type="text"
-            className="form-control"
-            name="restaurant"
-            placeholder="Search for a City..."
-            value={restaurantCitySearch}
-            onChange={(e) => setRestaurantCitySearch(e.target.value)}
-          />
-        </Section>
-        <Button
-          className="button is-medium is-primary is-fullwidth"
-          data-testid="button"
-          type="submit"
-        />
-        Search
-      </Form>
+      <Section>
+        <Form id="contact-form" onSubmit={handleFormSubmit}>
+          <div className="field">
+            <Label className="label" htmlFor="city">
+              Search for a City
+            </Label>
+            <Input
+              id="city"
+              type="text"
+              className="form-control"
+              name="restaurant"
+              placeholder="Search for a City..."
+              value={restaurantCitySearch}
+              onChange={(e) => setRestaurantCitySearch(e.target.value)}
+            />
+          </div>
 
+          <Button
+            className="button is-medium is-primary is-fullwidth"
+            data-testid="button"
+            type="submit"
+          >
+            Search
+          </Button>
+        </Form>
+      </Section>
+      <Section>
       {restaurants.length > 0
-        ? restaurants.map((restaurant) => (
+        ? restaurants.slice(0, 5).map((restaurant) => (
             <Card key={restaurant.locationId} style={{ width: "18rem" }}>
               <Card.Header as="h4" className="text-center">
                 {restaurant.name}
@@ -173,7 +176,8 @@ const RestaurantsPage = () => {
             </Card>
           ))
         : null}
-    </>
+        </Section>
+   </ParentDiv>
   );
 };
 export default RestaurantsPage;
