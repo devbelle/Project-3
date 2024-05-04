@@ -1,7 +1,7 @@
-import HeaderPages from "../components/HeaderPages";
+import HeaderPages from '../components/HeaderPages';
 import styled from "styled-components";
-import { useState } from "react";
-import { useLazyQuery } from "@apollo/client";
+import {useState} from 'react';
+import { useQuery } from "@apollo/client";
 import { GET_RESTAURANTS } from "../utils/queries";
 
 const Section = styled.section`
@@ -9,11 +9,13 @@ const Section = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 40vh; 
+  height: 70vh;
+  min-height: 40vh;
   width: 100%;
-  margin-top: -120px;
   @media (max-width: 768px) {
-    width: 70%; // Decrease width on smaller screens
+    height: 80vh; // Increase height on smaller screens
+    min-height: 90vh; // Increase minimum height on smaller screens
+    width: 100%; // Increase width on smaller screens
   }
 `;
 
@@ -21,27 +23,31 @@ const ParentDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 80vh;
-  width: 100vw;`
+  min-height: 40vh;
+  width: 100vw;
+  @media (max-width: 768px) {
+    min-height: 60vh; // Increase minimum height on smaller screens
+  }
+`;
 
 const Form = styled.form`
+margin-top: -80px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 300px; 
-  height: 260px;
+  min-height: 50%; 
+  width: 25%;
   border: 2px solid black;
-  margin-top: 10px;
   border-radius: 10px;
-  background-image: url('images/burger.png');
-  background-repeat: no-repeat;
-  background-size: cover%;
-  filter: brightness(90%); 
+  background-image: url('/images/burger.png');
+  background-size: cover;
+  @media (max-width: 768px) {
+    width: 60%; // Increase width on smaller screens
+    min-height: 40%; // Increase height on smaller screens
+  }
 `;
-
 const Button = styled.button`
-  width: 100px;
   display: block;
   border: 2px solid black;
   padding: 8px;
@@ -55,83 +61,107 @@ const Button = styled.button`
   }
   background-color: #ADD8E6;
   @media (max-width: 768px) {
-    width: 50%; // Increase width on smaller screens
-    height: 60px; // Increase height on smaller screens
+    width: 40%; // Increase width on smaller screens
   }
 
-  @media (max-width: 735px) {
-    width: 40%; // Increase width on even smaller screens
-    height: 40px; // Increase height on even smaller screens
+  @media (max-width: 480px) {
+    width: 80%; // Further increase width on very small screens
   }
 `;
+
 const Input = styled.input`
   padding: 5px;
-  margin: 5px;
+  width: 90%; 
+  margin-top: 2px;
+  text-align: center;
+  transition: all 0.3s ease; // Add transition
+  &:hover {
+    transform: scale(1.02); // Increase size on hover
+  }
+  @media (max-width: 480px) {
+    width: 60; // Further increase width on very small screens
+  }
 `;
 
-const RestaurantsPage = () => {
-  const [restaurantCitySearch, setRestaurantCitySearch] = useState("");
-  const [getRestaurants, { loading, error, data, called }] = useLazyQuery(
-    GET_RESTAURANTS,
-    {
-      variables: { city: restaurantCitySearch },
-    }
-  );
-  console.log(restaurantCitySearch);
+const Label = styled.label`
+display: block;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+margin-bottom: 10px;
+font-size: 28px;
+color: white;
+margin-top: -50px;
+padding-bottom: 2px;
+  `;
+
+
+
+  const RestaurantsPage = () => {
+    const [restaurantCitySearch, setRestaurantCitySearch] = useState('');
+    const { loading, error, data } = useQuery(GET_RESTAURANTS);
+
+  // restaurant stuff
+  // const handleFormSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const { data } = await getRestaurants({
+  //       variables: { city: "Barcelona" },
+  //     });
+  //     console.log(data.getRestaurants);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-
-    await getRestaurants();
+    if (loading) return;
+    if (error) {
+      console.error(error);
+      return;
+    }
+    console.log(data.getRestaurants);
   };
-  if (loading && called) return <div>Loading...</div>;
-  if (error) return `Error! ${error.message}`;
-
-  const restaurants = data?.getRestaurants || [];
 
   return (
-    <>
+    <ParentDiv>
       <HeaderPages
         title="Restaurants Page"
         color="#ADD8E6"
         font="Arial"
-        fontSize="18"
+        fontSize='18'
         marginTop="15px"
         imgSrc="/images/globe.jpg"
       />
-      <ParentDiv>
       <Section>
-        
+        <Form id="contact-form" onSubmit={handleFormSubmit}>
+          <div className="field">
+            <Label className="label" htmlFor="city">
+              Search for a City
+            </Label>
+            <Input
+              id="city"
+              type="text"
+              className="form-control"
+              name="restaurant"
+              placeholder="Search for a City..."
+              value={restaurantCitySearch}
+              onChange={e => setRestaurantCitySearch(e.target.value)}
+            />
+          </div>
+
+          <Button
+            className="button is-medium is-primary is-fullwidth"
+            data-testid="button"
+            type="submit"
+          >
+            Search
+          </Button>
+        </Form>
       </Section>
-     
-      </ParentDiv>
-      <Form onSubmit={handleFormSubmit}>
-        <Section className="field">
-          <label className="label" htmlFor="city">
-            Search for a City
-          </label>
-          <Input
-            type="text"
-            className="form-control"
-            name="restaurant"
-            placeholder="Search for a City..."
-            value={restaurantCitySearch}
-            onChange={(e) => setRestaurantCitySearch(e.target.value)}
-          />
-        </Section>
-
-        <Button
-          className="button is-medium is-primary is-fullwidth"
-          data-testid="button"
-          type="submit"
-        />
-          Search
-      </Form>
-
-      {restaurants.length > 0
-        ? restaurants.map((restaurant) => <div key={restaurant.locationId}> {restaurant.name}</div>)
-        : null}
-    </>
+    </ParentDiv>
   );
 };
+
 export default RestaurantsPage;
