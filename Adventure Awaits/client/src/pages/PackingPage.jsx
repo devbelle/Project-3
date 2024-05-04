@@ -12,21 +12,23 @@ const PackingBox = styled.div`
   height: 60%;
   max-width: 600px;
   max-height: 400px;
-  background-color: white;
-  border-radius: 20px;
+  background: url('/images/paper.png')no-repeat center center/cover; 
+   border-radius: 20px;
   border: 3px solid black;
   margin: 0 auto; 
   box-sizing: border-box;
   position: absolute; 
-  top: 25%; 
-  right: 25%;
-  left: 20%;
+  top: 20%; 
+  right: 20%;
+  left: 10%;
   padding: 20px;
   `;
 
 const StyledH2 = styled.h2`
-  borderBottom: "2px solid black";
-  fontSize: 20px;
+  border-bottom: 2px dashed black;
+  font-size: 30px;
+  color: blue;
+  margin-top: -20px;
   align-items: center;
   whiteSpace: 'nowrap'; 
   text-align: center;
@@ -43,6 +45,10 @@ const PackingSection = styled.div`
   @media (max-width: 768px) {
     height: 100%; // Increase height on smaller screens
   }
+`;
+const StyledH3 = styled.h3`
+  margin-bottom: 20px; 
+  font-size: 30px;
 `;
 
 const PackingForm = styled.form`
@@ -101,13 +107,13 @@ const PackingPage = () => {
         title="My Packing Page"
         color="#ADD8E6"
         font="Arial"
-        fontSize="18px"
+        fontSize="20px"
         marginTop="10px"
         imgSrc="/images/globe.jpg"
       />
       <PackingSection>
       <StyledH2>What should you bring?</StyledH2>  
- <h3>Packing List:</h3>
+      <StyledH3>Packing List:</StyledH3>      
       </PackingSection>
       <PackingForm>
 
