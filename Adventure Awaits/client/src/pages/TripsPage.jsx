@@ -61,7 +61,7 @@ const TripsPage = () => {
   const [formState, setFormState] = useState({
     title: "",
     destination: "",
-    message: "",
+    notes: "",
     startDate: null,
     endDate: null,
   });
@@ -98,7 +98,7 @@ const TripsPage = () => {
                 destination: '',
                 startDate: null,
                 endDate: null,
-                message: '',
+                notes: '',
               });
             setStartDate(null);
             setEndDate(null);
@@ -173,9 +173,9 @@ const TripsPage = () => {
             <label className="" htmlFor="message">Notes...</label>
                 <textarea
                     className=""
-                    name="message"
-                    placeholder="message"
-                    value={formState.message}
+                    name="notes"
+                    placeholder="notes"
+                    value={formState.notes}
                     onChange={handleInputChange}
                 ></textarea>
                  
@@ -201,7 +201,7 @@ const TripsPage = () => {
                 <p>Destination: {trip.destination}</p>
                 <p>Start Date: {trip.startDate}</p>
                 <p>End Date: {trip.endDate}</p>
-                <p>Notes: {trip.message}</p>
+                <p>Notes: {trip.notes}</p>
               </li>
               
               <Link
