@@ -1,7 +1,7 @@
 # Adventure-Awaits
 Adventure Awaits is an app that allows the user to create a trip, find restuarants and hotels.
 
-![Adventure Awaits Login Page](./Adventure%20Awaits/client/public/images/adventureAwaitsLogin.png)
+![Adventure Awaits Login Page](./Adventure%20Awaits/client/public/images/adventureawaitslogin.png)
 
 ## Description
 This is a React, single-page application that allows the user to find hotels and restaurants by typing in the city of their choice, create a trip form on the trip page, and create a packing list on the packing page.
