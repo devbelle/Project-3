@@ -21,6 +21,7 @@ border-radius: 10px;
 align-items: center;
 border: 3px solid black;
 margin-bottom: 250px;
+margin-top: 200px;
 `
 
 const Section = styled.div`
@@ -47,16 +48,23 @@ const Input = styled.input`
   margin: 5px;
 `;
 
+const Edittrip = styled.div`
+margin-right: 200px,
+`;
+
+
+
 const TripsPage = () => {
+  
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
   const [formState, setFormState] = useState({
     title: "",
     destination: "",
     message: "",
+    startDate: null,
+    endDate: null,
   });
-
-  const [date, setDate] = useState(new Date());
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
 
   const [addTrip] = useMutation(ADD_TRIP);
 
@@ -88,11 +96,12 @@ const TripsPage = () => {
             setFormState({
                 title: '',
                 destination: '',
-                startDate,
-                endDate,
+                startDate: null,
+                endDate: null,
                 message: '',
               });
-            
+            setStartDate(null);
+            setEndDate(null);
             //possible function needed to match Ids with API
 
         } catch (err) {
@@ -110,7 +119,7 @@ const TripsPage = () => {
     return (
       <>
         <TripsBox>
-        <HeaderPages title="My Trips" color="#ADD8E6" font="Arial" fontSize="22px" marginTop= '10px' imgSrc="/images/globe.jpg" />
+        <HeaderPages title="Let's Travel" color="#ADD8E6" font="Arial" fontSize="24px" marginTop= '15px' imgSrc="/images/globe.jpg" />
             <Section>
                 <h2>Add Trips</h2>
             </Section>
@@ -183,6 +192,7 @@ const TripsPage = () => {
         {loading ? (
           <div>Loading...</div>
         ) : (
+          <Edittrip>
           <ul>
             {trips.map((trip) => (
             <div key={trip._id}>
@@ -196,11 +206,14 @@ const TripsPage = () => {
               
               <Link
               key={trip._id + 'link'}
-              to={`/trip/${trip._id}`}></Link>
+              to={`/trip/${trip._id}`}>Edit Trip</Link>
               </div>
             ))}
             
           </ul>
+          </Edittrip>
+          
+          
           
           
         )}
