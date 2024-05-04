@@ -3,13 +3,15 @@ import styled from "styled-components";
 import { useState } from "react";
 import { useLazyQuery } from "@apollo/client";
 import { GET_RESTAURANTS } from "../utils/queries";
+import "bootstrap/dist/css/bootstrap.min.css";
+import {Card, ListGroup} from "react-bootstrap";
 
 const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 40vh; 
+  min-height: 40vh;
   width: 100%;
   margin-top: -120px;
   @media (max-width: 768px) {
@@ -22,22 +24,23 @@ const ParentDiv = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 80vh;
-  width: 100vw;`
+  width: 100vw;
+`;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 300px; 
+  width: 300px;
   height: 260px;
   border: 2px solid black;
   margin-top: 10px;
   border-radius: 10px;
-  background-image: url('images/burger.png');
+  background-image: url("images/burger.png");
   background-repeat: no-repeat;
   background-size: cover%;
-  filter: brightness(90%); 
+  filter: brightness(90%);
 `;
 
 const Button = styled.button`
@@ -47,13 +50,13 @@ const Button = styled.button`
   padding: 8px;
   margin-top: 8px;
   margin-bottom: 5px;
-  width: 45%; 
+  width: 45%;
   text-align: center;
   transition: all 0.3s ease; // Add transition
   &:hover {
     transform: scale(1.02); // Increase size on hover
   }
-  background-color: #ADD8E6;
+  background-color: #add8e6;
   @media (max-width: 768px) {
     width: 50%; // Increase width on smaller screens
     height: 60px; // Increase height on smaller screens
@@ -68,6 +71,8 @@ const Input = styled.input`
   padding: 5px;
   margin: 5px;
 `;
+
+
 
 const RestaurantsPage = () => {
   const [restaurantCitySearch, setRestaurantCitySearch] = useState("");
@@ -100,10 +105,7 @@ const RestaurantsPage = () => {
         imgSrc="/images/globe.jpg"
       />
       <ParentDiv>
-      <Section>
-        
-      </Section>
-     
+        <Section></Section>
       </ParentDiv>
       <Form onSubmit={handleFormSubmit}>
         <Section className="field">
@@ -119,17 +121,29 @@ const RestaurantsPage = () => {
             onChange={(e) => setRestaurantCitySearch(e.target.value)}
           />
         </Section>
-
         <Button
           className="button is-medium is-primary is-fullwidth"
           data-testid="button"
           type="submit"
         />
-          Search
+        Search
       </Form>
 
       {restaurants.length > 0
-        ? restaurants.map((restaurant) => <div key={restaurant.locationId}> {restaurant.name}</div>)
+        ? restaurants.map((restaurant) => (
+            <Card key={restaurant.locationId} style={{ width: '18rem' }} >
+              <Card.Header as="h4" className="text-center">{restaurant.name}</Card.Header>
+              <Card.Body>
+              <Card.Img src={restaurant.squareImgUrl} />
+                <ListGroup>
+                  <ListGroup.Item>Average Rating: {restaurant.averageRating}</ListGroup.Item>
+                  <ListGroup.Item>Price: {restaurant.priceTag}</ListGroup.Item>
+                  <ListGroup.Item>{restaurant.currentOpenStatusText}</ListGroup.Item>
+                  
+                </ListGroup>
+              </Card.Body>
+            </Card>
+          ))
         : null}
     </>
   );
