@@ -8,16 +8,22 @@ const PackingBox = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-width: 100%;
-  height: 40vh;
-  max-width: 400px;
+  width: 80%;
+  height: 60%;
+  max-width: 600px;
+  max-height: 400px;
   background-color: white;
-  border-radius: 10px;
+  border-radius: 20px;
   border: 3px solid black;
-  margin: 0 auto;
-  padding: 20px;
+  margin: 0 auto; 
   box-sizing: border-box;
-`;
+  position: absolute; 
+  top: 25%; 
+  right: 25%;
+  left: 20%;
+  padding: 20px;
+  `;
+
 const StyledH2 = styled.h2`
   borderBottom: "2px solid black";
   fontSize: 20px;
@@ -32,17 +38,27 @@ const StyledH2 = styled.h2`
   }
 `;
 const PackingSection = styled.div`
-   width: 100%;
+  width: 100%;
   height: 50%;
-  margin-top: 2px;
+  @media (max-width: 768px) {
+    height: 100%; // Increase height on smaller screens
+  }
 `;
+
 const PackingForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
+  @media (max-width: 768px) {
+    width: 90%; // Reduce width on smaller screens
+  }
+  @media (max-width: 480px) {
+    width: 100%; // Further reduce width on very small screens
+  }
 `;
+
 const PackingButton = styled.button`
   width: 100px;
   display: block;
@@ -54,6 +70,12 @@ const PackingButton = styled.button`
     transform: scale(1.02); // Increase size on hover
   }
   background-color: #ADD8E6;
+  @media (max-width: 768px) {
+    width: 80px; // Reduce width on smaller screens
+  }
+  @media (max-width: 480px) {
+    width: 60px; // Further reduce width on very small screens
+  }
 `;
 
 //from Devin's React Portfolio
