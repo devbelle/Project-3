@@ -1,7 +1,9 @@
-
 import styled from "styled-components";
 import { useState } from "react";
 import HeaderPages from "../components/HeaderPages";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { createGlobalStyle } from "styled-components";
 
 const PackingBox = styled.div`
   display: flex;
@@ -52,10 +54,9 @@ const PackingSection = styled.div`
   }
 `;
 
-
 const StyledH3 = styled.h3`
   margin-bottom: 20px;
-  font-size: 24px;
+  font-size: 28px;
 `;
 
 const PackingForm = styled.form`
@@ -88,7 +89,19 @@ const PackingButton = styled.button`
     width: 60px; // Further reduce width on very small screens
   }
 `;
-
+const GlobalStyle = createGlobalStyle`
+body {
+  background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url('/images/car.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+@media (max-width: 1024px) {
+  body {
+    background-size: cover;
+    background-position: top center;
+  }
+}
+`;
 const PackingPage = () => {
   const [packingEl, setPackingEl] = useState([]);
   const [inputValue, setInputValue] = useState("");
@@ -100,43 +113,97 @@ const PackingPage = () => {
     }
   };
 
+  const [deleting, setDeleting] = useState({});
+  const [spinning, setSpinning] = useState({});
+
+  const handleDelete = (index) => {
+    setSpinning({ ...spinning, [index]: true }); // Set the trashcan as spinning
+
+    setTimeout(() => {
+      setPackingEl(packingEl.filter((_, i) => i !== index));
+      setSpinning({ ...spinning, [index]: false }); // Reset the trashcan as not spinning
+    }, 500);
+  };
+
   return (
-    <PackingBox>
-      <HeaderPages
-        title="Travel Checklist"
-        color="#ADD8E6"
-        font="Arial"
-        fontSize="24px"
-        marginTop="10px"
-        imgSrc="/images/globe.jpg"
-      />
-      <PackingSection>
-        <StyledH2>What should you bring?</StyledH2>
-        <StyledH3>Packing List:</StyledH3>
-        <ul style={{ marginTop: "0%", fontSize: "20px" }}>
-          {packingEl.map((packingEl, index) => (
-            <li key={index}>{packingEl}</li>
-          ))}
-        </ul>
-      </PackingSection>
-      <PackingSection style={{ position: 'relative', marginTop: 'auto', display: "flex", flexDirection: "column", alignItems: "center" }}>
-  <PackingForm style={{ position: 'absolute', bottom: '0', marginTop: '80px', display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-          <input
-            type="text"
-            value={inputValue}
-            placeholder="Add item to pack..."
-            onChange={(e) => setInputValue(e.target.value)}
-            style={{ marginBottom: '5px' }} 
-          />
-          <PackingButton
-            type="submit"
-            onClick={addPackingEl}
+    <>
+      <GlobalStyle />
+      <PackingBox>
+        <HeaderPages
+          title="Travel Checklist"
+          color="#ADD8E6"
+          font="Arial"
+          fontSize="24px"
+          marginTop="10px"
+          imgSrc="/images/globe.jpg"
+        />
+        <PackingSection>
+          <StyledH2>What should you bring? </StyledH2>
+          <StyledH3>Packing List:</StyledH3>
+          <ul
+            style={{
+              marginTop: "0%",
+              fontSize: "18px",
+              color: "black",
+            }}
           >
-            Add Item
-          </PackingButton>
-        </PackingForm>
-      </PackingSection>
-    </PackingBox>
+            {packingEl.map((packingEl, index) => (
+              <li key={index}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    animation: deleting[index] ? "fadeOut 0.5s forwards" : "", // Apply the animation based on the state
+                  }}
+                >
+                  <span style={{ flex: 1, width: "40%" }}>{packingEl}</span>
+                  <FontAwesomeIcon
+                    icon={faTrash}
+                    className="trashcan"
+                    onClick={() => handleDelete(index)}
+                    spin={spinning[index]} // Make the trashcan spin based on the state
+                    style={{ marginRight: "70%" }}
+                  />
+                </div>
+              </li>
+            ))}
+          </ul>
+        </PackingSection>
+        <PackingSection
+          style={{
+            position: "relative",
+            marginTop: "auto",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <PackingForm
+            style={{
+              position: "absolute",
+              bottom: "0",
+              marginTop: "80px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <input
+              type="text"
+              value={inputValue}
+              placeholder="Add item to pack..."
+              onChange={(e) => setInputValue(e.target.value)}
+              style={{ marginBottom: "5px" }}
+            />
+            <PackingButton type="submit" onClick={addPackingEl}>
+              Add Item
+            </PackingButton>
+          </PackingForm>
+        </PackingSection>
+      </PackingBox>
+    </>
   );
 };
 
