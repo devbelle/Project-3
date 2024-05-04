@@ -17,35 +17,31 @@ width: 100%;
   margin: 0 auto;
   padding: 20px;
   box-sizing: border-box;
-
-  @media (min-width: 576px) {
-    width: 60%;
-    height: 60vh; // Increase height for larger screens
+`;
+const StyledH2 = styled.h2`
+  borderBottom: "2px solid black";
+  fontSize: 20px;
+  align-items: center;
+  whiteSpace: 'nowrap'; 
+  text-align: center;
+  @media (max-width: 768px) {
+    fontSize: 20px;
   }
-
-  @media (min-width: 768px) {
-    width: 70%;
-    height: 80vh; // Increase height for larger screens
-  }
-
-  @media (min-width: 992px) {
-    width: 60%;
-  }
-
-  @media (min-width: 1200px) {
-    width: 50%;
+  @media (max-width: 576px) {
+    fontSize: 16px;
   }
 `;
-
 const PackingSection = styled.div`
-  //   width: 75%;
+   width: 100%;
   height: 50%;
+  margin-top: 2px;
 `;
 const PackingForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
 `;
 const PackingButton = styled.button`
   width: 100px;
@@ -58,14 +54,6 @@ const PackingButton = styled.button`
     transform: scale(1.02); // Increase size on hover
   }
   background-color: #ADD8E6;
-
-  @media (max-width: 768px) {
-    width: 60%; // Increase width on smaller screens
-  }
-
-  @media (max-width: 576px) {
-    width: 80%; // Increase width on even smaller screens
-  }
 `;
 
 //from Devin's React Portfolio
@@ -96,17 +84,7 @@ const PackingPage = () => {
         imgSrc="/images/globe.jpg"
       />
       <PackingSection>
-      <h2 style={{
-  borderBottom: "2px solid black",
-  fontSize: '24px',
-  whiteSpace: 'nowrap', // Add this line
-  '@media (max-width: 768px)': {
-    fontSize: '20px',
-  },
-  '@media (max-width: 576px)': {
-    fontSize: '16px',
-  }
-}}>What should you bring?</h2>      
+      <StyledH2>What should you bring?</StyledH2>  
  <h3>Packing List:</h3>
       </PackingSection>
       <PackingForm>
