@@ -8,45 +8,63 @@ const PackingBox = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-width: 100%;
-  height: 40vh;
-  max-width: 400px;
-  background-color: white;
-  border-radius: 10px;
+  width: 80%;
+  height: 60%;
+  max-width: 600px;
+  max-height: 400px;
+  background: url('/images/paper.png')no-repeat center center/cover; 
+   border-radius: 20px;
   border: 3px solid black;
-  margin: 0 auto;
-  padding: 20px;
+  margin: 0 auto; 
   box-sizing: border-box;
+  position: absolute; 
+  top: 20%; 
+  right: 20%;
+  left: 10%;
+  padding: 20px;
+  `;
 
-  @media (min-width: 576px) {
-    width: 60%;
-    height: 60vh; // Increase height for larger screens
+const StyledH2 = styled.h2`
+  border-bottom: 2px dashed black;
+  font-size: 30px;
+  color: blue;
+  margin-top: -20px;
+  align-items: center;
+  whiteSpace: 'nowrap'; 
+  text-align: center;
+  @media (max-width: 768px) {
+    fontSize: 20px;
   }
-
-  @media (min-width: 768px) {
-    width: 70%;
-    height: 80vh; // Increase height for larger screens
-  }
-
-  @media (min-width: 992px) {
-    width: 60%;
-  }
-
-  @media (min-width: 1200px) {
-    width: 50%;
+  @media (max-width: 576px) {
+    fontSize: 16px;
   }
 `;
-
 const PackingSection = styled.div`
-  //   width: 75%;
+  width: 100%;
   height: 50%;
+  @media (max-width: 768px) {
+    height: 100%; // Increase height on smaller screens
+  }
 `;
+const StyledH3 = styled.h3`
+  margin-bottom: 20px; 
+  font-size: 30px;
+`;
+
 const PackingForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  @media (max-width: 768px) {
+    width: 90%; // Reduce width on smaller screens
+  }
+  @media (max-width: 480px) {
+    width: 100%; // Further reduce width on very small screens
+  }
 `;
+
 const PackingButton = styled.button`
   width: 100px;
   display: block;
@@ -58,13 +76,11 @@ const PackingButton = styled.button`
     transform: scale(1.02); // Increase size on hover
   }
   background-color: #ADD8E6;
-
   @media (max-width: 768px) {
-    width: 60%; // Increase width on smaller screens
+    width: 80px; // Reduce width on smaller screens
   }
-
-  @media (max-width: 576px) {
-    width: 80%; // Increase width on even smaller screens
+  @media (max-width: 480px) {
+    width: 60px; // Further reduce width on very small screens
   }
 `;
 
@@ -91,23 +107,13 @@ const PackingPage = () => {
         title="My Packing Page"
         color="#ADD8E6"
         font="Arial"
-        fontSize="18px"
+        fontSize="20px"
         marginTop="10px"
         imgSrc="/images/globe.jpg"
       />
       <PackingSection>
-      <h2 style={{
-  borderBottom: "2px solid black",
-  fontSize: '24px',
-  whiteSpace: 'nowrap', // Add this line
-  '@media (max-width: 768px)': {
-    fontSize: '20px',
-  },
-  '@media (max-width: 576px)': {
-    fontSize: '16px',
-  }
-}}>What should you bring?</h2>      
- <h3>Packing List:</h3>
+      <StyledH2>What should you bring?</StyledH2>  
+      <StyledH3>Packing List:</StyledH3>      
       </PackingSection>
       <PackingForm>
 
