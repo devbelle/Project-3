@@ -1,81 +1,86 @@
+
 import styled from "styled-components";
 import { useState } from "react";
 import HeaderPages from "../components/HeaderPages";
 
-
 const PackingBox = styled.div`
   display: flex;
+  position: absolute;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   width: 80%;
   height: 60%;
   max-width: 600px;
-  max-height: 400px;
-  background: url('/images/paper.png')no-repeat center center/cover; 
-   border-radius: 20px;
+  min-height: 400px;
+  background: url("/images/paper.png") no-repeat center center/cover;
+  border-radius: 20px;
   border: 3px solid black;
-  margin: 0 auto; 
+  margin: 0 auto;
   box-sizing: border-box;
-  position: absolute; 
-  top: 20%; 
+  padding: 20px;
+  top: 20%;
   right: 20%;
   left: 10%;
-  padding: 20px;
-  `;
+`;
 
 const StyledH2 = styled.h2`
   border-bottom: 2px dashed black;
   font-size: 30px;
   color: blue;
-  margin-top: -20px;
+  margin-top: 0;
   align-items: center;
-  whiteSpace: 'nowrap'; 
+  whitespace: "nowrap";
   text-align: center;
   @media (max-width: 768px) {
-    fontSize: 20px;
+    fontsize: 20px;
   }
   @media (max-width: 576px) {
-    fontSize: 16px;
+    fontsize: 16px;
   }
 `;
+
 const PackingSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0 auto;
   width: 100%;
-  height: 50%;
+  height: auto;
   @media (max-width: 768px) {
-    height: 100%; // Increase height on smaller screens
+    max-height100%; // Increase maximum height on smaller screens
   }
 `;
+
+
 const StyledH3 = styled.h3`
-  margin-bottom: 20px; 
-  font-size: 30px;
+  margin-bottom: 20px;
+  font-size: 24px;
 `;
 
 const PackingForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+  height: auto;
+  width: 50%;
   @media (max-width: 768px) {
     width: 90%; // Reduce width on smaller screens
   }
   @media (max-width: 480px) {
-    width: 100%; // Further reduce width on very small screens
+    width: 90%; // Further reduce width on very small screens
   }
 `;
 
 const PackingButton = styled.button`
+  text-align: center;
   width: 100px;
   display: block;
-  border: 1px solid black;
   padding: 5px;
-  margin-top: 10px;
+  border: 1px solid black;
+  border-radius: 20px;
   transition: all 0.3s ease; // Add transition
   &:hover {
     transform: scale(1.02); // Increase size on hover
   }
-  background-color: #ADD8E6;
+  background-color: #add8e6;
   @media (max-width: 768px) {
     width: 80px; // Reduce width on smaller screens
   }
@@ -84,7 +89,6 @@ const PackingButton = styled.button`
   }
 `;
 
-//from Devin's React Portfolio
 const PackingPage = () => {
   const [packingEl, setPackingEl] = useState([]);
   const [inputValue, setInputValue] = useState("");
@@ -96,64 +100,42 @@ const PackingPage = () => {
     }
   };
 
-//   const deletePackingEl = (index) => {
-//     const updatedPackingEl = packingEl.filter((packingEl, i) => i !== index);
-//     setPackingEl(updatedPackingEl);
-//   };
-
   return (
     <PackingBox>
       <HeaderPages
-        title="My Packing Page"
+        title="Travel Checklist"
         color="#ADD8E6"
         font="Arial"
-        fontSize="20px"
+        fontSize="24px"
         marginTop="10px"
         imgSrc="/images/globe.jpg"
       />
       <PackingSection>
-      <StyledH2>What should you bring?</StyledH2>  
-      <StyledH3>Packing List:</StyledH3>      
+        <StyledH2>What should you bring?</StyledH2>
+        <StyledH3>Packing List:</StyledH3>
+        <ul style={{ marginTop: "0%", fontSize: "20px" }}>
+          {packingEl.map((packingEl, index) => (
+            <li key={index}>{packingEl}</li>
+          ))}
+        </ul>
       </PackingSection>
-      <PackingForm>
-
-        <PackingSection>
-          <ul>
-            {packingEl.map((packingEl, index) => (
-              <li key={index}>{packingEl}</li>
-            ))}
-          </ul>
-       
-        </PackingSection>
-        
-        <PackingSection> 
-       
-        </PackingSection>
-
-        <input
-          type="text"
-          value={inputValue}
-          placeholder="Add item to pack..."
-          onChange={(e) => setInputValue(e.target.value)}
-        />
-          {/* <ul>
-        {packingEl.map((packingEl, index) => (
-          <li key={index}>
-            {packingEl}
-            <button onClick={() => deletePackingEl(index)}>Delete</button>
-          </li>
-        ))}
-      </ul> */}
-        <PackingButton
-          className="button is-medium is-primary is-fullwidth"
-          type="submit"
-          onClick={addPackingEl}
-        >
-          Add Item
-        </PackingButton>
-      
-      </PackingForm>
-      
+      <PackingSection style={{ position: 'relative', marginTop: 'auto', display: "flex", flexDirection: "column", alignItems: "center" }}>
+  <PackingForm style={{ position: 'absolute', bottom: '0', marginTop: '80px', display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+          <input
+            type="text"
+            value={inputValue}
+            placeholder="Add item to pack..."
+            onChange={(e) => setInputValue(e.target.value)}
+            style={{ marginBottom: '5px' }} 
+          />
+          <PackingButton
+            type="submit"
+            onClick={addPackingEl}
+          >
+            Add Item
+          </PackingButton>
+        </PackingForm>
+      </PackingSection>
     </PackingBox>
   );
 };
