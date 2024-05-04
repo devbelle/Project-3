@@ -86,6 +86,7 @@ const resolvers = {
         const response = await fetch(requestUrl, requestOptions);
         const data = await response.json();
         const hotel = data.data.data;
+      
         return hotel;
       } catch (error) {
         console.log(error);

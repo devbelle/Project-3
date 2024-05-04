@@ -167,7 +167,7 @@ const RestaurantsPage = () => {
                 <Card.Header as="h4" className="text-center">
                   {restaurant.name}
                 </Card.Header>
-                <Card.Body>
+                <Card.Body >
                   <Card.Img src={restaurant.squareImgUrl} />
                   <ListGroup>
                     <ListGroup.Item>
