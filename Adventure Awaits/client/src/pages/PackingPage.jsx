@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import HeaderPages from "../components/HeaderPages";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -105,6 +105,20 @@ body {
 const PackingPage = () => {
   const [packingEl, setPackingEl] = useState([]);
   const [inputValue, setInputValue] = useState("");
+
+// Load data from localStorage on component mount
+useEffect(() => {
+  const storedPackingEl = localStorage.getItem("packingEl");
+  if (storedPackingEl) {
+    setPackingEl(JSON.parse(storedPackingEl));
+  }
+}, []);
+
+// Save data to localStorage whenever packingEl changes
+useEffect(() => {
+  localStorage.setItem("packingEl", JSON.stringify(packingEl));
+}, [packingEl]);
+
   const addPackingEl = (e) => {
     e.preventDefault();
     if (inputValue.trim() !== "") {
