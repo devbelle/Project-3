@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useLazyQuery } from "@apollo/client";
 import { GET_RESTAURANTS } from "../utils/queries";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Card, ListGroup } from "react-bootstrap";
+import { Card, ListGroup, Row, CardGroup } from "react-bootstrap";
 
 const Section = styled.section`
   display: flex;
@@ -155,29 +155,40 @@ const RestaurantsPage = () => {
         </Form>
       </Section>
       <Section>
-      {restaurants.length > 0
-        ? restaurants.slice(0, 5).map((restaurant) => (
-            <Card key={restaurant.locationId} style={{ width: "18rem" }}>
-              <Card.Header as="h4" className="text-center">
-                {restaurant.name}
-              </Card.Header>
-              <Card.Body>
-                <Card.Img src={restaurant.squareImgUrl} />
-                <ListGroup>
-                  <ListGroup.Item>
-                    Average Rating: {restaurant.averageRating}
-                  </ListGroup.Item>
-                  <ListGroup.Item>Price: {restaurant.priceTag}</ListGroup.Item>
-                  <ListGroup.Item>
-                    {restaurant.currentOpenStatusText}
-                  </ListGroup.Item>
-                </ListGroup>
-              </Card.Body>
-            </Card>
-          ))
-        : null}
-        </Section>
-   </ParentDiv>
+      <Row xs={1} md={5} className="g-4">
+        {restaurants.length > 0
+          ? restaurants.slice(0, 10).map((restaurant) => (
+            <CardGroup> 
+              <Card
+                key={restaurant.locationId}
+                style={{ width: "18rem" }}
+                border="dark"
+              >
+                <Card.Header as="h4" className="text-center">
+                  {restaurant.name}
+                </Card.Header>
+                <Card.Body>
+                  <Card.Img src={restaurant.squareImgUrl} />
+                  <ListGroup>
+                    <ListGroup.Item>
+                      Average Rating: {restaurant.averageRating}
+                    </ListGroup.Item>
+                    <ListGroup.Item>
+                      Price: {restaurant.priceTag}
+                    </ListGroup.Item>
+                    <ListGroup.Item>
+                      {restaurant.currentOpenStatusText}
+                    </ListGroup.Item>
+                  </ListGroup>
+                </Card.Body>
+              </Card>
+              </CardGroup>
+              
+            ))
+          : null}
+          </Row>
+      </Section>
+    </ParentDiv>
   );
 };
 export default RestaurantsPage;
