@@ -87,7 +87,7 @@ const HotelsPage = () => {
       </Form>
 
       {hotels.length > 0
-        ? hotels.map((hotel) => <div> {hotel.title}</div>)
+        ? hotels.map((hotel) => <div key={hotel.id}> {hotel.title}</div>)
         : null}
     </>
   );
