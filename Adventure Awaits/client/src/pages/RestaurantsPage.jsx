@@ -61,7 +61,7 @@ const Button = styled.button`
   }
   background-color: #ADD8E6;
   @media (max-width: 768px) {
-    width: 60%; // Increase width on smaller screens
+    width: 40%; // Increase width on smaller screens
   }
 
   @media (max-width: 480px) {
@@ -71,7 +71,7 @@ const Button = styled.button`
 
 const Input = styled.input`
   padding: 5px;
-  width: 100%; 
+  width: 90%; 
   margin-top: 2px;
   text-align: center;
   transition: all 0.3s ease; // Add transition
@@ -79,7 +79,7 @@ const Input = styled.input`
     transform: scale(1.02); // Increase size on hover
   }
   @media (max-width: 480px) {
-    width: 90; // Further increase width on very small screens
+    width: 60; // Further increase width on very small screens
   }
 `;
 
