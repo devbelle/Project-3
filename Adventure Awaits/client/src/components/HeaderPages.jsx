@@ -1,15 +1,15 @@
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 function HeaderPages({ title, color, font, fontSize, imgSrc }) {
- const navigate =useNavigate();
- function handleLogout() {
+  const navigate = useNavigate();
+  function handleLogout() {
     //clear user data from local storage
     localStorage.clear();
     //redirect to login page
-    navigate('/');
- }
-    return (
+    navigate("/");
+  }
+  return (
     <header
       style={{
         backgroundImage: `url(${imgSrc})`,
