@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Auth from "../utils/auth";
-import { ADD_TRIP } from "../utils/mutations";
+import { ADD_TRIP, REMOVE_TRIP } from "../utils/mutations";
 import { useMutation, useQuery } from "@apollo/client";
 import EditTripPage from "./EditTripPage";
 import { QUERY_ME } from "../utils/queries";
@@ -62,8 +62,8 @@ const TripsPage = () => {
   });
 
   const [addTrip] = useMutation(ADD_TRIP);
-
-  const { data, loading } = useQuery(QUERY_ME);
+  const [removeTrip] = useMutation(REMOVE_TRIP);
+  const { data, loading, refetch } = useQuery(QUERY_ME);
   //posibly needed for a trips list
   const trips = data?.me.trips || [];
   console.log(trips);
@@ -75,6 +75,18 @@ const TripsPage = () => {
     //const updatedName = name === 'name' ? 'title' : title;
 
     setFormState({ ...formState, [name]: value });
+  };
+
+  const handleDeleteTrip = async (tripId) => {
+
+      try {
+        await removeTrip({variables: {tripId}});
+        refetch();
+      } catch (err) {
+        console.error(err)
+      }
+
+
   };
 
   const handleSubmit = async (e) => {
@@ -204,6 +216,7 @@ const TripsPage = () => {
                   <Link key={trip._id + "link"} to={`/trip/${trip._id}`}>
                     Edit Trip
                   </Link>
+                  <button onClick={() => handleDeleteTrip(trip._id)}>Delete Trip</button>
                 </div>
               );
             })}
