@@ -7,10 +7,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect,} from 'react';
 import Auth from '../utils/auth';
 import { ADD_TRIP } from "../utils/mutations";
-import { useMutation, useQuery } from "@apollo/client";
 import EditTripPage from './EditTripPage';
 import { QUERY_ME } from '../utils/queries';
 
