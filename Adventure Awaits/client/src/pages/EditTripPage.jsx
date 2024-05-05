@@ -8,6 +8,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { UPDATE_TRIP } from "../utils/mutations";
 import { QUERY_TRIP } from "../utils/queries";
 import HeaderPages from "../components/HeaderPages";
+import dayjs from "dayjs";
 
 const Box = styled.div`
   display: flex;
@@ -107,26 +108,22 @@ const EditTripPage = () => {
       // Show an error message or prevent form submission
       console.error("Title and destination are required.");
       return;
+    } else if (!formState.startDate && !formState.endDate) {
+      console.error("dates needed");
+      return;
     }
+
     try {
       const { data } = await editTrip({
         variables: {
           tripId: tripId,
-          tripName: formState.title,
+          title: formState.title,
           notes: formState.notes,
           destination: formState.destination,
-          startDate: formState.startDate
-            ? formState.startDate.toISOString()
-            : null,
-          endDate: formState.endDate ? formState.endDate.toISOString() : null,
+          startDate: dayjs(formState.startDate).toISOString(),
+
+          endDate: dayjs(formState.endDate).toISOString(),
         },
-      });
-      setFormState({
-        title: data.updateTrip.title,
-        destination: data.updateTrip.destination,
-        notes: data.updateTrip.notes,
-        startDate: data.updateTrip.startDate,
-        endDate: data.updateTrip.endDate,
       });
       console.log("Submitting form with state:", formState);
     } catch (err) {
@@ -183,7 +180,6 @@ const EditTripPage = () => {
             selectsStart
             selected={formState.startDate}
             onChange={(date) => setFormDate({ ...formState, startDate: date })}
-            startDate={formState.startDate}
           />
         </Section>
         <Section>
@@ -192,9 +188,6 @@ const EditTripPage = () => {
             selectsStart
             selected={formState.endDate}
             onChange={(date) => setFormState({ ...formState, endDate: date })}
-            endDate={formState.endDate}
-            startDate={formState.startDate}
-            minDate={formState.startDate}
           />
         </Section>
         <Section>
