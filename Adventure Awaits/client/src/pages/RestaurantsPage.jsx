@@ -5,7 +5,6 @@ import { useLazyQuery } from "@apollo/client";
 import { GET_RESTAURANTS } from "../utils/queries";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card, ListGroup, Row, CardGroup } from "react-bootstrap";
-import { styled } from "styled-components";
 
 const Section = styled.section`
   display: flex;
