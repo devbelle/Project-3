@@ -62,29 +62,9 @@ body {
   border-color: blue !important;
 }
 
-
-
-.form-control {
-  border-color: blue !important;
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000; 
 }
 
-.input-blue-border {
-  border: 1px solid blue !important;
-}
-
-.label-color {
-  color: blue;
-}
-
-@media (max-width: 768px) {
-  .card {
-    width: 100%;
-    position: static;
-  }
-}
-
-@media (min-width: 768px) {
-  .card {
-    width: 50%; 
-  }
-}
