@@ -276,16 +276,15 @@ import dayjs from "dayjs";
 import { createGlobalStyle } from "styled-components";
 
 const TripsBox = styled.div`
-  justify-content: space-between;
-  width: 90%;
+  justify-content: space-evenly;
+  width: 120%;
   max-width: 430px;
   padding: 10px;
   padding-top: 40%;
   border-radius: 10px;
   align-items: center;
-  border: 3px solid black;
-  margin-bottom: 250px;
-  margin-top: 200px;
+  margin-bottom: 100px;
+  margin-top: 100px;
 `;
 const GlobalStyle = createGlobalStyle`
 body {
@@ -303,6 +302,7 @@ body {
 const Section = styled.div`
   width: 50%;
   height: 100%;
+  padding: 2%;
   background-color: #ffad73;
   border: 1px solid black;
 `;
@@ -310,7 +310,7 @@ const Section = styled.div`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-left;
 `;
 
 const Button = styled.button`
