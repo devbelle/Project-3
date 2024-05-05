@@ -1,4 +1,3 @@
-import HeaderPages from "../components/HeaderPages";
 import styled from "styled-components";
 import { useState } from "react";
 import { useLazyQuery } from "@apollo/client";
