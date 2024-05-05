@@ -106,7 +106,11 @@ const HotelsPage = () => {
   const [getHotels, { loading, error, data, called }] = useLazyQuery(
     GET_HOTELS,
     {
-      variables: { city: hotelCitySearch, startDate: "2025-06-12", endDate: "2025-06-18" },
+      variables: {
+        city: hotelCitySearch,
+        startDate: "2025-06-12",
+        endDate: "2025-06-18",
+      },
     }
   );
   console.log(hotelCitySearch);
@@ -121,18 +125,9 @@ const HotelsPage = () => {
   if (error) return `Error! ${error.message}`;
 
   const hotels = data?.getHotels || [];
-  
 
   return (
     <ParentDiv>
-      <HeaderPages
-        title="Hotels Page"
-        color="#ADD8E6"
-        font="Arial"
-        fontSize="18"
-        marginTop="15px"
-        imgSrc="/images/globe.jpg"
-      />
       <Section>
         <Form id="contact-form" onSubmit={handleFormSubmit}>
           <div className="field">
@@ -150,18 +145,18 @@ const HotelsPage = () => {
             />
             <label htmlFor="check-in">Check-In</label>
             <DatePicker
-            selectsStart
-            selected = {checkIn}
-            onChange = {(date) => setCheckIn(date)}
-            checkIn = {checkIn}
+              selectsStart
+              selected={checkIn}
+              onChange={(date) => setCheckIn(date)}
+              checkIn={checkIn}
             />
-             <label htmlFor="check-out">Check-Out</label>
+            <label htmlFor="check-out">Check-Out</label>
             <DatePicker
-            selectsStart
-            selected = {checkOut}
-            onChange = {(date) => setCheckOut(date)}
-            checkOut = {checkOut}
-            minDate = {checkIn}
+              selectsStart
+              selected={checkOut}
+              onChange={(date) => setCheckOut(date)}
+              checkOut={checkOut}
+              minDate={checkIn}
             />
           </div>
 
@@ -180,7 +175,7 @@ const HotelsPage = () => {
             ? hotels.slice(0, 10).map((hotel) => (
                 <CardGroup key={hotel.id}>
                   <Card
-            key={hotel.id}
+                    key={hotel.id}
                     style={{ width: "18rem" }}
                     border="dark"
                     bg="info-subtle"

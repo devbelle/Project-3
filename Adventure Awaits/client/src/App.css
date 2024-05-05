@@ -2,7 +2,7 @@
   /* max-width: 1280px; */
   width: 100%;
   min-height: 100vh;
-    margin: 0 auto;
+  margin: 0 auto;
   padding: 2rem;
   text-align: center;
 }
@@ -42,12 +42,9 @@
   color: #888;
 }
 
-
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  display: block; /* changed from flex to block */
+  height: auto; /* changed from 100vh to auto */
   margin: 0;
   padding: 0;
 }
@@ -55,4 +52,14 @@ body {
 @keyframes fadeOut {
   from { opacity: 1; }
   to { opacity: 0; }
+}
+
+.react-datepicker__input-container input {
+  border-color: blue !important;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1; 
 }
