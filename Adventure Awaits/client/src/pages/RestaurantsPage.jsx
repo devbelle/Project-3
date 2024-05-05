@@ -120,14 +120,6 @@ const RestaurantsPage = () => {
 
   return (
     <ParentDiv>
-      <HeaderPages
-        title="Restaurants Page"
-        color="#ADD8E6"
-        font="Arial"
-        fontSize="18"
-        marginTop="15px"
-        imgSrc="/images/globe.jpg"
-      />
       <Section>
         <Form id="contact-form" onSubmit={handleFormSubmit}>
           <div className="field">
