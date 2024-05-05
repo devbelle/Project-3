@@ -149,7 +149,6 @@ const TripsPage = () => {
     return (
       <>
         <TripsBox>
-        <HeaderPages title="My Trips" color="#ADD8E6" font="Arial" fontSize="22px" marginTop= '10px' imgSrc="/images/globe.jpg" />
             <Section>
                 <h2>Add Trips</h2>
             </Section>

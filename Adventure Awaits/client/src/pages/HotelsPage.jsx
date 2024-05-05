@@ -125,14 +125,7 @@ const HotelsPage = () => {
 
   return (
     <ParentDiv>
-      <HeaderPages
-        title="Hotels Page"
-        color="#ADD8E6"
-        font="Arial"
-        fontSize="18"
-        marginTop="15px"
-        imgSrc="/images/globe.jpg"
-      />
+  
       <Section>
         <Form id="contact-form" onSubmit={handleFormSubmit}>
           <div className="field">
@@ -175,38 +168,6 @@ const HotelsPage = () => {
         </Form>
       </Section>
       <Section>
-<<<<<<< HEAD
-      <Row xs={1} md={5} className="g-4">
-      {hotels.length > 0
-        ? hotels.slice(0, 10).map((hotel) => (
-          <CardGroup key={hotel.id}> 
-          <Card
-            style={{ width: "18rem" }}
-            border="dark"
-            bg='info-subtle'
-          >
-            <Card.Header as="h4" className="text-center">
-              {hotel.title}
-            </Card.Header>
-            <Card.Body>
-              {/* <Card.Img src={hotel.squareImgUrl} /> */}
-              <ListGroup>
-                <ListGroup.Item>
-                  Price: {hotel.priceForDisplay}
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  Brought to you by: {hotel.provider}
-                </ListGroup.Item>
-            
-                
-              </ListGroup>
-            </Card.Body>
-          </Card>
-          </CardGroup>
-          
-        ))
-      : null}
-=======
         <Row xs={1} md={5} className="g-4">
           {hotels.length > 0
             ? hotels.slice(0, 10).map((hotel) => (
@@ -240,7 +201,6 @@ const HotelsPage = () => {
                 </CardGroup>
               ))
             : null}
->>>>>>> origin
         </Row>
       </Section>
     </ParentDiv>
