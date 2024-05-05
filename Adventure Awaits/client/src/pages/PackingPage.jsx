@@ -1,81 +1,87 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import HeaderPages from "../components/HeaderPages";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { createGlobalStyle } from "styled-components";
 
 const PackingBox = styled.div`
   display: flex;
+  position: absolute;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   width: 80%;
   height: 60%;
   max-width: 600px;
-  max-height: 400px;
-  background: url('/images/paper.png')no-repeat center center/cover; 
-   border-radius: 20px;
+  min-height: 400px;
+  background: url("/images/paper.png") no-repeat center center/cover;
+  border-radius: 20px;
   border: 3px solid black;
-  margin: 0 auto; 
+  margin: 0 auto;
   box-sizing: border-box;
-  position: absolute; 
-  top: 20%; 
+  padding: 20px;
+  top: 20%;
   right: 20%;
   left: 10%;
-  padding: 20px;
-  `;
+`;
 
 const StyledH2 = styled.h2`
   border-bottom: 2px dashed black;
   font-size: 30px;
   color: blue;
-  margin-top: -20px;
+  margin-top: 0;
   align-items: center;
-  whiteSpace: 'nowrap'; 
+  whitespace: "nowrap";
   text-align: center;
   @media (max-width: 768px) {
-    fontSize: 20px;
+    fontsize: 20px;
   }
   @media (max-width: 576px) {
-    fontSize: 16px;
+    fontsize: 16px;
   }
 `;
+
 const PackingSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0 auto;
   width: 100%;
-  height: 50%;
+  height: auto;
   @media (max-width: 768px) {
-    height: 100%; // Increase height on smaller screens
+    max-height100%; // Increase maximum height on smaller screens
   }
 `;
+
 const StyledH3 = styled.h3`
-  margin-bottom: 20px; 
-  font-size: 30px;
+  margin-bottom: 20px;
+  font-size: 28px;
 `;
 
 const PackingForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+  height: auto;
+  width: 50%;
   @media (max-width: 768px) {
     width: 90%; // Reduce width on smaller screens
   }
   @media (max-width: 480px) {
-    width: 100%; // Further reduce width on very small screens
+    width: 90%; // Further reduce width on very small screens
   }
 `;
 
 const PackingButton = styled.button`
+  text-align: center;
   width: 100px;
   display: block;
-  border: 1px solid black;
   padding: 5px;
-  margin-top: 10px;
+  border: 1px solid black;
+  border-radius: 20px;
   transition: all 0.3s ease; // Add transition
   &:hover {
     transform: scale(1.02); // Increase size on hover
   }
-  background-color: #ADD8E6;
+  background-color: #add8e6;
   @media (max-width: 768px) {
     width: 80px; // Reduce width on smaller screens
   }
@@ -83,11 +89,36 @@ const PackingButton = styled.button`
     width: 60px; // Further reduce width on very small screens
   }
 `;
-
-//from Devin's React Portfolio
+const GlobalStyle = createGlobalStyle`
+body {
+  background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url('/images/car.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+@media (max-width: 1024px) {
+  body {
+    background-size: cover;
+    background-position: top center;
+  }
+}
+`;
 const PackingPage = () => {
   const [packingEl, setPackingEl] = useState([]);
   const [inputValue, setInputValue] = useState("");
+
+// Load data from localStorage on component mount
+useEffect(() => {
+  const storedPackingEl = localStorage.getItem("packingEl");
+  if (storedPackingEl) {
+    setPackingEl(JSON.parse(storedPackingEl));
+  }
+}, []);
+
+// Save data to localStorage whenever packingEl changes
+useEffect(() => {
+  localStorage.setItem("packingEl", JSON.stringify(packingEl));
+}, [packingEl]);
+
   const addPackingEl = (e) => {
     e.preventDefault();
     if (inputValue.trim() !== "") {
@@ -96,65 +127,97 @@ const PackingPage = () => {
     }
   };
 
-//   const deletePackingEl = (index) => {
-//     const updatedPackingEl = packingEl.filter((packingEl, i) => i !== index);
-//     setPackingEl(updatedPackingEl);
-//   };
+  const [deleting, setDeleting] = useState({});
+  const [spinning, setSpinning] = useState({});
+
+  const handleDelete = (index) => {
+    setSpinning({ ...spinning, [index]: true }); // Set the trashcan as spinning
+
+    setTimeout(() => {
+      setPackingEl(packingEl.filter((_, i) => i !== index));
+      setSpinning({ ...spinning, [index]: false }); // Reset the trashcan as not spinning
+    }, 500);
+  };
 
   return (
-    <PackingBox>
-      <HeaderPages
-        title="My Packing Page"
-        color="#ADD8E6"
-        font="Arial"
-        fontSize="20px"
-        marginTop="10px"
-        imgSrc="/images/globe.jpg"
-      />
-      <PackingSection>
-      <StyledH2>What should you bring?</StyledH2>  
-      <StyledH3>Packing List:</StyledH3>      
-      </PackingSection>
-      <PackingForm>
-
+    <>
+      <GlobalStyle />
+      <PackingBox>
+        <HeaderPages
+          title="Travel Checklist"
+          color="#ADD8E6"
+          font="Arial"
+          fontSize="24px"
+          marginTop="10px"
+          imgSrc="/images/globe.jpg"
+        />
         <PackingSection>
-          <ul>
+          <StyledH2>What should you bring? </StyledH2>
+          <StyledH3>Packing List:</StyledH3>
+          <ul
+            style={{
+              marginTop: "0%",
+              fontSize: "18px",
+              color: "black",
+            }}
+          >
             {packingEl.map((packingEl, index) => (
-              <li key={index}>{packingEl}</li>
+              <li key={index}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    animation: deleting[index] ? "fadeOut 0.5s forwards" : "", // Apply the animation based on the state
+                  }}
+                >
+                  <span style={{ flex: 1, width: "40%" }}>{packingEl}</span>
+                  <FontAwesomeIcon
+                    icon={faTrash}
+                    className="trashcan"
+                    onClick={() => handleDelete(index)}
+                    spin={spinning[index]} // Make the trashcan spin based on the state
+                    style={{ marginRight: "70%" }}
+                  />
+                </div>
+              </li>
             ))}
           </ul>
-       
         </PackingSection>
-        
-        <PackingSection> 
-       
-        </PackingSection>
-
-        <input
-          type="text"
-          value={inputValue}
-          placeholder="Add item to pack..."
-          onChange={(e) => setInputValue(e.target.value)}
-        />
-          {/* <ul>
-        {packingEl.map((packingEl, index) => (
-          <li key={index}>
-            {packingEl}
-            <button onClick={() => deletePackingEl(index)}>Delete</button>
-          </li>
-        ))}
-      </ul> */}
-        <PackingButton
-          className="button is-medium is-primary is-fullwidth"
-          type="submit"
-          onClick={addPackingEl}
+        <PackingSection
+          style={{
+            position: "relative",
+            marginTop: "auto",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
         >
-          Add Item
-        </PackingButton>
-      
-      </PackingForm>
-      
-    </PackingBox>
+          <PackingForm
+            style={{
+              position: "absolute",
+              bottom: "0",
+              marginTop: "80px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <input
+              type="text"
+              value={inputValue}
+              placeholder="Add item to pack..."
+              onChange={(e) => setInputValue(e.target.value)}
+              style={{ marginBottom: "5px" }}
+            />
+            <PackingButton type="submit" onClick={addPackingEl}>
+              Add Item
+            </PackingButton>
+          </PackingForm>
+        </PackingSection>
+      </PackingBox>
+    </>
   );
 };
 

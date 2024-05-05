@@ -20,7 +20,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <ProtectedRoute path="/hotels" element={<HotelsPage />} />
         <ProtectedRoute path="/restaurants" element={<RestaurantsPage />} />
         <ProtectedRoute path="/packing" element={<PackingPage />} />
-        <ProtectedRoute path="/trips/:tripId" element={<EditTripPage />} /> 
+        <ProtectedRoute path="/trip/tripId" element={<EditTripPage />} /> 
       </Routes>
     </Router>
   </ApolloProvider>

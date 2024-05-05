@@ -83,6 +83,10 @@ const Button = styled.button`
 const Input = styled.input`
   padding: 5px;
   margin: 5px;
+  width: 100%;
+  @media (min-width: 768px) {
+    width: 70%; // Take up half the width of the parent container on larger screens
+  }
 `;
 const Header = styled.h1`
   position: absolute;

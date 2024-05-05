@@ -90,23 +90,22 @@ function HeaderPages({ title, color, font, fontSize, imgSrc }) {
           }}
           to="/packing"
         >
-          Packing
+          Packing List
         </Link>
-
         <span>|</span>
 
         <Link
-          style={{
-            padding: "0 6px",
-            fontWeight: "bold",
-            fontSize: "1em",
-            color: "#FFF8F0",
-            textShadow: "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black",
-          }}
-          to="/"
-          onClick={handleLogout}
+            style={{
+                padding: "0 6px",
+                fontWeight: "bold",
+                fontSize: "1em",
+                color: "#FFF8F0",
+                textShadow: "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black",
+            }}
+            to="/"
+            onClick={handleLogout}
         >
-          Logout
+            Logout
         </Link>
       </nav>
     </header>

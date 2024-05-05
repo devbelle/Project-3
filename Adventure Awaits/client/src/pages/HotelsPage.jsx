@@ -5,6 +5,7 @@ import { useLazyQuery } from "@apollo/client";
 import { GET_HOTELS } from "../utils/queries";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card, ListGroup, Row, CardGroup } from "react-bootstrap";
+import DatePicker from "react-datepicker";
 
 const Section = styled.section`
   display: flex;
@@ -99,6 +100,8 @@ const Label = styled.label`
 `;
 
 const HotelsPage = () => {
+  const [checkIn, setCheckIn] = useState();
+  const [checkOut, setCheckOut] = useState();
   const [hotelCitySearch, setHotelCitySearch] = useState("");
   const [getHotels, { loading, error, data, called }] = useLazyQuery(
     GET_HOTELS,
@@ -144,6 +147,21 @@ const HotelsPage = () => {
               placeholder="Search for a City..."
               value={hotelCitySearch}
               onChange={(e) => setHotelCitySearch(e.target.value)}
+            />
+            <label htmlFor="check-in">Check-In</label>
+            <DatePicker
+            selectsStart
+            selected = {checkIn}
+            onChange = {(date) => setCheckIn(date)}
+            checkIn = {checkIn}
+            />
+             <label htmlFor="check-out">Check-Out</label>
+            <DatePicker
+            selectsStart
+            selected = {checkOut}
+            onChange = {(date) => setCheckOut(date)}
+            checkOut = {checkOut}
+            minDate = {checkIn}
             />
           </div>
 
