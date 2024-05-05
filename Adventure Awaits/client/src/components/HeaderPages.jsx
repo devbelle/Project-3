@@ -25,18 +25,20 @@ function HeaderPages({ title, color, font, fontSize, imgSrc }) {
         right: 0,
         width: "100%",
         boxSizing: "border-box",
-        paddingTop: "2px",
+        paddingTop: "15px",
         border: "2px solid #000",
         borderRadius: "5px",
+        height: "30%",
       }}
     >
-      <h1 style={{ marginTop: "-10px" }}>{title}</h1>
+      <h1 style={{ marginTop: "20px" }}>{title}</h1>
       <nav
         style={{
           display: "flex",
           justifyContent: "center",
-          marginBottom: "2px",
+          marginBottom: "10px",
           flexWrap: "wrap",
+          marginTop: "30px",
         }}
       >
         <Link

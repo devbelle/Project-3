@@ -10,20 +10,32 @@ import { useMutation, useQuery } from "@apollo/client";
 import EditTripPage from "./EditTripPage";
 import { QUERY_ME } from "../utils/queries";
 import dayjs from "dayjs";
+import { createGlobalStyle } from "styled-components";
 
 const TripsBox = styled.div`
   justify-content: space-between;
   width: 90%;
   max-width: 430px;
   padding: 10px;
-  background-color: white;
   border-radius: 10px;
   align-items: center;
   border: 3px solid black;
   margin-bottom: 250px;
   margin-top: 200px;
 `;
-
+const GlobalStyle = createGlobalStyle`
+body {
+  background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url('/images/road.jpg');
+  background-repeat: no-repeat;
+  background-size: cover; // This will cover the entire body
+}
+@media (max-width: 1024px) {
+  body {
+    background-size: cover; // This will cover the entire body
+    background-position: top center;
+  }
+}
+`;
 const Section = styled.div`
   width: 50%;
   height: 100%;
@@ -120,13 +132,14 @@ const TripsPage = () => {
 
   return (
     <>
+    <GlobalStyle/>
       <TripsBox>
         <HeaderPages
           title="My Trips"
           color="#ADD8E6"
           font="Arial"
           fontSize="22px"
-          marginTop="10px"
+          marginTop="60px"
           imgSrc="/images/globe.jpg"
         />
         <Section>
