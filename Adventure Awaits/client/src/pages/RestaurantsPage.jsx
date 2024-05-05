@@ -5,7 +5,6 @@ import { useLazyQuery } from "@apollo/client";
 import { GET_RESTAURANTS } from "../utils/queries";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card, ListGroup, Row, CardGroup } from "react-bootstrap";
-import { styled } from "styled-components";
 
 const Section = styled.section`
   display: flex;
@@ -121,14 +120,6 @@ const RestaurantsPage = () => {
 
   return (
     <ParentDiv>
-      <HeaderPages
-        title="Restaurants Page"
-        color="#ADD8E6"
-        font="Arial"
-        fontSize="18"
-        marginTop="15px"
-        imgSrc="/images/globe.jpg"
-      />
       <Section>
         <Form id="contact-form" onSubmit={handleFormSubmit}>
           <div className="field">
