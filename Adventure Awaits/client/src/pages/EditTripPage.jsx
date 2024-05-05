@@ -74,7 +74,7 @@ const EditTripPage = () => {
   const [formState, setFormState] = useState({
     title: trip.title || "",
     destination: trip.destination || "",
-    message: trip.message || "",
+    notes: trip.notes || "",
     startDate: trip.startDate ? new Date(trip.startDate) : null,
     endDate: trip.endDate ? new Date(trip.endDate) : null,
    });
@@ -105,7 +105,7 @@ const EditTripPage = () => {
         variables: {
           tripId: tripId,
           tripName: formState.title,
-          message: formState.message,
+          notes: formState.notes,
           destination: formState.destination,
           startDate: formState.startDate ? formState.startDate.toISOString() : null,
           endDate: formState.endDate ? formState.endDate.toISOString() : null,
@@ -114,7 +114,7 @@ const EditTripPage = () => {
       setFormState({
         title: data.updateTrip.title,
         destination: data.updateTrip.destination,
-        message: data.updateTrip.message,
+        notes: data.updateTrip.notes,
         startDate: data.updateTrip.startDate,
         endDate: data.updateTrip.endDate,
       });
@@ -190,7 +190,7 @@ const EditTripPage = () => {
           <textarea className="" 
           name="message" 
           placeholder="Notes"
-          defaultValue={trip.message}
+          defaultValue={trip.notes}
           onChange={handleInputChange}></textarea>
           {/* Note use state */}
         </Section>
