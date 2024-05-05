@@ -49,7 +49,7 @@ mutation addTrip($title: String!, $destination: String!, $startDate: String, $en
 `;
 
 export const UPDATE_TRIP = gql`
-mutation updateTrip($tripId: ID!, $title: String, $destination: String, $startDate: String, $endDate: String, $notes: String) {
+mutation updateTrip($tripId: ID!, $title: String!, $destination: String!, $startDate: String, $endDate: String, $notes: String) {
     updateTrip(tripId: $tripId, title: $title, destination: $destination, startDate: $startDate, endDate: $endDate, notes: $notes) {
       _id
       title
