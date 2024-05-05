@@ -13,6 +13,7 @@ const Section = styled.section`
   justify-content: center;
   height: 70vh;
   min-height: 40vh;
+ 
   width: 100%;
   @media (max-width: 768px) {
     height: 80vh; // Increase height on smaller screens
@@ -27,6 +28,7 @@ const ParentDiv = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 40vh;
+  padding-top: 10%;
   width: 100vw;
   @media (max-width: 768px) {
     min-height: 60vh; // Increase minimum height on smaller screens
@@ -35,6 +37,7 @@ const ParentDiv = styled.div`
 
 const Form = styled.form`
   margin-top: -80px;
+  
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -120,6 +123,7 @@ const RestaurantsPage = () => {
 
   return (
     <ParentDiv>
+    
       <Section>
         <Form id="contact-form" onSubmit={handleFormSubmit}>
           <div className="field">

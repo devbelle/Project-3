@@ -28,6 +28,7 @@ const ParentDiv = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 40vh;
+  padding-top: 15%;
   width: 100vw;
   @media (max-width: 768px) {
     min-height: 60vh; // Increase minimum height on smaller screens
@@ -150,6 +151,7 @@ const HotelsPage = () => {
               onChange={(date) => setCheckIn(date)}
               checkIn={checkIn}
             />
+            <br></br>
             <label htmlFor="check-out">Check-Out</label>
             <DatePicker
               selectsStart
