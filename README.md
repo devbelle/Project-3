@@ -1,7 +1,9 @@
 # Adventure-Awaits
 Adventure Awaits is an app that allows the user to create a trip, find restuarants and hotels.
 
-![Adventure Awaits Login Page](./Adventure%20Awaits/client/public/images/adventureawaitslogin.png)
+![Adventure Awaits Login Page](/Adventure%20Awaits/client/public/images/adventureawaitslogin.png)
+
+Deployed Application [Deployed on Render](https://adventure-awaits-gagg.onrender.com/)
 
 ## Description
 This is a React, single-page application that allows the user to find hotels and restaurants by typing in the city of their choice, create a trip form on the trip page, and create a packing list on the packing page.
@@ -28,4 +30,4 @@ To install, clone the repo to your local. Then run npm i in the terminal to inst
 This project is licensed under the MIT License - see the LICENSE.md file for details.
 
 ## Acknowledgements
-Thank you for a lot of help from our instructors, tutors, and activities from UoR Coding Bootcamp!
+Thank you for a lot of help from our instructors (Andrew and Michael), tutors, and activities from UoR Coding Bootcamp!
