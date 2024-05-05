@@ -48,7 +48,6 @@ const Input = styled.input`
   margin: 5px;
 `;
 
-
 const EditTripPage = () => {
   const { tripId } = useParams();
 
@@ -63,7 +62,10 @@ const EditTripPage = () => {
   //   message: "",
   // });
 
-  const { data } = useQuery(QUERY_TRIP, { variables: { tripId } });
+  const { data } = useQuery(QUERY_TRIP, {
+    variables: { tripId },
+    fetchPolicy: "network-only",
+  });
   console.log(tripId);
   const [editTrip, { error }] = useMutation(UPDATE_TRIP);
 
@@ -72,34 +74,40 @@ const EditTripPage = () => {
   const trip = data?.trip || {};
   console.log(trip);
   const [formState, setFormState] = useState({
-    title: trip.title || "",
-    destination: trip.destination || "",
-    notes: trip.notes || "",
-    startDate: trip.startDate ? new Date(trip.startDate) : null,
-    endDate: trip.endDate ? new Date(trip.endDate) : null,
-   });
+    title: "",
+    destination: "",
+    notes: "",
+    startDate: new Date(),
+    endDate: new Date(),
+  });
+  console.log(formState);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormState({
-       ...formState,
-       [name]: value,
+      ...formState,
+      [name]: value,
     });
-   };
+  };
 
-   useEffect(() => {
-    console.log('Updated formState:', formState);
-    }, [formState]);
-
-
+  useEffect(() => {
+    console.log("Updated formState:", formState);
+    setFormState({
+      title: trip.title || "",
+      destination: trip.destination || "",
+      notes: trip.notes || "",
+      startDate: trip.startDate ? new Date(Number(trip.startDate)) : new Date(),
+      endDate: trip.endDate ? new Date(Number(trip.endDate)) : new Date(),
+    });
+  }, [trip.title, trip.destination, trip.notes, trip.startDate, trip.endDate]);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     if (!formState.title || !formState.destination) {
       // Show an error message or prevent form submission
-      console.error('Title and destination are required.');
+      console.error("Title and destination are required.");
       return;
-   }
+    }
     try {
       const { data } = await editTrip({
         variables: {
@@ -107,7 +115,9 @@ const EditTripPage = () => {
           tripName: formState.title,
           notes: formState.notes,
           destination: formState.destination,
-          startDate: formState.startDate ? formState.startDate.toISOString() : null,
+          startDate: formState.startDate
+            ? formState.startDate.toISOString()
+            : null,
           endDate: formState.endDate ? formState.endDate.toISOString() : null,
         },
       });
@@ -118,7 +128,7 @@ const EditTripPage = () => {
         startDate: data.updateTrip.startDate,
         endDate: data.updateTrip.endDate,
       });
-      console.log('Submitting form with state:', formState);
+      console.log("Submitting form with state:", formState);
     } catch (err) {
       console.log(err);
     }
@@ -134,7 +144,7 @@ const EditTripPage = () => {
         marginTop="10px"
         imgSrc="/images/globe.jpg"
       />
-      
+
       <Section>
         <h2>Edit Trips</h2>
       </Section>
@@ -148,6 +158,7 @@ const EditTripPage = () => {
             className="form-control"
             name="title"
             placeholder="Trip Name"
+            value={formState.title}
             defaultValue={trip.title}
             onChange={handleInputChange}
           />
@@ -160,38 +171,41 @@ const EditTripPage = () => {
             className="form-control"
             name="destination"
             placeholder="Destination"
+            value={formState.destination}
             defaultValue={trip.destination}
             onChange={handleInputChange}
           />
           {/* Destination use state*/}
         </Section>
         <Section>
-                <label htmlFor="start-date">Start Date</label>
-                <DatePicker
-                        selectsStart
-                        selected = {formState.startDate}
-                        onChange = {(date) => setFormDate({ ...formState, startDate: date })}
-                        startDate = {formState.startDate}
-                    />
-                    </Section>
-                    <Section>
-                    <label htmlFor="start-date">End Date</label>
-                <DatePicker
-                        selectsStart
-                        selected = {formState.endDate}
-                        onChange = {(date) => setFormState({ ...formState, endDate: date })}
-                        endDate = {formState.endDate}
-                        startDate={formState.startDate}
-                        minDate = {formState.startDate}
-                />
-                    </Section>
+          <label htmlFor="start-date">Start Date</label>
+          <DatePicker
+            selectsStart
+            selected={formState.startDate}
+            onChange={(date) => setFormDate({ ...formState, startDate: date })}
+            startDate={formState.startDate}
+          />
+        </Section>
+        <Section>
+          <label htmlFor="start-date">End Date</label>
+          <DatePicker
+            selectsStart
+            selected={formState.endDate}
+            onChange={(date) => setFormState({ ...formState, endDate: date })}
+            endDate={formState.endDate}
+            startDate={formState.startDate}
+            minDate={formState.startDate}
+          />
+        </Section>
         <Section>
           <label className="" htmlFor="message"></label>
-          <textarea className="" 
-          name="message" 
-          placeholder="Notes"
-          defaultValue={trip.notes}
-          onChange={handleInputChange}></textarea>
+          <textarea
+            className=""
+            name="notes"
+            placeholder="Notes"
+            defaultValue={trip.notes}
+            onChange={handleInputChange}
+          ></textarea>
           {/* Note use state */}
         </Section>
         <Button
