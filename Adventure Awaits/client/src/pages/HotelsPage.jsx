@@ -7,6 +7,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Card, ListGroup, Row, CardGroup } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import dayjs from "dayjs";
+import { createGlobalStyle } from 'styled-components';
+
 
 const Section = styled.section`
   display: flex;
@@ -21,6 +23,10 @@ const Section = styled.section`
     min-height: 90vh; // Increase minimum height on smaller screens
     width: 100%; // Increase width on smaller screens
   }
+`;
+const DatePickerWrapper = styled.div`
+  margin: 10px 0; // Adjust as needed
+  width: 100%; // Adjust as needed
 `;
 
 const ParentDiv = styled.div`
@@ -74,18 +80,29 @@ const Button = styled.button`
     width: 80%; // Further increase width on very small screens
   }
 `;
+const GlobalStyle = createGlobalStyle`
+  body {
+    background: url('/images/city.jpg') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+`;
 
 const Input = styled.input`
   padding: 5px;
-  width: 90%;
-  margin-top: 2px;
+  width: 70%;
+  margin: 2px auto;
   text-align: center;
+  border: 2px  solid blue;
+
   transition: all 0.3s ease; // Add transition
   &:hover {
     transform: scale(1.02); // Increase size on hover
   }
   @media (max-width: 480px) {
-    width: 60; // Further increase width on very small screens
+    width: 200px; // Further increase width on very small screens
   }
 `;
 
@@ -138,39 +155,42 @@ const HotelsPage = () => {
  
 
   return (
+    <>
+    <GlobalStyle/>
     <ParentDiv>
-      <Section>
-        <Form id="contact-form" onSubmit={handleFormSubmit}>
-          <div className="field">
-            <Label className="label" htmlFor="city">
-              Search for a City
-            </Label>
-            <Input
-              id="city"
-              type="text"
-              className="form-control"
-              name="hotel"
-              placeholder="Search for a City..."
-              value={hotelCitySearch}
-              onChange={(e) => setHotelCitySearch(e.target.value)}
-            />
-            <label htmlFor="check-in">Check-In</label>
-            <DatePicker
-              selectsStart
-              selected={checkIn}
-              onChange={(date) => setCheckIn(date)}
-              checkIn={checkIn}
-            />
-            <br></br>
-            <label htmlFor="check-out">Check-Out</label>
-            <DatePicker
-              selectsStart
-              selected={checkOut}
-              onChange={(date) => setCheckOut(date)}
-              checkOut={checkOut}
-              minDate={checkIn}
-            />
-          </div>
+    <Section>
+      <Form id="contact-form" onSubmit={handleFormSubmit}>
+        <div>
+          <Label className="label" htmlFor="city">
+            Search for a City
+          </Label>
+          <Input
+            id="city"
+            type="text"
+            className="form-control"
+            name="hotel"
+            placeholder="Enter a City..."
+            value={hotelCitySearch}
+            onChange={(e) => setHotelCitySearch(e.target.value)}
+          />
+           <br></br>
+          <label>Check-In
+          <DatePicker
+            selectsStart
+            selected={checkIn}
+            onChange={(date) => setCheckIn(date)}
+            checkIn={checkIn}
+          /></label>
+          <br></br>
+          <label>Check-Out
+          <DatePicker
+            selectsStart
+            selected={checkOut}
+            onChange={(date) => setCheckOut(date)}
+            checkOut={checkOut}
+            minDate={checkIn}
+          /></label>
+        </div>
 
           <Button
             className="button is-medium is-primary is-fullwidth"
@@ -218,6 +238,7 @@ const HotelsPage = () => {
         </Row>
       </Section>
     </ParentDiv>
+    </>
   );
 };
 export default HotelsPage;

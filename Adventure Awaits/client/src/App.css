@@ -63,3 +63,11 @@ body {
   top: 0;
   z-index: 1; 
 }
+
+.datepicker {
+  margin: 5px !important;
+}
+
+.parent-class .datepicker {
+  margin: 5px;
+}
