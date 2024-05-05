@@ -280,6 +280,7 @@ const TripsBox = styled.div`
   width: 90%;
   max-width: 430px;
   padding: 10px;
+  padding-top: 40%;
   border-radius: 10px;
   align-items: center;
   border: 3px solid black;

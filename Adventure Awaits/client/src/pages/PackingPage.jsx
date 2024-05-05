@@ -21,7 +21,7 @@ const PackingBox = styled.div`
   margin: 0 auto;
   box-sizing: border-box;
   padding: 20px;
-  top: 20%;
+  top: 35%;
   right: 20%;
   left: 10%;
 `;
@@ -32,6 +32,7 @@ const StyledH2 = styled.h2`
   color: blue;
   margin-top: 0;
   align-items: center;
+
   whitespace: "nowrap";
   text-align: center;
   @media (max-width: 768px) {
@@ -46,6 +47,7 @@ const PackingSection = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+
   margin: 0 auto;
   width: 100%;
   height: auto;
