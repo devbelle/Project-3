@@ -4,8 +4,6 @@ import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Auth from "../utils/auth";
-//import axios from 'axios';
 import { useMutation, useQuery } from "@apollo/client";
 import { UPDATE_TRIP } from "../utils/mutations";
 import { QUERY_TRIP } from "../utils/queries";
@@ -13,31 +11,28 @@ import HeaderPages from "../components/HeaderPages";
 import dayjs from "dayjs";
 
 const Box = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 90%;
+  justify-content: space-evenly;
+  width: 180%;
   max-width: 430px;
-  height: 220px;
   padding: 10px;
-  background-color: white;
+  padding-top: 40%;
   border-radius: 10px;
   align-items: center;
-  position: absolute;
-  border: 3px solid black;
-  margin-bottom: 250px;
+  margin-bottom: 20px;
+  margin-top: 50px;
 `;
 
 const Section = styled.div`
   width: 50%;
   height: 100%;
+  padding: 2%;
   background-color: #ffad73;
   border: 1px solid black;
 `;
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-left;
 `;
 const Button = styled.button`
   width: 100px;
@@ -45,6 +40,7 @@ const Button = styled.button`
   border: 1px solid black;
   padding: 5px;
   margin-top: 10px;
+  margin-left: 49px;
 `;
 const Input = styled.input`
   padding: 5px;
