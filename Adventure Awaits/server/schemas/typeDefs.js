@@ -10,8 +10,8 @@ type Trip {
     _id: ID
     title: String!
     destination: String!
-    startDate: String
-    endDate: String
+    startDate: String!
+    endDate: String!
     notes: String
 }
 

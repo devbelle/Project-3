@@ -44,7 +44,7 @@ const Form = styled.form`
   width: 25%;
   border: 2px solid black;
   border-radius: 10px;
-  
+
   background-size: cover;
   @media (max-width: 768px) {
     width: 60%; // Increase width on smaller screens
@@ -121,6 +121,7 @@ const HotelsPage = () => {
   if (error) return `Error! ${error.message}`;
 
   const hotels = data?.getHotels || [];
+  
 
   return (
     <ParentDiv>
@@ -132,7 +133,7 @@ const HotelsPage = () => {
         marginTop="15px"
         imgSrc="/images/globe.jpg"
       />
-       <Section>
+      <Section>
         <Form id="contact-form" onSubmit={handleFormSubmit}>
           <div className="field">
             <Label className="label" htmlFor="city">
@@ -174,6 +175,7 @@ const HotelsPage = () => {
         </Form>
       </Section>
       <Section>
+<<<<<<< HEAD
       <Row xs={1} md={5} className="g-4">
       {hotels.length > 0
         ? hotels.slice(0, 10).map((hotel) => (
@@ -204,8 +206,43 @@ const HotelsPage = () => {
           
         ))
       : null}
+=======
+        <Row xs={1} md={5} className="g-4">
+          {hotels.length > 0
+            ? hotels.slice(0, 10).map((hotel) => (
+                <CardGroup key={hotel.id}>
+                  <Card
+            key={hotel.id}
+                    style={{ width: "18rem" }}
+                    border="dark"
+                    bg="info-subtle"
+                  >
+                    <Card.Header as="h4" className="text-center">
+                      {hotel.title}
+                    </Card.Header>
+                    <Card.Body>
+                      <ListGroup>
+                        <ListGroup.Item>
+                          Price: {hotel.priceForDisplay}
+                        </ListGroup.Item>
+
+                        <ListGroup.Item>
+                          Provided by: {hotel.provider}
+                        </ListGroup.Item>
+                        {hotel.priceDetails && (
+                          <ListGroup.Item>
+                            Additional Info: {hotel.priceDetails}
+                          </ListGroup.Item>
+                        )}
+                      </ListGroup>
+                    </Card.Body>
+                  </Card>
+                </CardGroup>
+              ))
+            : null}
+>>>>>>> origin
         </Row>
-        </Section>
+      </Section>
     </ParentDiv>
   );
 };
