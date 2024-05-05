@@ -1,4 +1,3 @@
-import HeaderPages from "../components/HeaderPages";
 import styled from "styled-components";
 import { useState } from "react";
 import { useLazyQuery } from "@apollo/client";
@@ -6,6 +5,7 @@ import { GET_HOTELS } from "../utils/queries";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card, ListGroup, Row, CardGroup } from "react-bootstrap";
 import DatePicker from "react-datepicker";
+import dayjs from "dayjs";
 
 const Section = styled.section`
   display: flex;
@@ -104,16 +104,24 @@ const HotelsPage = () => {
   const [checkIn, setCheckIn] = useState();
   const [checkOut, setCheckOut] = useState();
   const [hotelCitySearch, setHotelCitySearch] = useState("");
+  const checkInJs = dayjs(Number(checkIn)).format(
+    "YYYY-MM-DD"
+  );
+  const checkOutJs = dayjs(Number(checkOut)).format(
+    "YYYY-MM-DD"
+  );
   const [getHotels, { loading, error, data, called }] = useLazyQuery(
     GET_HOTELS,
     {
       variables: {
         city: hotelCitySearch,
-        startDate: "2025-06-12",
-        endDate: "2025-06-18",
+        startDate: checkInJs,
+        endDate: checkOutJs,
       },
     }
+    
   );
+
   console.log(hotelCitySearch);
 
   // hotel stuff
@@ -126,6 +134,7 @@ const HotelsPage = () => {
   if (error) return `Error! ${error.message}`;
 
   const hotels = data?.getHotels || [];
+ 
 
   return (
     <ParentDiv>

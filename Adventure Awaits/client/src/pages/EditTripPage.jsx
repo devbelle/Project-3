@@ -4,8 +4,6 @@ import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Auth from "../utils/auth";
-//import axios from 'axios';
 import { useMutation, useQuery } from "@apollo/client";
 import { UPDATE_TRIP } from "../utils/mutations";
 import { QUERY_TRIP } from "../utils/queries";
