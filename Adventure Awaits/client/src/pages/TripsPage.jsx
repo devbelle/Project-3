@@ -274,17 +274,19 @@ import { ADD_TRIP, REMOVE_TRIP } from "../utils/mutations";
 import { QUERY_ME } from "../utils/queries";
 import dayjs from "dayjs";
 import { createGlobalStyle } from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const TripsBox = styled.div`
   justify-content: space-evenly;
-  width: 120%;
+  width: 180%;
   max-width: 430px;
   padding: 10px;
   padding-top: 40%;
   border-radius: 10px;
   align-items: center;
-  margin-bottom: 100px;
-  margin-top: 100px;
+  margin-bottom: 20px;
+  margin-top: 50px;
 `;
 const GlobalStyle = createGlobalStyle`
 body {
@@ -307,6 +309,7 @@ const Section = styled.div`
   border: 1px solid black;
 `;
 
+
 const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -314,11 +317,12 @@ const Form = styled.form`
 `;
 
 const Button = styled.button`
-  width: 100px;
-  display: block;
+  display: flex;
+  width: 21%;
   border: 2px solid black;
-  padding: 5px;
-  margin: 8px auto 10px;
+  padding: 10px;
+  margin-top: 10px;
+  margin-left: 56px;
   color: white;
   background-color: blue;
   border-radius: 5px;
@@ -351,12 +355,16 @@ const TripList = styled.ul`
 
 const TripItem = styled.li`
   border: 1px solid #ccc;
-  padding: 20px;
+  padding: 15px;
   margin: 10px 0;
 `;
 
 const Edittrip = styled.div`
   margin-right: 200px;
+  margin-left: 5px;
+  padding: 2%;
+  background-color: white;
+  box-shadow: 10px 5px 5px teal;
 `;
 
 const TripsPage = () => {
@@ -511,9 +519,12 @@ const TripsPage = () => {
                   <Link key={trip._id + "link"} to={`/trip/${trip._id}`}>
                     Edit Trip
                   </Link>
-                  <button onClick={() => handleDeleteTrip(trip._id)}>
-                    Delete Trip
-                  </button>
+                  <FontAwesomeIcon
+                    icon={faTrash}
+                    className="trashcan"
+                    onClick={() => handleDeleteTrip(trip._id)}
+                    style={{ marginRight: "70%" }}
+                  />
                 </li>
               );
             })}
