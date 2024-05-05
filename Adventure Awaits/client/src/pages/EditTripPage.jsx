@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import DatePicker from "react-datepicker";
-
+import Modal from 'react-bootstrap/Modal';
+import { useNavigate } from 'react-router-dom';
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Auth from "../utils/auth";
@@ -53,8 +54,11 @@ const Input = styled.input`
 const EditTripPage = () => {
   const { tripId } = useParams();
   //update back to trip below
+  const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
+  const handleShowModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
   
-
   if (!tripId) {
     return <div>Loading...</div>; // or any loading indicator
   }
@@ -93,6 +97,8 @@ const EditTripPage = () => {
       [name]: value,
     });
   };
+  
+  
 
   useEffect(() => {
     console.log("Updated formState:", formState);
@@ -104,6 +110,9 @@ const EditTripPage = () => {
       endDate: trip.endDate ? new Date(Number(trip.endDate)) : new Date(),
     });
   }, [trip.title, trip.destination, trip.notes, trip.startDate, trip.endDate]);
+
+  
+
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -130,12 +139,9 @@ const EditTripPage = () => {
       });
       console.log("Submitting form with state:", formState);
 
-      const userResponse = window.confirm("Trip updated successfully! Click OK to go back to the TripsPage.");
+      handleShowModal();
 
-        if (userResponse !== null) {
-      // Navigate back to the TripsPage
-          window.location.href = '/trips'; // Adjust the path as necessary
-          }
+        
     } catch (err) {
       console.log(err);
 
@@ -223,6 +229,23 @@ const EditTripPage = () => {
         </Button>
         <Link to="/trips">Back to Trips</Link>
       </Form>
+      <Modal show={showModal} onHide={handleCloseModal}>
+      <Modal.Header closeButton>
+        <Modal.Title>Trip Updated</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>Your trip has been updated successfully!</Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleCloseModal}>
+          Close
+        </Button>
+        <Button variant="primary" onClick={() => {
+          handleCloseModal();
+          navigate('/trips');
+        }}>
+          Go to Trips
+        </Button>
+      </Modal.Footer>
+    </Modal>
     </Box>
   );
 };
