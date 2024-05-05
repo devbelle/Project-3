@@ -5,6 +5,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import HeaderPages from "../components/HeaderPages";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+<<<<<<< HEAD
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useEffect,} from 'react';
@@ -13,6 +14,17 @@ import { ADD_TRIP } from "../utils/mutations";
 import EditTripPage from './EditTripPage';
 import { QUERY_ME } from '../utils/queries';
 
+=======
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import Auth from "../utils/auth";
+import { ADD_TRIP, REMOVE_TRIP } from "../utils/mutations";
+import { useMutation, useQuery } from "@apollo/client";
+import EditTripPage from "./EditTripPage";
+import { QUERY_ME } from "../utils/queries";
+import dayjs from "dayjs";
+>>>>>>> origin
 
 const TripsBox = styled.div`
 justify-content: space-between;
@@ -98,8 +110,14 @@ const TripsPage = () => {
   });
 
   const [addTrip] = useMutation(ADD_TRIP);
+<<<<<<< HEAD
 
   const { data, loading } = useQuery(QUERY_ME);
+=======
+  const [removeTrip] = useMutation(REMOVE_TRIP);
+  const { data, loading, refetch } = useQuery(QUERY_ME);
+  //posibly needed for a trips list
+>>>>>>> origin
   const trips = data?.me.trips || [];
   console.log(trips);
   console.log(data);
@@ -110,8 +128,25 @@ const TripsPage = () => {
 
         //const updatedName = name === 'name' ? 'title' : title;
 
+<<<<<<< HEAD
         setFormState({ ...formState, [name]: value });
       };
+=======
+  const handleDeleteTrip = async (tripId) => {
+
+      try {
+        await removeTrip({variables: {tripId}});
+        refetch();
+      } catch (err) {
+        console.error(err)
+      }
+
+
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+>>>>>>> origin
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -223,6 +258,7 @@ const TripsPage = () => {
         ) : (
           <Edittrip>
           <ul>
+<<<<<<< HEAD
             {trips.map((trip) => (
             <div key={trip._id}>
               <li>
@@ -239,6 +275,28 @@ const TripsPage = () => {
               </div>
             ))}
             
+=======
+            {trips.map((trip) => {
+              const startDate = dayjs(Number(trip.startDate)).format('MMMM DD, YYYY');
+              const endDate = dayjs(Number(trip.endDate)).format('MMMM DD, YYYY');
+              return (
+                <div key={trip._id}>
+                  <li>
+                    <h3>{trip.title}</h3>
+                    <p>Destination: {trip.destination}</p>
+                    <p>Start Date: {startDate}</p>
+                    <p>End Date: {endDate}</p>
+                    <p>Notes: {trip.notes}</p>
+                  </li>
+
+                  <Link key={trip._id + "link"} to={`/trip/${trip._id}`}>
+                    Edit Trip
+                  </Link>
+                  <button onClick={() => handleDeleteTrip(trip._id)}>Delete Trip</button>
+                </div>
+              );
+            })}
+>>>>>>> origin
           </ul>
           </Edittrip>
           
