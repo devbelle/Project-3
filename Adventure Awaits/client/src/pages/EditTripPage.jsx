@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import DatePicker from "react-datepicker";
+
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Auth from "../utils/auth";
@@ -51,6 +52,8 @@ const Input = styled.input`
 
 const EditTripPage = () => {
   const { tripId } = useParams();
+  //update back to trip below
+  
 
   if (!tripId) {
     return <div>Loading...</div>; // or any loading indicator
@@ -126,8 +129,17 @@ const EditTripPage = () => {
         },
       });
       console.log("Submitting form with state:", formState);
+
+      const userResponse = window.confirm("Trip updated successfully! Click OK to go back to the TripsPage.");
+
+        if (userResponse !== null) {
+      // Navigate back to the TripsPage
+          window.location.href = '/trips'; // Adjust the path as necessary
+          }
     } catch (err) {
       console.log(err);
+
+      window.alert("An error occurred while updating the trip.");
     }
   };
 
@@ -209,6 +221,7 @@ const EditTripPage = () => {
           {" "}
           Update trip
         </Button>
+        <Link to="/trips">Back to Trips</Link>
       </Form>
     </Box>
   );
