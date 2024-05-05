@@ -28,7 +28,7 @@ function HeaderPages({ title, color, font, fontSize, imgSrc }) {
         paddingTop: "15px",
         border: "2px solid #000",
         borderRadius: "5px",
-        height: "30%",
+        height: "20%",
       }}
     >
       <h1 style={{ marginTop: "20px" }}>{title}</h1>
