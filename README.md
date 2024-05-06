@@ -1,7 +1,7 @@
 # Adventure-Awaits
 Adventure Awaits is an app that allows the user to create a trip, find restuarants and hotels.
 
-![Adventure Awaits Login Page](/Adventure%20Awaits/client/public/images/adventureawaitslogin.png)
+![Adventure Awaits Login Page](/Adventure%20Awaits/client/public/images/imageapp.png)
 
 Deployed Application [Deployed on Render](https://adventure-awaits-gagg.onrender.com/)
 
