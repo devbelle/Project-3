@@ -7,8 +7,9 @@ import { useState, useEffect } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { UPDATE_TRIP } from "../utils/mutations";
 import { QUERY_TRIP } from "../utils/queries";
-import HeaderPages from "../components/HeaderPages";
 import dayjs from "dayjs";
+import { createGlobalStyle } from "styled-components";
+
 
 const Box = styled.div`
   justify-content: space-evenly;
@@ -46,7 +47,19 @@ const Input = styled.input`
   padding: 5px;
   margin: 5px;
 `;
-
+const GlobalStyle = createGlobalStyle`
+body {
+  background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url('/images/road.jpg');
+  background-repeat: no-repeat;
+  background-size: cover; // This will cover the entire body
+}
+@media (max-width: 1024px) {
+  body {
+    background-size: cover; // This will cover the entire body
+    background-position: top center;
+  }
+}
+`;
 const EditTripPage = () => {
   const { tripId } = useParams();
   //update back to trip below
@@ -147,15 +160,7 @@ const EditTripPage = () => {
 
   return (
     <Box>
-      <HeaderPages
-        title="My Trip Edits"
-        color="#ADD8E6"
-        font="Arial"
-        fontSize="22px"
-        marginTop="10px"
-        imgSrc="/images/globe.jpg"
-      />
-
+      <GlobalStyle />
       <Section>
         <h2>Edit Trips</h2>
       </Section>
