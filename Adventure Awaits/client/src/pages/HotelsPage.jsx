@@ -14,12 +14,13 @@ const Section = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 70vh;
-  min-height: 40vh;
-  width: 110%;
+  width: 100%;
+  height: auto;
+  min-height: 70vh;
+  width: 100%;
   @media (max-width: 768px) {
     height: 80vh; // Increase height on smaller screens
-    min-height: 90vh; // Increase minimum height on smaller screens
+    min-height: 80vh; // Increase minimum height on smaller screens
     width: 100%; // Increase width on smaller screens
   }
 `;
@@ -82,6 +83,10 @@ const GlobalStyle = createGlobalStyle`
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    min-height: 100vh;
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
   }
 `;
 
@@ -201,13 +206,13 @@ const HotelsPage = () => {
         </Form>
       </Section>
       <Section>
-        <Row xs={1} md={5} className="g-4">
+        <Row xs={1} md={5} className="g-1">
           {hotels.length > 0
             ? hotels.slice(0, 10).map((hotel) => (
                 <CardGroup key={hotel.id}>
                   <Card
                     key={hotel.id}
-                    style={{ width: "18rem" }}
+                    style={{ width: "100%" }}
                     border="dark"
                     bg="info-subtle"
                   >
