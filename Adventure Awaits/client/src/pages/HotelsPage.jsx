@@ -111,8 +111,8 @@ const Label = styled.label`
   text-align: center;
   font-weight: bold;
   margin-bottom: 10px;
-  font-size: 28px;
-  color: black;
+  font-size: 30px;
+  color: white;
   margin-top: -50px;
   padding-bottom: 2px;
 `;
@@ -173,22 +173,26 @@ const HotelsPage = () => {
             onChange={(e) => setHotelCitySearch(e.target.value)}
           />
            <br></br>
-          <label>Check-In
-          <DatePicker
+           <label style={{ color: 'white', fontWeight: 'bold', marginLeft: '-15px'  }}>Check-In       
+              <DatePicker
             selectsStart
             selected={checkIn}
             onChange={(date) => setCheckIn(date)}
             checkIn={checkIn}
-          /></label>
+            style={{ width: '50%' }}
+          />
+          </label>
           <br></br>
-          <label>Check-Out
+          <label style={{ color: 'white' ,fontWeight: 'bold', marginLeft: '-15px' }}>Check-Out
           <DatePicker
             selectsStart
             selected={checkOut}
             onChange={(date) => setCheckOut(date)}
             checkOut={checkOut}
             minDate={checkIn}
-          /></label>
+            style={{ width: '50%' }}
+          />
+          </label>
         </div>
 
           <Button
