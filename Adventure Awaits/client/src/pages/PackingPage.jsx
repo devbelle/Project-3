@@ -144,15 +144,15 @@ useEffect(() => {
   return (
     <>
       <GlobalStyle />
-      <PackingBox>
-        <HeaderPages
+       <PackingBox>
+        {/* <HeaderPages
           title="Travel Checklist"
           color="#ADD8E6"
           font="Arial"
           fontSize="24px"
           marginTop="10px"
           imgSrc="/images/globe.jpg"
-        />
+        />  */}
         <PackingSection>
           <StyledH2>What should you bring? </StyledH2>
           <StyledH3>Packing List:</StyledH3>

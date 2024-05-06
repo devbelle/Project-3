@@ -14,18 +14,14 @@ const Section = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 50vh;
+  height: 70vh;
   min-height: 40vh;
-  width: 100%;
+  width: 110%;
   @media (max-width: 768px) {
     height: 80vh; // Increase height on smaller screens
     min-height: 90vh; // Increase minimum height on smaller screens
     width: 100%; // Increase width on smaller screens
   }
-`;
-const DatePickerWrapper = styled.div`
-  margin: 10px 0; // Adjust as needed
-  width: 100%; // Adjust as needed
 `;
 
 const ParentDiv = styled.div`

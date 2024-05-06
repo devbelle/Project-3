@@ -98,7 +98,7 @@ function RenderHeader() {
   else {
     return (
       <HeaderPages
-        title="Home Page"
+        title="Travel Checklist"
         color="#ADD8E6"
         font="Arial"
         fontSize="18"

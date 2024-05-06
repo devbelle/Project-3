@@ -4,6 +4,8 @@ import { useLazyQuery } from "@apollo/client";
 import { GET_RESTAURANTS } from "../utils/queries";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card, ListGroup, Row, CardGroup } from "react-bootstrap";
+import { createGlobalStyle } from 'styled-components';
+
 
 const Section = styled.section`
   display: flex;
@@ -18,6 +20,15 @@ const Section = styled.section`
     height: 80vh; // Increase height on smaller screens
     min-height: 90vh; // Increase minimum height on smaller screens
     width: 100%; // Increase width on smaller screens
+  }
+`;
+const GlobalStyle = createGlobalStyle`
+  body {
+    background: url('/images/food.png') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
   }
 `;
 
@@ -121,6 +132,9 @@ const RestaurantsPage = () => {
   const restaurants = data?.getRestaurants || [];
 
   return (
+    <>
+        <GlobalStyle/>
+
     <ParentDiv>
     
       <Section>
@@ -183,6 +197,7 @@ const RestaurantsPage = () => {
         </Row>
       </Section>
     </ParentDiv>
+    </>
   );
 };
 export default RestaurantsPage;
